@@ -1940,6 +1940,21 @@
   "about": "signed decisions of cl-6.decisions that WIDEN a grant, verified in every step but S1 step 4 (no root from Dinis yet). Each is exactly the change in its record and applies in one step once Dinis gives the anchor fingerprint or the fingerprint of cl-6.decisions' key in my session. Nothing here is in force",
   "at": "2026-11-26T16:32Z",
   "items": [
+  {
+   "record": "2026-11-26__abp-london-registry",
+   "commit_of_record": "c49b4e6",
+   "item": "London entry in the place registry",
+   "change": {
+    "role": "cl-6.dev",
+    "op": "one hand-written change (website only): add london (and a non-linked united-kingdom parent only if the code needs it) to data/by-place/places.json, nothing else in the commit",
+    "by": "cl-6.dev@PrompTugal.dinis, one signed commit citing the record id"
+   },
+   "verified": "26 Nov 17:46Z: the .sig verifies (namespace sovereignwebsite-decision) with the key whose signing fingerprint is the root Dinis gave (sha256:2c3824641f5b8470); status in-force; expires 2026-11-30T23:59:59Z. Not checked: the record's commit signature, revoked.json, security's review (relayed, the recorder did not re-read it)",
+   "held_because": "a widening of a write grant (a website data path for cl-6.dev) whose authority is the delegation of cl-6.decisions' endorsement plus a relayed word of Dinis (cl-6.conductor's session, about 17:36Z, 'not read by the recorder'), with no session and event_uuid of Dinis's own words; S1 applies a widening only if the record quotes them. Not applied; nothing here is in force",
+   "needs": "Dinis's own word in my session, or a record that quotes his words with session and event_uuid",
+   "reviewed_by": "cl-6.security@PrompTugal.dinis (agree with conditions, 17:44Z; relayed)",
+   "expires": "2026-11-30T23:59:59Z"
+  },
    {
     "record": "2026-11-26__abp-p11-c",
     "commit_of_record": "5b991d5",
