@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.abp@PrompTugal.dinis"
-policy: abp/policies.json v1.4.2 (sha256:dd053061ff74d74f)
+policy: abp/policies.json v1.4.3 (sha256:7e475ef8b4d520f5)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.abp@PrompTugal.dinis
@@ -25,7 +25,7 @@ generated: by node abp/tools.mjs build; never edited by hand
   1. the record is in SovereignWebsite/Site__Agent__Decisions, branch dev, site/factory/dinis-cruz/account-f/records/<date>__abp-<item>.json, with its .sig (format: site/factory/dinis-cruz/account-f/abp-decisions.md there)
   2. the .sig verifies (ssh-keygen -Y verify, namespace sovereignwebsite-decision) with the key in site/keys/cl-6.decisions.json, principal cl-6.decisions@dinis
   3. that key is endorsed for account F in site/keys/endorsements/decisions-f.json: signed by decisions.b (sha256:eefbe996d9c67a7c), expires 2026-11-30T23:59:59Z, and not on revoked.json
-  4. the endorsement chains to Dinis's anchor key (sha256:db7f79fdd87e030a) through the SIGNED statements of the pki.sgit.ai directory, not through its generated summaries (they say "_authority: NONE")
+  4. the endorsement chains to Dinis's anchor key (sha256:db7f79fdd87e030a) through the SIGNED statements of the pki.sgit.ai directory, not through its generated summaries (they say "_authority: NONE"). How: download https://pki.sgit.ai/agents/pki-agent.mjs into its own directory (read it first; sha256 e7a64cf5e86a08adbd9a62cc3c88da6722a590c9526646257d60cfa6d8ad8eba on 26 Nov 2026, 3909 lines), run it with PKI_AGENT_HOME set to a scratch directory, then `node pki-agent.mjs pin <the root fingerprint Dinis gives me>` and `node pki-agent.mjs trust sha256:eefbe996d9c67a7c`. The root must come from Dinis out of band (the tool says so too): not from cl-6.decisions, and not from the directory it is meant to check. Until he gives it, this step is not done and a widening is not applied
   5. the record's commit on dev is signed by the same key and carries Agent: cl-6.decisions@dinis and its Claude-Session trailer
   6. status is in-force, expires is in the future, decision is grant or grant-narrower, and change names role, field and values (the item id must exist in proposed_relaxations)
   7. the change is inside the endorsement's scope. Its scope text excludes widening permissions, keys, connectors, AWS, GitHub App privileges, private people's details, the rules, money, legal commitments, one-way doors and anything of another account: a record that widens a permission is outside it unless the record quotes Dinis's own words about that item (session and event_uuid)
