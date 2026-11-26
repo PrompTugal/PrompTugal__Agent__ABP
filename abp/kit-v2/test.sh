@@ -97,6 +97,10 @@ r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r"
 r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 99 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses a sequence at or below the floor"; } || { fail=$((fail+1)); echo "FAIL CI floor :: $r" | cut -c1-200; }
 r=$(ABP_PIN_KEY_SHA256=$fpb node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses pins signed by a key other than the one from outside"; } || { fail=$((fail+1)); echo "FAIL CI key :: $r" | cut -c1-200; }
 r=$(node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"not set"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses to run with no key from outside"; } || { fail=$((fail+1)); echo "FAIL CI nokey :: $r" | cut -c1-200; }
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 99 --last-pins-sha $(sha256sum $T2/abp/pins.json | cut -d' ' -f1) 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   C1: unchanged pins must carry exactly the last accepted sequence (a different floor fails)"; } || { fail=$((fail+1)); echo "FAIL C1 a :: $r" | cut -c1-200; }
+sq=$(node -p 'require(process.argv[1]).seq' $T2/abp/pins.json)
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor $sq --last-pins-sha $(sha256sum $T2/abp/pins.json | cut -d' ' -f1) 2>&1); [[ "$r" == *"OK"* ]] && { pass=$((pass+1)); echo "ok   C1: an ordinary commit after an install passes the CI check (same pins, same sequence)"; } || { fail=$((fail+1)); echo "FAIL C1 b :: $r" | cut -c1-200; }
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor $sq --last-pins-sha 0000 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   C1: changed pins must rise above the floor"; } || { fail=$((fail+1)); echo "FAIL C1 c :: $r" | cut -c1-200; }
 echo '{"x":1}' > $T2/.claude/extra.json; (cd $T2 && git add -f .claude/extra.json)
 r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"not covered"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses a tracked file under .claude that the pins do not cover"; } || { fail=$((fail+1)); echo "FAIL CI cover :: $r" | cut -c1-200; }
 rm -rf $T2 $T2.git
@@ -113,6 +117,12 @@ pin a
 r=$(ABP_PIN_KEY_SHA256=$fpb run "$W"); denyk "v2.1: a key set by the environment wins over the constant: pins signed by A do not load when the environment says B" "fail closed" "$r"
 pin b; r=$(ABP_PIN_KEY_SHA256=$fpb run "$W"); allow "v2.1: ...and pins signed by B load when the environment says B (a rotation through the environment)" "$r"
 pin a
+echo '{"permissions":{"allow":["Bash(ls:*)"]}}' > $T/.claude/settings.local.json
+allow "v2.1: a settings.local.json with only permissions (a person's always-allow) still loads" "$(run "$W")"
+echo '{"hooks":{}}' > $T/.claude/settings.local.json
+denyk "v2.1: a settings.local.json with hooks does not load" "settings.local.json" "$(run "$W")"
+echo '{"permissions":{},"disableAllHooks":true}' > $T/.claude/settings.local.json
+denyk "v2.1: a settings.local.json with disableAllHooks does not load" "settings.local.json" "$(run "$W")"; rm -f $T/.claude/settings.local.json
 touch $T/.claude/hooks/extra.mjs
 denyk "v2.1: a hook file on disk that the pins do not list does not load" "not pinned" "$(run "$W")"; rm $T/.claude/hooks/extra.mjs
 echo "--- v2.1 security round 4: V1 (commit -a), V2 (rollback), V3 (push from another branch), plumbing"

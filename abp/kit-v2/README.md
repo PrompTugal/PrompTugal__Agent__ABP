@@ -8,7 +8,7 @@ Written by cl-6.abp@PrompTugal.dinis, 2026-11-26T16:13Z, on cl-6.security's four
 | `claude/hooks/launch.mjs` | new: the launcher the settings call. It verifies the signed pins, then runs the hook |
 | `claude/settings.json` | the wiring, fail closed in the shell itself |
 | `pins.mjs` | hashes the pinned files, the repository, the policy version and a rising sequence number into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
-| `test.sh` | 93 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
+| `test.sh` | 99 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
 | `DIFF-vs-kit-v1.patch` | the diff against the kit of https://sovereignwebsite.ai/abp/kit/ (hook and settings) |
 
 ## The four requirements
@@ -110,3 +110,9 @@ cl-6.security found that kit v2.0 (acc2f2a) and v2.1 (b14bdcf) could be got roun
 | plumbing | `git commit-tree`, `mktree`, `read-tree`, `update-index`, `write-tree`, `fast-import`, `replace` and `hash-object -w` are tamper | commit-tree, hash-object -w |
 
 93 tests, all pass. Nothing is installed, and the install waits for both securities' pass on the head of this version, for cl-6.decisions' revision 4 of the record, and for Dinis's root.
+
+### Round 5 (2026-11-26T16:43Z): C1 and settings.local.json
+
+- **C1** (`ci-check.mjs`): CI keeps the last accepted sequence (\`--floor N\`) and the SHA-256 of the last accepted \`abp/pins.json\` (\`--last-pins-sha\`). Unchanged pins must carry exactly that sequence, so an ordinary commit after an install passes; changed pins must rise above it. Without \`--last-pins-sha\` the sequence must not fall below the floor. Three tests.
+- **settings.local.json**: Claude Code writes it when a person approves "always allow". The launcher accepts it only if its keys are a subset of \`permissions\`; hooks, env, \`disableAllHooks\` or any other key fail closed (the hook still decides every tool call, so a local allow rule widens nothing past it). Three tests. The other \`.claude/hooks/**\` and \`.claude/settings*.json\` files must be pinned.
+- **Who sets \`ABP_PIN_KEY_SHA256\`**: the environment's settings, which only Dinis (the person who owns that environment) approves, and the org or repository variable for CI. cl-6.infra cannot set the first; the second needs a variable action in IaC and the App's Variables permission. Hooks get Claude Code's own environment, not the Bash tool's \`export\`; the \`env\` block of a settings file is the other route, and settings.json is pinned.

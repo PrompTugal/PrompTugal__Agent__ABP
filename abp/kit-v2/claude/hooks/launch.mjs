@@ -26,8 +26,9 @@ try {
   const floorFile = path.join(os.homedir(), '.abp/seq', pins.repository.replace(/[^\w.-]/g, '_')); let floor = 0; try { floor = parseInt(fs.readFileSync(floorFile, 'utf8'), 10) || 0 } catch {}
   if (pins.seq < floor) closed(`the signed pins have sequence ${pins.seq}, below the ${floor} already seen here (a replay of an older install)`)
   if (pins.seq > floor) { try { fs.mkdirSync(path.dirname(floorFile), { recursive: true }); fs.writeFileSync(floorFile, String(pins.seq)) } catch {} }
+  try { const sl = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude/settings.local.json'), 'utf8')), extra = Object.keys(sl).filter(k => k !== 'permissions'); if (extra.length) bad.push('.claude/settings.local.json has keys other than permissions: ' + extra.join(', ')) } catch (e) { if (e.code !== 'ENOENT') bad.push('.claude/settings.local.json cannot be read as JSON') }   // v2.1 (security): a person's "always allow" is only permissions; hooks, env or disableAllHooks there fail closed
   const walk = d => { let out = []; try { for (const e of fs.readdirSync(path.join(ROOT, d), { withFileTypes: true })) out = out.concat(e.isDirectory() ? walk(d + '/' + e.name) : [d + '/' + e.name]) } catch {} return out }
-  for (const f of [...walk('.claude/hooks'), ...fs.readdirSync(path.join(ROOT, '.claude')).filter(x => /^settings.*\.json$/.test(x)).map(x => '.claude/' + x)]) if (!(f in (pins.files || {}))) bad.push(f + ' (on disk, not pinned)')
+  for (const f of [...walk('.claude/hooks'), ...fs.readdirSync(path.join(ROOT, '.claude')).filter(x => /^settings.*\.json$/.test(x) && x !== 'settings.local.json').map(x => '.claude/' + x)]) if (!(f in (pins.files || {}))) bad.push(f + ' (on disk, not pinned)')
   for (const [f, h] of Object.entries(pins.files || {})) { let ok = false; try { ok = sha(fs.readFileSync(path.join(ROOT, f))) === h } catch {} ; if (!ok) bad.push(f) }
   if (!Object.keys(pins.files || {}).length) bad.push('(no pinned files)')
   for (const need of ['.claude/hooks/abp.mjs', '.claude/hooks/launch.mjs', '.claude/hooks/pinlib.mjs', '.claude/settings.json', 'abp/policies.json']) if (!(need in (pins.files || {}))) bad.push(need + ' (not pinned)')

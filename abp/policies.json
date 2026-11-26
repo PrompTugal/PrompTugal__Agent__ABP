@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.8",
+ "version": "1.6.9",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1271,7 +1271,11 @@
       "low: a relative Glob such as ../home/.ssh/* lists file names only; not changed now so as not to move the reviewed head"
      ]
     },
-    "install_plan": "for each cl-6 repository (the homes and the News repositories; the nine other sessions later): cl-6.abp copies claude/ to .claude/ and abp/policies.json and tools.mjs to abp/, runs pins.mjs, signs abp/pins.json by hand with ssh-keygen -Y sign, commits signed, in a scratch clone; cl-6.security reviews; the repository is pulled. Needs each repository attached to cl-6.abp with push access (a decision of Dinis's: P11 b), or each agent pulling the signed commit itself"
+    "install_plan": "for each cl-6 repository (the homes and the News repositories; the nine other sessions later): cl-6.abp copies claude/ to .claude/ and abp/policies.json and tools.mjs to abp/, runs pins.mjs, signs abp/pins.json by hand with ssh-keygen -Y sign, commits signed, in a scratch clone; cl-6.security reviews; the repository is pulled. Needs each repository attached to cl-6.abp with push access (a decision of Dinis's: P11 b), or each agent pulling the signed commit itself",
+    "needs_from_dinis": [
+     "the environment variable ABP_PIN_KEY_SHA256 = eb5b09f0fa1e6e67ae643c623986869f12d6dd2526ffab53b1ca35bacd299326 (recomputed by cl-6.infra and cl-6.abp from site/keys/cl-6.abp.json) in the cl-6 sessions' environment settings: cl-6.infra cannot set it (the claude.ai environment settings show an approval prompt every time); the environment is Dinis's and cl-6.infra's alone",
+     "the CI variable: an org variable needs the App's organisation Variables permission (not among the five requested) and an IaC variable.set action: cl-6.infra can draft the IaC PR once Dinis gives his root; a repository variable needs only the Variables: write already requested; the first wave of repositories whose required CI status reads it: PrompTugal__News__Website, PrompTugal__Agent__Dev, PrompTugal__Agent__Place__Algarve, the new conductor's home, PrompTugal__Agent__Infrastructure and PrompTugal__IaC"
+    ]
    },
    {
     "id": "P9",
@@ -1403,7 +1407,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:41Z",
+ "updated": "2026-11-26T16:43Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1893,18 +1897,21 @@
  },
  "draft_roles": {
   "about": "role entries drafted for cl-6.security's review BEFORE the session starts, NOT active: a role gives its session the common home-area writes, which is a grant, and S1 step 4 (Dinis's root) is not done; they become roles in one step when security agrees and Dinis gives the root",
-  "at": "2026-11-26T16:35Z",
+  "at": "2026-11-26T16:43Z",
   "roles": {
    "cl-6.social": {
-    "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange",
-    "writes": [],
+    "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange. Its drafts live in drafts/** of its own home, apart from its run state in site/factory/**",
+    "writes": [
+     "drafts/**"
+    ],
     "subagents": false,
     "repos": [
      "PrompTugal/PrompTugal__Agent__Social"
     ],
-    "never": "uses any connector (an Instagram or LinkedIn account is a connector, Dinis's alone), posts, comments or sends a message to any outside service (R7), logs in to any site, starts a session, creates or changes a scheduled task, uses a sub-agent, attaches a repository (no add_repo), holds or uses a credential (it does not render through OpenRouter and is not put on an environment holding OPEN_ROUTER_KEY), writes outside its own home, writes board/keys.json other than its own public key alone in its first commit, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; music, fonts and images are checked by cl-6.rights and the script and the cut by cl-6.security before Dinis sees them",
+    "never": "uses any connector (an Instagram or LinkedIn account is a connector, Dinis's alone), posts, comments or sends a message to any outside service (R7), logs in to any site, starts a session, creates or changes a scheduled task, uses a sub-agent, attaches a repository (no add_repo), holds or uses a credential (it does not render through OpenRouter and is not put on an environment holding OPEN_ROUTER_KEY), writes outside its own home, writes board/keys.json or any website file at all (it publishes its own key in its own home, site/keys/cl-6.social.json, a common write; a website entry, if ever needed, comes from the website's own flow, reviewed by cl-6.security), prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; music, fonts and images are checked by cl-6.rights and the script and the cut by cl-6.security before Dinis sees them; uses a synthetic voice, face or likeness of a real person, Dinis included, without his explicit yes for that piece; shows a screenshot or capture of any real interface that shows another person's data; uses an image, clip or audio that is downloaded and reused (only re-drawn, or licence-checked by cl-6.rights); leaves a draft without the label that says it is AI-drafted; and puts into a draft anything from another account's lanes (vicky, indi and the others) or their agents' names beyond what the published site already shows, or any prompt or message text from any session (not only transcript text)",
     "first_prompt_must_state": "its grant (abp/cl-6.social.md once active): its own home only; no connector; no post, comment or message to any outside service; no session, no scheduled task, no sub-agent; no login to any site; its own key published alone in its first commit"
    }
-  }
+  },
+  "review": "cl-6.security@PrompTugal.dinis, 26 Nov 16:40 UTC: tight on access; agree once four changes are made: (1) no website file at all; (2) drafts/** as its explicit place; (3) no synthetic likeness, no capture of a real interface with another person's data, no downloaded and reused media, every draft labelled AI-drafted; (4) nothing from another account's lanes, no prompt or message text from any session. All four made in v1.6.9; the root remains Dinis's"
  }
 }
