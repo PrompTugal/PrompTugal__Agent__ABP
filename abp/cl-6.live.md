@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.live@PrompTugal.dinis"
-policy: abp/policies.json v1.2.0 (sha256:b1231c951de09318)
+policy: abp/policies.json v1.2.0 (sha256:28588676831ec3bb)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.live@PrompTugal.dinis

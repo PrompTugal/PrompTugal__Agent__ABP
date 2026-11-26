@@ -1118,6 +1118,21 @@
     "risk": "low if only in the agent's own home repository: a path glob cannot tell a home from the website, so history/** would also open that path in the website; the hourly review would check commits against each role's repos",
     "alternative": "grant it per role, as the history of its own repository, after its first run report shows the need",
     "needs": "Dinis's yes; until then no cl-6 role writes history/**"
+   },
+   {
+    "id": "P6",
+    "since": "2026-11-26",
+    "role": "every section agent (cl-6.data, weather, travel, civic, startups, library, signals, cyber, events, live, videos, bulletins, fringe, swarm), in its own PrompTugal__News__ repository",
+    "proposal": "a section agent may push a key-* branch and open a pull request in its own PrompTugal repository for a key or gate change that cl-6.security approves",
+    "evidence": "cl-6.conductor's message of 26 Nov: security's key route is PrompTugal__IaC #25 (passed at f3a2b47): the agent pushes a branch and opens a PR, security approves, the App merges; agents of bulletins and signals hold for want of it. I have not read #25 (that repository is cl-6.infra's and not attached here)",
+    "would_change": [
+     "R5: a push to key-* branches, not only dev, in its own News repository (a branch name pattern, no force, no tags, never main)",
+     "R7: one pull request per change, in its own repository, to dev; no comment, issue or other post",
+     "R3: if the PR is opened through the GitHub connector, the one write tool create_pull_request for that role; if the App opens it from the branch, no connector",
+     "hook: R5 checks the push branch against push_branch only, so a key-* exemption needs a hook change (cl-6.abp, same commit); R4 and R6 unchanged"
+    ],
+    "risk": "a PR path for gate or key changes in a repository the section agent also writes: security's approval and the App's merge are the barrier, not the hook; the hook cannot see who approved; the hourly review must check every merged key-* PR against security's approval",
+    "needs": "Dinis's yes in this session, with his merge of #25 (the conductor asks for P4, P5 and P6 in one line); until then R5 and R7 stand and the section agents hold"
    }
   ]
  },

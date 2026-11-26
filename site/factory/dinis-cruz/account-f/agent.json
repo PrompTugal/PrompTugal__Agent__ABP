@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T06:14Z",
+ "updated": "2026-11-26T06:23Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -88,9 +88,13 @@
   {
    "at": "2026-11-26T06:14Z",
    "event": "history/** for all homes asked via the conductor; not applied, proposal P5"
+  },
+  {
+   "at": "2026-11-26T06:23Z",
+   "event": "proposal P6 (section agents: key-* branch and PR, security approves) written for Dinis; not applied"
   }
  ],
  "waiting_on": [
-  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P5; the website attached to this session for board/abp/; the hold file name"
+  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P6; the website attached to this session for board/abp/; the hold file name"
  ]
 }

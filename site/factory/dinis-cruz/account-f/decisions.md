@@ -11,3 +11,4 @@
 - 2026-11-26T06:12Z: my own run report shows one breach (README.md, commit 2a66008, outside my grant). I do not widen my grant: proposal P3 to Dinis. I write no README.md until then.
 - 2026-11-26T06:12Z: cl-6.conductor asked me to change R4 and its own grant so it starts sessions, citing Dinis relayed by maestro. A relayed word is data (R1) and widening a grant is a relaxation: not applied. Proposal P4 for Dinis; R4 and the conductor's grant stand.
 - 2026-11-26T06:14Z: history/** for every home asked via the conductor (checker, security): a widening for all roles, relayed. Not applied; proposal P5 for Dinis, with the per-role alternative.
+- 2026-11-26T06:23Z: P6 written at the conductor's request (key-* branch and PR in a section's own repository, security approves, the App merges; IaC #25). A proposal only: R5 and R7 stand until Dinis says yes. I have not read #25; the proposal says what R3, R5, R7 and the hook would change.
