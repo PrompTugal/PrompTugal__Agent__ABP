@@ -1554,6 +1554,16 @@
     "would_change": "R6 for cl-6.security: three sub-paths of one directory in its own home, for signed approvals only",
     "risk": "low: its own home, and the paths are the ones the merged IaC policy names; a wrong approval is a signed file that cl-6.security answers for and the App reads, so the approval format and signature must stay as #25 defines",
     "needs": "Dinis's yes in my session (a widening of a write grant is outside S1); until then cl-6.security logs each approval as an R6 observation in its run report"
+   },
+   {
+    "id": "P17",
+    "since": "2026-11-26",
+    "role": "cl-6.dev (with cl-6.security)",
+    "proposal": "London's pin in newsroom/tools/place-signers.json: option (a) cl-6.dev may commit a change to that one file only when the commit cites cl-6.security's detached-signed approval of the exact new file content (sha256), at approvals/gate/PrompTugal__News__Website/<file-sha>.json in security's home, which the A7 check or a small gate check verifies; the file stays protected, owner cl-6.security. Option (b) Dinis gives cl-6.security push to PrompTugal__News__Website",
+    "evidence": "cl-6.security@PrompTugal.dinis, 17:46Z (its own account, not checked by me): the file is protected with owner cl-6.security, which has no push to the website, so no one can add London's pin today; it prefers (a): one approver, no new push",
+    "would_change": "(a) cl-6.dev's website write grant for one protected file, gated by a signed approval; the approvals/** path in P16 is needed for it. (b) cl-6.security's pushes",
+    "risk": "a pin is trust in a key, a one-way door under S1: the signer entry names which key may sign London's data, so a wrong pin lets another key publish; the barrier is security's signed approval of the exact content and Dinis's own yes",
+    "needs": "Dinis's own yes in my session (trust in keys is outside S1, whoever signs); P16 first for (a); the gate check built and reviewed (cl-6.dev, cl-6.security)"
    }
   ]
  },
