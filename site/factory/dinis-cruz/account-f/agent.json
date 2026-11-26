@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T15:50Z",
+ "updated": "2026-11-26T15:52Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -132,6 +132,10 @@
   {
    "at": "2026-11-26T15:50Z",
    "event": "P12: London home for cl-6.places, relayed word of Dinis; awaiting his confirmation in this session"
+  },
+  {
+   "at": "2026-11-26T15:52Z",
+   "event": "P13: proposals applied on a signature of cl-6.decisions (relayed word of Dinis); not adopted until he says it in this session; pointer sent to the decisions agent"
   }
  ],
  "waiting_on": [
