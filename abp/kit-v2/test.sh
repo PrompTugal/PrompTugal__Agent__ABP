@@ -5,7 +5,7 @@ T=$(mktemp -d); H=$(mktemp -d); trap 'rm -rf "$T" "$H"' EXIT; mkdir -p $T/.claud
 ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/a >/dev/null; ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/b >/dev/null
 fpa=$(ssh-keygen -e -m PKCS8 -f $T/k/a.pub | openssl pkey -pubin -outform DER | sha256sum | cut -d' ' -f1)
 cp $here/claude/hooks/*.mjs $T/.claude/hooks/; cp $here/claude/settings.json $T/.claude/; cp $pol $T/abp/policies.json
-sed -i "s/const PIN_KEY_SHA256 = '[0-9a-f]*'/const PIN_KEY_SHA256 = '$fpa'/" $T/.claude/hooks/launch.mjs   # the test copy trusts the throw-away key A
+sed -i "s/export const PIN_KEY_SHA256 = '[0-9a-f]*'/export const PIN_KEY_SHA256 = '$fpa'/" $T/.claude/hooks/pinlib.mjs   # the test copy trusts the throw-away key A
 echo '{"label":"cl-6.dev@PrompTugal.dinis"}' > $H/home/.abp/keys/cl-6.dev/metadata.json
 (cd $T && git init -q -b dev . && git -c user.name=t -c user.email=t@t commit -q --allow-empty -m i) 2>/dev/null
 pin(){ node $here/pins.mjs $T >/dev/null; rm -f $T/abp/pins.json.sig; ssh-keygen -Y sign -q -f $T/k/${1:-a} -n ${2:-abp-pins} $T/abp/pins.json >/dev/null 2>&1; mv $T/abp/pins.json.sig $T/abp/pins.json.sig 2>/dev/null; }
@@ -65,6 +65,31 @@ deny  "G3: patch .claude/settings.json" "$(bash_ 'patch .claude/settings.json p.
 mkdir -p $T/.claude && echo '{}' > $T/.claude/z.json; (cd $T && git add -f .claude/z.json)
 denyk "G3: git commit with a protected path staged (R6)" "ABP R6" "$(bash_ 'git commit -m x')"; (cd $T && git rm -q --cached -f .claude/z.json) 2>/dev/null
 allow "G3: git commit with nothing protected staged" "$(bash_ 'git commit -m "update the .claude notes"')"
+echo "--- v2.1: the signed install leaves the machine only with signed pins"
+T2=$(mktemp -d); mkdir -p $T2/.claude/hooks $T2/abp $T2/src; cp $T/.claude/hooks/*.mjs $T2/.claude/hooks/; cp $T/.claude/settings.json $T2/.claude/; cp $pol $T2/abp/policies.json
+pin2(){ node $here/pins.mjs $T2 >/dev/null; rm -f $T2/abp/pins.json.sig; ssh-keygen -Y sign -q -f $T/k/${1:-a} -n abp-pins $T2/abp/pins.json >/dev/null 2>&1; }
+pin2 a; git init -q --bare $T2.git; (cd $T2 && git init -q -b dev . && git remote add origin $T2.git && git add -A && git -c user.name=t -c user.email=t@t commit -q -m base && git push -q origin dev) 2>/dev/null
+run2(){ CLAUDE_PROJECT_DIR=$T2 bash -c "echo '$1' | node $T2/.claude/hooks/launch.mjs pre-tool"; }
+bash2(){ run2 '{"tool_name":"Bash","tool_input":{"command":'"$(node -p 'JSON.stringify(process.argv[1])' "$1")"'},"cwd":"'$T2'"}'; }
+reset2(){ (cd $T2 && git reset -q --hard origin/dev && git clean -qfd) 2>/dev/null; }
+echo '{"v":"new"}' > $T2/.claude/settings.json; pin2 a; (cd $T2 && git add -A)
+allow "v2.1: a commit that changes a protected file WITH matching signed pins passes" "$(bash2 'git commit -m install')"
+(cd $T2 && git -c user.name=t -c user.email=t@t commit -q -m install)
+allow "v2.1: the push of that signed install passes" "$(bash2 'git push origin dev')"
+(cd $T2 && git push -q origin dev); reset2
+echo '{"v":"evil"}' > $T2/.claude/settings.json; (cd $T2 && git add -A)
+deny  "v2.1: a protected change with the OLD pins is refused (by the launcher, which fails closed on a changed pinned file, or by the commit check)" "$(bash2 'git commit -m x')"; reset2
+echo '{"v":"evil"}' > $T2/.claude/settings.json; pin2 b; (cd $T2 && git add -A)
+deny  "v2.1: a protected change with pins signed by another key is refused" "$(bash2 'git commit -m x')"; reset2
+echo '{"v":"new2"}' > $T2/.claude/settings.json; echo '{}' > $T2/.claude/extra.json; pin2 a; (cd $T2 && git add -f -A)
+denyk "v2.1: a protected file that the pins do not list is refused even with valid pins" "ABP R6" "$(bash2 'git commit -m x')"; reset2
+# the commit check itself, with a working tree that still matches the old pins (so the launcher passes and the staged change is what is judged)
+cp $T2/.claude/settings.json $T2/settings.good; echo '{"v":"evil"}' > $T2/.claude/settings.json; (cd $T2 && git add .claude/settings.json); cp $T2/settings.good $T2/.claude/settings.json
+denyk "v2.1: a staged protected change that the committed pins do not cover is refused by the commit check (R6)" "ABP R6" "$(bash2 'git commit -m x')"; reset2
+echo '{"v":"new3"}' > $T2/.claude/settings.json; cp $T2/abp/pins.json $T2/pins.old; cp $T2/abp/pins.json.sig $T2/pins.old.sig; pin2 b; (cd $T2 && git add -A .claude abp); cp $T2/.claude/settings.json $T2/new3.json; (cd $T2 && git show HEAD:.claude/settings.json > .claude/settings.json && git show HEAD:abp/pins.json > abp/pins.json && git show HEAD:abp/pins.json.sig > abp/pins.json.sig)
+denyk "v2.1: staged pins signed by another key do not cover a staged change (R6)" "ABP R6" "$(bash2 'git commit -m x')"; reset2
+echo '{"v":"evil"}' > $T2/.claude/settings.json; (cd $T2 && git add -A && git -c user.name=t -c user.email=t@t commit -q -m unsigned)
+deny  "v2.1: the push of an unsigned protected change is refused" "$(bash2 'git push origin dev')"; rm -rf $T2 $T2.git
 echo "--- F7 and G4 and G5 secrets"
 deny  "F7: awk on a private key" "$(bash_ 'awk 1 ~/.ssh/id_ed25519')"
 deny  "F7: sed on a private key" "$(bash_ 'sed -n p ~/.ssh/id_rsa')"

@@ -4,6 +4,7 @@
 // A guardrail and an audit log, NOT a security boundary: bash -c, python -c and the like get past it (INSTALL.md lists the real ones).
 import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import crypto from 'node:crypto'
 import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url'
+import { verifySshsig, sha as sha256 } from './pinlib.mjs'   // v2.1: the signed-install exception
 const SELF = fileURLToPath(import.meta.url), HOME = os.homedir()
 const real = q => { try { return fs.realpathSync.native(q) } catch { let d = path.dirname(q), tail = path.basename(q); for (let i = 0; i < 40; i++) { try { return path.join(fs.realpathSync.native(d), tail) } catch { tail = path.join(path.basename(d), tail); const n = path.dirname(d); if (n === d) break; d = n } } return q } }   // v2 (F2): the real path, symlinks resolved, even for a file that does not exist yet
 const TEST = process.env.ABP_TEST === '1'   // v2: no environment override of the policy, the log, the keys or the role outside tests
@@ -87,7 +88,12 @@ function checkBash(who, cmd, cwd, P) {
       const gl = (...a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 5000 }).split('\n').filter(Boolean) } catch { return [] } }, files = new Set()
       if (sub === 'commit') { gl('diff', '--cached', '--name-only').forEach(x => files.add(x)); if (args.some(a => /^-[a-z]*a|^--all$/.test(a) && !/^--/.test(a) || a === '--all')) gl('diff', '--name-only').forEach(x => files.add(x)) }
       else gl('log', 'HEAD', '--not', '--remotes', '--name-only', '--format=').forEach(x => files.add(x))
-      for (const x of files) { const d = guarded(who, path.resolve(ROOT, x), P); if (d) return deny('R6', `git ${sub}: the change touches ${x}: ${d.reason}`, 'tamper') } }
+      const hits = [...files].map(x => [x, guarded(who, path.resolve(ROOT, x), P)]).filter(([, d]) => d)
+      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) and whose hashes match every changed protected file: the signed install
+        const blob = x => { try { return execFileSync('git', sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x], { cwd: ROOT, stdio: 'pipe', timeout: 5000 }) } catch { return null } }
+        let pins = null; try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw) } } catch {}
+        const unc = hits.filter(([x]) => !(pins && (x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))))
+        if (unc.length) return deny('R6', `git ${sub}: the change touches ${unc.map(([x]) => x).join(', ')}: ${unc[0][1].reason}; a protected path changes only in a commit that carries abp/pins.json signed by cl-6.abp and matching it`, 'tamper') } }
     if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
       const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
     if (!who.role && /^(push|commit)$/.test(sub)) return anon()

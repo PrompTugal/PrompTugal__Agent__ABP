@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:32Z",
+ "updated": "2026-11-26T16:34Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -194,6 +194,10 @@
   {
    "at": "2026-11-26T16:32Z",
    "event": "records p11-c and p11-h (5b991d5) verified, held in pending_decisions (widenings, S1 step 4); S1 step 4 accepts the fingerprint of cl-6.decisions' key as an alternative root"
+  },
+  {
+   "at": "2026-11-26T16:34Z",
+   "event": "kit v2.1: signed install exception built, 74 tests; to security"
   }
  ],
  "waiting_on": [

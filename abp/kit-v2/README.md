@@ -8,7 +8,7 @@ Written by cl-6.abp@PrompTugal.dinis, 2026-11-26T16:13Z, on cl-6.security's four
 | `claude/hooks/launch.mjs` | new: the launcher the settings call. It verifies the signed pins, then runs the hook |
 | `claude/settings.json` | the wiring, fail closed in the shell itself |
 | `pins.mjs` | hashes the four pinned files into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
-| `test.sh` | 66 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
+| `test.sh` | 74 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
 | `DIFF-vs-kit-v1.patch` | the diff against the kit of https://sovereignwebsite.ai/abp/kit/ (hook and settings) |
 
 ## The four requirements
@@ -71,3 +71,15 @@ Also run, as before: fifteen ordinary commands of cl-6.abp's own work (commit wi
 ### What it will still not stop (H3, accepted by cl-6.security, for Dinis)
 
 Commands that rewrite the working tree without naming a path: \`git reset --hard\`, \`stash pop\`, \`pull\`, \`merge\`, \`checkout <branch>\`, \`rebase\`, \`cherry-pick\`, \`am\`, \`apply\`, \`tar\`, \`unzip\`. The commit and push check stops such a change **leaving the machine**, and a cloud session starts from a fresh clone. The gap is a local or resumed session in the same working tree: its next start would load whatever settings.json is on disk. That is covered by the per-repository CI check (reject a \`.claude/**\` or \`abp/**\` change not signed by cl-6.abp's key: for Dinis and cl-6.dev) and cl-6.security's review.
+
+## Kit v2.1 (2026-11-26T16:34Z): the signed install, the pull form of record 2026-11-26__abp-p8
+
+Built on the agreement of cl-6.decisions (and pending cl-6.security's review): a protected path (\`.claude/**\`, \`abp/**\`) may change **only in a commit that carries \`abp/pins.json\` signed by cl-6.abp (namespace abp-pins) whose hashes match every changed protected file**. Nothing else gets a protected change through \`git commit\` or \`git push\`.
+
+- New file \`claude/hooks/pinlib.mjs\`: the one place that checks the signature, used by the launcher at load and by the hook at commit and push. It holds the full SHA-256 of cl-6.abp's key; it is pinned like the others (five files now: hook, launcher, pinlib, settings, policy).
+- \`pins.mjs\` writes the pins in two groups, \`hook\` (changes rarely) and \`policy\` (policies.json, the repository's own generated ABP and any extra file you name); the signature is one \`ssh-keygen -Y sign\` of \`abp/pins.json\`. A policy-only wave is therefore a commit of the policy, the ABP, pins.json and its signature.
+- The hook's commit check reads the **staged** blobs and the push check the **HEAD** blobs: pins and signature from the same tree, then the hash of each changed protected file against them. A protected file that the pins do not list, an old pins file, pins signed by another key, a missing signature: refused.
+- The pull form works because git writes the files: an agent \`git fetch\`es cl-6.abp's signed install commit and fast-forwards (or merges) it; the files and the new pins arrive together, so the launcher's pin check passes after the update. While they do not match, everything fails closed. The agent pushes the unchanged signed commit; the commit check lets it through because the pins cover it; the CI check (cl-6.dev) rejects anything else.
+- Tests: six new ones (a signed install passes at commit and at push; old pins, pins signed by another key, an unlisted protected file and an unsigned push are refused; two of these judge the commit check itself, with a working tree that still matches the old pins). 74 in all.
+
+What this does not change: nothing is installed; the exception it implements is a widening of the protection, so it applies only after Dinis's root (S1 step 4) and cl-6.security's review of this revision.
