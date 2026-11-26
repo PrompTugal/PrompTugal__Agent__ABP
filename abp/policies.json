@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.1",
+ "version": "1.6.2",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -264,9 +264,9 @@
     "why": "the hooks hold every agent's policy; an agent that edits them disables its own barrier (v1.6.0: no owner exemption inside a session: an install or an update is a signed commit made outside a live session, then reviewed by cl-6.security)"
    },
    {
-    "glob": "abp/*",
+    "glob": "abp/**",
     "owner": "cl-6.abp",
-    "why": "the policy, its tools, the generated ABPs and the schema"
+    "why": "the policy, its tools, the generated ABPs and the schema (v1.6.2: abp/** at every depth: the kit, its scripts and its tests too; cl-6.security G4)"
    },
    {
     "glob": "board/abp/**",

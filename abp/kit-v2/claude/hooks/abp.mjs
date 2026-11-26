@@ -41,6 +41,7 @@ const hasLabel = () => { try { return fs.readdirSync(KEYS).some(d => { try { ret
 function guarded(who, abs, P) {   // v2: every form of the path (as given, and with symlinks resolved) is checked; ~/.abp/keys is open only while it holds no label (the R14 bootstrap)
   for (const a of new Set([abs, real(abs)])) {
     if ((a === KEYS || a.startsWith(KEYS + path.sep)) && !hasLabel()) continue
+    try { const st = fs.statSync(a); if (st.isFile() && st.nlink > 1) return deny('R6', `${rel(a) ?? a} has ${st.nlink} hard links: a write would change the other names too`, 'tamper') } catch {}   // v2 (G1)
     const t = rel(a) ?? a
     for (const p of P.common.protected) { const re = globRe(fill(p.glob, who.role))
       if (re.test(t) || re.test(t + '/x') || re.test(a) || re.test(a + '/x')) return p.owner && p.owner === who.role ? null : deny('R6', `${t} is protected: ${p.why}`, 'tamper') }
@@ -72,9 +73,21 @@ function checkBash(who, cmd, cwd, P) {
       here = m && !/[$`]|^-$/.test(m[1]) ? path.resolve(here || ROOT, tilde(m[1])) : null; continue }
     const t = (seg.match(/"[^"]*"|'[^']*'|\S+/g) || []).map(x => x.replace(/^["']|["']$/g, '')), verb = path.basename(t[0]), args = t.slice(1), f = args.filter(a => !/^[->]/.test(a))
     for (const [rule, re, why] of P.shell_deny || []) if (new RegExp(re).test(seg)) return deny(rule, `${verb}: ${why}`, 'shell')
-    if (!/^(ssh-keygen|git)$/.test(verb) && !/abp\/kit-v2\/(pin|test)\.sh$/.test(t[1] || '')) for (const tk of t.slice(1)) { if (/^-/.test(tk) && !tk.includes('/')) continue   // v2 (F7): whatever the verb, a secret path in a segment is refused
-      const rp = path.resolve(here || ROOT, tilde(tk.replace(/^[<>]+/, ''))); if ((rp === KEYS || rp.startsWith(KEYS + path.sep)) && !hasLabel()) continue; if (hit(rp, P.common.secret_reads, who.role)) return deny('R8', `${verb}: names a secret path (${tk}): keys and credentials are never read into the conversation`, 'secret') }
+    const SIGNING = (verb === 'ssh-keygen' && (args.includes('-y') || args.includes('-l') || args.includes('-lf') || (args.includes('-Y') && args[args.indexOf('-Y') + 1] === 'sign'))) || (verb === 'git' && /^(commit|config)$/.test(args.find(a => !a.startsWith('-') && !a.includes('=')) || ''))   // v2 (G4): only signing and the public half may name a key
+    if (!SIGNING) for (let tk of t.slice(1)) { if (/^-/.test(tk) && !tk.includes('/')) continue; tk = tk.replace(/^[A-Za-z_-]+=/, '')   // whatever the verb (F7), also name=path (dd if=)
+      const rp = path.resolve(here || ROOT, tilde(tk.replace(/^[<>]+/, '')))
+      if (rp === KEYS || rp.startsWith(KEYS + path.sep)) continue   // v2 (nit): the keys directory is the tamper rule's, so the log says tamper
+      if (hit(rp, P.common.secret_reads, who.role) || hit(rp + '/x', P.common.secret_reads, who.role)) return deny('R8', `${verb}: names a secret path (${tk}): keys and credentials are never read into the conversation`, 'secret') }
     const sub = verb === 'git' && args.find((a, i) => !a.startsWith('-') && !/^-[Cc]$/.test(args[i - 1])), rest = args.slice(args.indexOf(sub) + 1)
+    const READV = /^(cat|ls|head|tail|wc|grep|rg|diff|stat|file|sha256sum|echo|printf|test|\[)$/, GITREAD = /^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/
+    const FIND_W = verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a)), seg2 = verb === 'git' ? seg.replace(/(-m|--message)(=|\s+)("[^"]*"|'[^']*')/g, '') : seg
+    if (!READV.test(verb) && !(verb === 'git' && GITREAD.test(sub || '')) && !(verb === 'find' && !FIND_W) && /(^|[\s\/'"=:])\.claude(\/|\s|$|['"])|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(seg2) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(seg2)))
+      return deny('R6', `${verb}: names a protected place (.claude, HOLD.md, .git/config, ~/.abp), and it is not a read`, 'tamper')   // v2 (G2, G3): tar, unzip, patch, git checkout and the rest, whatever the verb
+    if (verb === 'git' && (sub === 'commit' || sub === 'push')) {   // v2 (G3): what is about to be committed or pushed may not touch a protected path
+      const gl = (...a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 5000 }).split('\n').filter(Boolean) } catch { return [] } }, files = new Set()
+      if (sub === 'commit') { gl('diff', '--cached', '--name-only').forEach(x => files.add(x)); if (args.some(a => /^-[a-z]*a|^--all$/.test(a) && !/^--/.test(a) || a === '--all')) gl('diff', '--name-only').forEach(x => files.add(x)) }
+      else gl('log', 'HEAD', '--not', '--remotes', '--name-only', '--format=').forEach(x => files.add(x))
+      for (const x of files) { const d = guarded(who, path.resolve(ROOT, x), P); if (d) return deny('R6', `git ${sub}: the change touches ${x}: ${d.reason}`, 'tamper') } }
     if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
       const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
     if (!who.role && /^(push|commit)$/.test(sub)) return anon()
@@ -92,12 +105,15 @@ function checkBash(who, cmd, cwd, P) {
       const sends = args.some(a => /^(-d|--data.*|-F|--form.*|-T|--upload-file|--json|--post-.*)$/.test(a)) || x >= 0 && !/^(GET|HEAD|OPTIONS)$/i.test(args[x + 1])
       if (sends && (!hosts.length || hosts.some(h => !g.send.includes(h)))) return deny('R7', `${verb} sends to ${hosts.join(', ') || 'an unnamed host'}, not in the grant`, 'send')
     }
-    const w = [...seg.matchAll(/(?:^|[^0-9&<>])>>?\s*([^\s;&|<>]+)/g)].map(m => m[1]).filter(x => !/^&|^\/dev\//.test(x))   // its writes
+    const w = [...seg.matchAll(/(?:^|[^0-9<>])(?:&>|>>|>\||>)\s*([^\s;&|<>]+)/g)].map(m => m[1]).filter(x => !/^&|^\/dev\//.test(x))   // its writes
     if (/^(tee|rm|rmdir|truncate|unlink|touch|mkdir|ln|mv)$/.test(verb)) w.push(...f)   // v2 (F2): ln and mv: every argument
     else if (/^(sed|perl)$/.test(verb) && args.some(a => /^(-[a-z]*i|--in-place)/.test(a)) || /^(chmod|chown)$/.test(verb)) w.push(...f.slice(1))
-    else if (/^(cp|install|rsync)$/.test(verb) && f.length > 1) w.push(f.at(-1))
+    else if (/^(cp|install|rsync)$/.test(verb)) w.push(...f, ...args.filter(a => /^--[a-z-]+=/.test(a)).map(a => a.replace(/^--[a-z-]+=/, '')))   // v2 (G1, G5): every argument of cp, rsync, install, and --link-dest=
+    else if (verb === 'dd') w.push(...args.filter(a => /^of=/.test(a)).map(a => a.slice(3)))   // v2 (G2)
+    else if (verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a))) w.push(...f)   // v2 (G2)
     if (w.length && here === null) return deny('R6', `${verb}: writes while the working directory is unknown (cd to a variable, \`cd -\`, popd)`, 'tamper')   // v2 (F4)
-    for (const x of w) { const xx = x.replace(/^["']|["']$/g, '')
+    for (const x of w) { const xx = x.replace(/^["']|["']$/g, ''); if (/[$`]/.test(xx)) return deny('R6', `${verb}: a write target built at run time (${xx}) cannot be checked`, 'tamper')   // v2 (G2)
+     
       if (/(^|\/)\.claude(\/|$)|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(xx) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(xx))) return deny('R6', `${verb}: ${xx} names a protected place`, 'tamper')   // v2 (F4): by its text too, whatever the cwd
       const d = guarded(who, path.resolve(here || ROOT, tilde(xx)), P) || !who.role && anon(); if (d) return d }
   }

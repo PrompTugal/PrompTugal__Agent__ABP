@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.6.0 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.6.2 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "12ee4a59f7d2c0b7",
+ "policy_sha256_16": "63223ffeef0f6460",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:18Z",
+ "updated": "2026-11-26T16:22Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -174,6 +174,10 @@
   {
    "at": "2026-11-26T16:18Z",
    "event": "kit v2 fixes F1 to F8 after security review; policy v1.6.0; 30 tests"
+  },
+  {
+   "at": "2026-11-26T16:22Z",
+   "event": "kit v2: security round 2 (G1 to G5) fixed, 52 tests, policy v1.6.2"
   }
  ],
  "waiting_on": [
