@@ -4,7 +4,7 @@
  "run": "YYYY-MM-DDTHH-MM-SSZ (date -u)",
  "started": "ISO time from date -u",
  "ended": "ISO time from date -u",
- "line": "HAND-WRITTEN, hooks not installed in this session. What this run did, in one line.",
+ "line": "HAND-WRITTEN, hooks not installed. One line, no names of private persons, no request text. What this run did.",
  "policy": {
   "version": "1.2.0",
   "sha256": "read from abp/policies.json in cl-6.abp home"
