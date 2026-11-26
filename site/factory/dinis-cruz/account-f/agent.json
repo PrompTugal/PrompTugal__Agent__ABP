@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.7 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "7f949266d01f9c25",
+ "policy_sha256_16": "b1f49befa59ed0e6",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T17:31Z",
+ "updated": "2026-11-26T17:37Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -270,10 +270,13 @@
   {
    "at": "2026-11-26T17:31Z",
    "event": "P8 status: both security passes at b87acff (reported), waits on Dinis yes and the pin variable; pinlib.mjs not changed (the variable takes priority, security asks so); needs_from_dinis names my new key"
+  },
+  {
+   "at": "2026-11-26T17:37Z",
+   "event": "Dinis in my session: yes to P9 and P8: yes. P9 applied for cl-6.data only (key_branch, record rev 2 verified); P8 recorded yes, install conditions stand, pin variable awaited"
   }
  ],
  "waiting_on": [
-  "Dinis: (1) P8 yes plus the root line (his anchor sha256:db7f79fdd87e030a, or cl-6.decisions' signing key sha256:2c3824641f5b8470), said in my session: security has PASSED the kit; (2) the environment variable ABP_PIN_KEY_SHA256; then P14, the rest of P1 to P11 (P1 includes transcript reading for the network audit), the website attached to my session, IaC #25",
   "cl-6.decisions: the signed decisions (none yet)",
   "Dinis: the pin of my new signing key (ABP_PIN_KEY_SHA256 = full SHA-256 of its SPKI), which is trust in a key: not changed by me"
  ],

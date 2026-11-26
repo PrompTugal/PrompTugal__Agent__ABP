@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.data@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:7f949266d01f9c25)
+policy: abp/policies.json v1.7.8 (sha256:b1f49befa59ed0e6)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.data@PrompTugal.dinis
@@ -14,6 +14,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
+- **Key branch (2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions); Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: "yes to P9"):** push `key/cl-6.data` only, in `PrompTugal/PrompTugal__News__Data`, holding only: team/keys.json (only its own entry, adding or rotating); .github/workflows/pages.yml and the four scripts that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin. Conditions: branch named exactly key/cl-6.data, no force push; the pull request goes to dev, never main; the agent opens no pull request through a connector: the App opens it from the pushed branch; one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops; merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it; a single trial: cl-6.security reads the branch once pushed before any other section repeats it; nothing else in the grant changes. Expires 2026-12-10T23:59:59Z.
 - **Never:** collects from a source whose terms are not on its card or that is on the register of sources not to be accessed; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear.
 
 ## Network (default deny; phase capture)

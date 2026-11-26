@@ -596,6 +596,26 @@
     "PrompTugal/PrompTugal__Agent__Data",
     "PrompTugal/PrompTugal__News__Data"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"",
+    "repository": "PrompTugal/PrompTugal__News__Data",
+    "branch": "key/cl-6.data",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     ".github/workflows/pages.yml and the four scripts that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.data, no force push; the pull request goes to dev, never main",
+     "the agent opens no pull request through a connector: the App opens it from the pushed branch",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "a single trial: cl-6.security reads the branch once pushed before any other section repeats it",
+     "nothing else in the grant changes"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes"
+   },
    "model": "sonnet"
   },
   "cl-6.weather": {
@@ -1341,7 +1361,7 @@
     "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
     "needs": "Dinis's yes in my session: 'P8: yes'; and the repositories attached to cl-6.abp, or who pulls",
     "priority": "FIRST on the list for Dinis",
-    "status": "both security passes at b87acff (reported by cl-6.security@PrompTugal.dinis, 17:31Z; record abp-p8 rev 4, 49a8960, reinstated; not verified by me); waits on Dinis's yes and the pin variable ABP_PIN_KEY_SHA256 (set by Dinis in the environment and by IaC for CI; it takes priority over the pinlib.mjs constant, so I do not change pinlib.mjs and b87acff stays the passed head). History: withdrawn (B1): cl-6.security@PrompTugal.dinis withdrew the pass at dffb673 (16:54 UTC); cl-6.security@dinis: no pass at dffb673 or 10d27ed; B1 open by symbolic-ref and file write; fixed in kit-v2.2b (push list from ls-remote, .git refs protected); record 2026-11-26__abp-p8 stays SUSPENDED; 16:59Z, reported by cl-6.security@PrompTugal.dinis (not yet verified by me): PASS at b87acff, waits on cl-6.security@dinis; the pin in the kit still names the superseded key eb5b09f0fa1e6e67 (private half gone), so an install fails closed until Dinis sets ABP_PIN_KEY_SHA256 to my new key (full SHA-256 of its SPKI, which I recomputed: d893179db8db24de127bf6437acc9da873c38416dd26c77a135609b82e322318) and pinlib.mjs is changed by a reviewed one-line commit; P8 is a one-way door and needs Dinis's 'P8: yes' in my session",
+    "status": "Dinis said 'P8: yes' in cl-6.abp's own session, 26 Nov 2026. Not installed: the install conditions stand (CI required on dev, install by pull, each install commit pre-reviewed against b87acff's hashes, ABP_PIN_KEY_SHA256 set to my new key by Dinis in the environment and by IaC for CI), and the website and the homes are not attached to me. Earlier: both security passes at b87acff (reported by cl-6.security@PrompTugal.dinis, 17:31Z; record abp-p8 rev 4, 49a8960, reinstated; not verified by me); waits on Dinis's yes and the pin variable ABP_PIN_KEY_SHA256 (set by Dinis in the environment and by IaC for CI; it takes priority over the pinlib.mjs constant, so I do not change pinlib.mjs and b87acff stays the passed head). History: withdrawn (B1): cl-6.security@PrompTugal.dinis withdrew the pass at dffb673 (16:54 UTC); cl-6.security@dinis: no pass at dffb673 or 10d27ed; B1 open by symbolic-ref and file write; fixed in kit-v2.2b (push list from ls-remote, .git refs protected); record 2026-11-26__abp-p8 stays SUSPENDED; 16:59Z, reported by cl-6.security@PrompTugal.dinis (not yet verified by me): PASS at b87acff, waits on cl-6.security@dinis; the pin in the kit still names the superseded key eb5b09f0fa1e6e67 (private half gone), so an install fails closed until Dinis sets ABP_PIN_KEY_SHA256 to my new key (full SHA-256 of its SPKI, which I recomputed: d893179db8db24de127bf6437acc9da873c38416dd26c77a135609b82e322318) and pinlib.mjs is changed by a reviewed one-line commit; P8 is a one-way door and needs Dinis's 'P8: yes' in my session",
     "review": {
      "by": "cl-6.security@PrompTugal.dinis",
      "write_up": "https://github.com/PrompTugal/PrompTugal__Agent__Security/blob/dev/docs/security/reviews/2026-11-26-p8-kit-v2.md",
@@ -1580,6 +1600,15 @@
   }
  ],
  "applied_decisions": [
+  {
+   "record": "2026-11-26__abp-p9 revision 2",
+   "at": "2026-11-26T17:40Z",
+   "commit_of_record": "1cefc01",
+   "item": "P9 (first role: cl-6.data, a single trial)",
+   "change": "roles.cl-6.data.key_branch added (branch key/cl-6.data in PrompTugal__News__Data, its own team/keys.json entry and the pinned files only); the other eight section roles (signals, cyber, bulletins, events, library, live, videos, travel) are NOT added: the record says cl-6.data goes first and security reads the branch before any other repeats it",
+   "how": "Dinis's own words in this session (\"yes to P9\") and the signed record, verified here: the .sig verifies (ssh-keygen -Y verify, namespace sovereignwebsite-decision) with the key in site/keys/cl-6.decisions.json, whose signing fingerprint is the root Dinis gave (sha256:2c3824641f5b8470); the record quotes his words (event 7c144bf8) and security's opinions (eb92be5, c464f04), status in-force, expires 2026-12-10. Not checked: the git commit signatures of the record and the opinions (no clone), the endorsement chain (not needed for this key: the root is the key itself), revoked.json",
+   "limit": "the hook cannot yet allow a key/* branch (R5): see roles.cl-6.data.key_branch.enforcement"
+  },
   {
    "record": "2026-11-26__abp-p11-c-pin",
    "at": "2026-11-26T15:59Z",
