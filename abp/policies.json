@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.4.1",
+ "version": "1.4.2",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1095,6 +1095,21 @@
     "PrompTugal/PrompTugal__News__Website"
    ],
    "model": "sonnet (not set by me: maestro's)"
+  },
+  "cl-6.infra": {
+   "focus": "the GitHub and AWS side of the cl-6 agents: PrompTugal__IaC (policy/abp.json is its GitHub and AWS policy) and its own home; the paths are those I know (home area and policy/abp.json): everything else in IaC is to be named by cl-6.infra in its run report and proposed",
+   "writes": [
+    "policy/abp.json",
+    "board/runs/cl-6.infra/**",
+    "board/team/cl-6.infra/**"
+   ],
+   "subagents": false,
+   "never": "dispatches, approves or runs an apply workflow, changes AWS or GitHub App privileges (one-way doors), reads or prints a key, a token or a credential, attaches a repository, starts a session or a scheduled task, uses a connector, writes in a repository other than its two; and, until Dinis decides P14, pushes anywhere but dev or opens a pull request",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Infrastructure",
+    "PrompTugal/PrompTugal__IaC"
+   ],
+   "model": "not set by me"
   }
  },
  "workers": {
@@ -1180,9 +1195,10 @@
     "since": "2026-11-26",
     "role": "cl-6.abp",
     "proposal": "cl-6.abp installs the hook kit in every cl-6 agent's home repository and in the News repositories: .claude/settings.json, .claude/hooks/abp.mjs, abp/policies.json (or a copy of its generated ABP), abp/tools.mjs; each commit signed and reviewed by cl-6.security; the session of each agent is wired to load it",
-    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.startups cannot file its R10 run report because the hook kit is not installed in its session and the install needs writes to protected paths. Only my own repository and (when attached) the website have the kit today, so every other cl-6 session runs with no hook at all: no log, no R3 or R4 breaker, no run report",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.startups cannot file its R10 run report because the hook kit is not installed in its session and the install needs writes to protected paths. Only my own repository and (when attached) the website have the kit today, so every other cl-6 session runs with no hook at all: no log, no R3 or R4 breaker, no run report; cl-6.security's access review of 26 Nov (its home, docs/security/2026-11-26-access-review.md), finding A2 (high): all 53 sessions hold the same 25 tools, including add_repo and create, update, delete and fire for scheduled tasks, in auto permission mode and one environment; R3 and R4 are logged, not enforced, because no hook runs in those sessions. P8 (the hook kit in every repository) is the main fix; ahead of every other proposal",
     "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
-    "needs": "Dinis's yes, and each repository attached to cl-6.abp with push access; until then agents file hand-written run reports (abp/templates/run-report-by-hand.md)"
+    "needs": "Dinis's yes, and each repository attached to cl-6.abp with push access; until then agents file hand-written run reports (abp/templates/run-report-by-hand.md)",
+    "priority": "FIRST on the list for Dinis"
    },
    {
     "id": "P9",
@@ -1244,7 +1260,8 @@
       "ask": "cl-6.places: history/** in all 36 Place homes, and data/by-place/now/*.json in the 18 Algarve homes",
       "finding": "update 2026-11-26: the conductor says cl-6.places attached the other 35 Place homes itself with add_repo (access push), one by one, at the start brief's word, and pushed to dev through the session's proxy; its session now holds 36 repositories. So the attach question is already settled in fact, outside the policy: add_repo is granted to cl-6.abp only, and the hook that would block it (R3) is not in that session. v1.2.0 grants cl-6.places data/by-place/*.json and its .sig only; the path data/by-place/now/*.json is one level deeper and not covered (a * does not cross a /). Only the Algarve home is attached to the places session; the other 35 homes are not reachable by it until each is attached, which is also a repositories question, not only a path one",
       "risk": "low per path; 36 homes written by one session is the breadth that matters: the hourly review checks each commit against the place it names",
-      "how": "grant data/by-place/now/*.json by name, not data/by-place/**; history/** per P5"
+      "how": "grant data/by-place/now/*.json by name, not data/by-place/**; history/** per P5",
+      "security_A5": "cl-6.security's access review, A5 (medium): cl-6.places holds the 36 place homes but its role names only Place__Algarve. Options for Dinis: (a) ratify the 36 attaches by naming them in its repos; (b) split the places into their own roles, one per place, like cl-6.place.london (Dinis's direction of 26 Nov: one agent per place). I changed nothing; the role stays Algarve only, and the other 35 are breaches by its own account until he chooses"
      },
      "g": {
       "ask": "cl-6.places: which should change, the wake prompt (each place as a sub-agent) or the grant (no sub-agents)?",
@@ -1294,10 +1311,23 @@
     "risk": "the decisions agent is a session like the others: a key that signs relaxations is the highest-value target in the system; a short expiry, the one-way list and the per-commit log are the barrier; the hook cannot check a signature, so my own checking is the control",
     "needs": "Dinis's own word in this session, because it changes who may relax a policy: \"cl-6.abp applies what cl-6.decisions signs on my behalf, except the one-way doors\"; until then nothing is applied on a signature",
     "status": "adopted at Dinis's own word in this session, 2026-11-26T15:55Z: see standing_instructions S1 (printed in cl-6.abp's ABP at every start and compaction)"
+   },
+   {
+    "id": "P14",
+    "since": "2026-11-26",
+    "role": "cl-6.infra",
+    "proposal": "work/* branches and pull requests, only in PrompTugal__IaC, for its infrastructure changes; never dispatching an apply workflow",
+    "evidence": "cl-6.security's access review, finding A4 (high): cl-6.infra held PrompTugal__IaC without a role; security suggests work/* and pull requests only on IaC and no dispatch of apply workflows",
+    "would_change": [
+     "R5: a push to work/* in PrompTugal__IaC (the hook has only the worker rule, work/<name>, and the push_branch dev)",
+     "R7: pull requests in that repository only"
+    ],
+    "risk": "infrastructure changes are the highest-impact writes of all: the barrier must be the IaC repository itself (branch protection, required reviews, no self-approval), not my hook",
+    "needs": "Dinis's word; AWS and GitHub App privileges remain his alone"
    }
   ]
  },
- "updated": "2026-11-26T15:59Z",
+ "updated": "2026-11-26T16:00Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1351,6 +1381,14 @@
    "change": "common.protected += newsroom/tools/place-signers.json (owner cl-6.security)",
    "commit_of_record": "51dd57d",
    "how": "a tightening: applied under cl-6.abp's own remit to tighten, with the record verified as far as S1 steps 1 to 3 and 5 to 7; step 4 (the anchor chain) only partly"
+  }
+ ],
+ "findings": [
+  {
+   "id": "A6",
+   "from": "cl-6.security's access review, 26 Nov",
+   "what": "cl-6.events holds PrompTugal__News__Website, which is outside its repos (its News__Events and its home)",
+   "status": "asked cl-6.events why; until a reason is given and Dinis agrees it is a breach to remove, not a repository to add"
   }
  ]
 }
