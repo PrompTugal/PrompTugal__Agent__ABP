@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.0",
+ "version": "1.7.1",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -242,6 +242,11 @@
    "R8",
    "^(cat|head|tail|less|more|xxd|od|base64|strings|grep|cp)\\s.*(\\.pem|\\.env(\\.\\w+)?|/\\.ssh/\\S*|\\.abp/(keys/\\S*|salt)|\\.credentials/\\S*)(\\s|$)",
    "keys and credentials are never read into the conversation"
+  ],
+  [
+   "R5",
+   "^git\\s(.*\\s)?(-c\\s*push\\.|config\\s(.*\\s)?push\\.)",
+   "push settings (push.default and the rest) are the owner's"
   ]
  ],
  "shell_deny_about": "[rule, regex, reason], tested on each shell segment (leading VAR=, sudo, env removed); the hook also checks the push branch, commit names, sends and protected writes",
@@ -350,8 +355,8 @@
    },
    {
     "glob": "newsroom/tools/operator-keys.json",
-    "owner": "cl-6.dev",
-    "why": "a gate file of the website: the fingerprints of operators whose key may vouch for any board/keys.json entry (empty until Dinis states his); changed only by a signed cl-6.dev commit reviewed by cl-6.security (cl-6.dev asked, 26 Nov; a tightening: every other role loses the write)"
+    "owner": null,
+    "why": "a gate file of the website: the fingerprints of operators whose key may vouch for any board/keys.json entry (empty until Dinis states his). Owner none: not even cl-6.dev may write the list that makes an operator; Dinis's own signed commit is the route (cl-6.security O1, 26 Nov)"
    }
   ],
   "secret_reads": [
@@ -396,7 +401,11 @@
    "model": "sonnet",
    "standing": [
     "S1"
-   ]
+   ],
+   "network": {
+    "allow": [],
+    "environment": "Default (limited): no outside network"
+   }
   },
   "cl-6.conductor": {
    "focus": "the plan, the board and the proposals; who does what; routes work to the other agents and proposes sessions and wakes to cl-6.maestro",
@@ -415,7 +424,11 @@
    "repos": [
     "PrompTugal/PrompTugal__Agent__Conductor"
    ],
-   "model": "opus (agent.json; the sessions list says sonnet: for Dinis to settle)"
+   "model": "opus (agent.json; the sessions list says sonnet: for Dinis to settle)",
+   "network": {
+    "allow": [],
+    "environment": "Default (limited): no outside network"
+   }
   },
   "cl-6.journalist": {
    "focus": "research, curation, writing, checking, signing and publishing of articles, each fact sourced",
@@ -481,7 +494,11 @@
     "PrompTugal/PrompTugal__Agent__Security",
     "PrompTugal/PrompTugal__News__Website"
    ],
-   "model": "opus"
+   "model": "opus",
+   "network": {
+    "allow": [],
+    "environment": "Default (limited): no outside network"
+   }
   },
   "cl-6.correspondent": {
    "focus": "the front page and the beats (beat correspondents as sub-agents in its own run)",
@@ -805,7 +822,11 @@
     "PrompTugal/PrompTugal__Agent__Accountant",
     "PrompTugal/PrompTugal__News__Website"
    ],
-   "model": "sonnet"
+   "model": "sonnet",
+   "network": {
+    "allow": [],
+    "environment": "Default (limited): no outside network"
+   }
   },
   "cl-6.ontologist": {
    "focus": "data/ schemas and the derivation, the knowledge graph (companies, people, events, past events, topics, places)",
@@ -1407,7 +1428,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:45Z",
+ "updated": "2026-11-26T16:46Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1921,14 +1942,13 @@
   "since": "2026-11-26T16:45Z",
   "common": {
    "hosts": [
-    "github.com",
-    "raw.githubusercontent.com"
+    "github.com"
    ],
    "methods": [
     "GET",
     "HEAD"
    ],
-   "note": "git through the session proxy (R5 still applies); public reads, GET only"
+   "note": "git through the session's proxy (R5 still applies). raw.githubusercontent.com and any other host only where the agent's environment lists it (cl-6.security's design: limited environments, exact hosts)"
   },
   "no_web_reads": [
    "cl-6.maestro",
@@ -1940,6 +1960,14 @@
    "cl-6.security"
   ],
   "no_web_reads_note": "Dinis, 26 Nov, as cl-6.maestro relays it: that kind of access never from a maestro repository, at most from a London data agent. These roles read only the common hosts (for the public repositories they review)",
-  "roles_note": "each role's own hosts go in roles.<name>.network.hosts with the reason and the rights record, only after the measure phase; today none is listed: the data agents' lists are to be measured, not guessed"
+  "roles_note": "each role's own hosts go in roles.<name>.network.hosts with the reason and the rights record, only after the measure phase; today none is listed: the data agents' lists are to be measured, not guessed",
+  "field_names": {
+   "allow": "roles.<name>.network.allow: exact hosts, no wildcard",
+   "environment": "roles.<name>.network.environment: the limited environment the session must run on"
+  },
+  "design": [
+   "abp/network/DESIGN.md (cl-6.abp)",
+   "SovereignWebsite/Site__Agent__Security site/factory/dinis-cruz/account-f/designs/2026-11-26-network-capture.md (cl-6.security, commit 7a77912): to be one agreed version"
+  ]
  }
 }
