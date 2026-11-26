@@ -2,7 +2,7 @@
 
 Use this only where the hook kit is not installed in your session. The hooks write the log a run report is built from; without them you write what you know, honestly, and say so.
 
-1. Copy `abp/templates/run-report-by-hand.json` (from https://github.com/PrompTugal/PrompTugal__Agent__ABP/blob/dev/abp/templates/run-report-by-hand.json) to `runs/<your agent name>/<run>.json` in your own home repository (granted: `runs/{role}/**`). Times from `date -u`.
+1. Copy `abp/templates/run-report-by-hand.json` (from https://github.com/PrompTugal/PrompTugal__Agent__ABP/blob/dev/abp/templates/run-report-by-hand.json) to `runs/cl-6.<name>/<run>.json` in your own home repository (granted: `runs/cl-6.<name>/**`, the full agent name with its `cl-6.` prefix; in the website it is `board/runs/cl-6.<name>/<run>.json`), for example `runs/cl-6.accountant/2026-11-26T11-00-00Z.json`. Times from `date -u`.
 2. Fill `agent`, `run`, `started`, `ended`, `line` (start it with "HAND-WRITTEN, hooks not installed") and `policy.version` and `policy.sha256` (from `abp/policies.json` in PrompTugal__Agent__ABP). Leave `policies_instrumented` empty: no hook measured anything.
 3. `breaches`: every thing you know you did outside your grant, one entry each (`kind`, `what`, `rule`). If you know of none, leave it empty and say in `line` that it is by your own account.
 4. Do not invent counts. Leave the counters at 0 and say in `line` that they are unmeasured.

@@ -1157,7 +1157,7 @@
    {
     "id": "P9",
     "since": "2026-11-26",
-    "role": "every section repository that needs the IaC key bootstrap: cl-6.data, cl-6.signals, cl-6.cyber, cl-6.bulletins (and any other section agent after it), one answer for all, replacing P6 for them",
+    "role": "every section repository that needs the IaC key bootstrap: cl-6.data, cl-6.signals, cl-6.cyber, cl-6.bulletins, cl-6.events, cl-6.library (and any other section agent after it), one answer for all, replacing P6 for them",
     "proposal": "for the IaC key bootstrap (PrompTugal__IaC #25, signed pins by cl-6.security), once and at each rotation: write team/keys.json and .github/workflows/pages.yml in its own News repository; push one branch other than dev (key/cl-6.cyber; P6 says key-*: one pattern to settle); open one pull request, merged by the IaC App only on security's signed approval; and in its home history/** (P5) and board/ready-to-ship/** . Widened at the conductor's request: one proposal for every section repository's key PR (data, signals, cyber, bulletins), once #25 merges; one branch pattern for all (key-*, or key/<agent> if Dinis prefers); one PR per change, to dev, in the agent's own repository; P6 is the same ask in general terms and is answered by this one",
     "evidence": "cl-6.cyber to cl-6.abp, 26 Nov, with its brief at PrompTugal__Agent__Cyber board/ready-to-ship/README.md (not read by me); it does none of it until granted and #25 is merged",
     "would_change": [
@@ -1181,17 +1181,36 @@
    {
     "id": "P11",
     "since": "2026-11-26",
-    "role": "cl-6.weather, cl-6.bulletins, cl-6.customers, cl-6.designer",
-    "proposal": "path gaps found by the agents on reading their ABPs: weather: history/** (P5); bulletins: history/**, site/key-pr/**; customers: history/**, board/customers/**; designer: history/**, site/specs/**, site/ready-to-ship/** in its home, and desks/designer-vicky/charts/** in the website",
-    "evidence": "cl-6.conductor's message of 26 Nov relaying the four agents; none read by me in a run report yet",
-    "notes": [
-     "history/** is P5 for all; not repeated per role",
-     "desks/designer-vicky/charts/** is a desk of Vicky's designer agent: another operator's agent, the same kind of question as P7, not a path fix",
-     "site/key-pr/**, site/specs/**, site/ready-to-ship/** are inside the home repository but outside site/factory/dinis-cruz/account-f/**: I would grant them per role, not for all",
-     "the classifier refusals of customers' and designer's own board/keys.json commits are the session harness's, not my hook's: my policy grants each agent its own entry in board/keys.json (those roles with the website attached); whether the classifier may let it through is Dinis's"
-    ],
-    "risk": "low for home paths; the Vicky desk is P7's risk",
-    "needs": "Dinis's yes per item; until then these paths stay denied (logged, not blocked, in observe mode, but counted as breaches)"
+    "role": "every cl-6 role that reported a gap after reading its ABP (dev, weather, bulletins, customers, designer, rights, backup, events, library, researcher, ontologist, accountant)",
+    "proposal": "ONE answer for the grants that the setup brief of Dinis's start (done before the grants existed) needed. Items a to e; Dinis can say yes to all, or name the items",
+    "evidence": "cl-6.conductor's messages of 26 Nov relaying the reporters, and the run reports of startups, devops and cyber; several agents now refuse routed work for want of a grant; I have not seen the setup brief",
+    "items": {
+     "a": {
+      "ask": "every home: history/** (P5), and where the agent uses them: prepared/**, review/**, site/specs/**, site/ready-to-ship/**, site/key-pr/**",
+      "risk": "low: its own home repository; a path glob cannot tell a home from the website, so it also opens those paths there",
+      "how": "grant per role, from its run report, not for all 42; history/** for all if Dinis says P5 yes"
+     },
+     "b": {
+      "ask": "all roles: signing settings in .git/config, apt install of openssh-client, add_repo read",
+      "finding": "signing settings: already possible. The hook denies only remote., url. and branch. settings and --global/--system/core.hooksPath (shell_deny R5, R6); gpg.format, gpg.ssh.program, user.signingkey and commit.gpgsign are not denied, and I set them so myself. If something refused it, it was the session harness's classifier, not the policy. apt install of openssh-client: no rule forbids it; no grant needed. add_repo read: not granted to any role but cl-6.abp (R3 blocks it where the hook runs, because the hook cannot tell read from push access, and a push attach mints credentials)",
+      "ask_left": "add_repo for reading: alternative that needs no grant: read public repositories through their raw URLs (https://raw.githubusercontent.com/...), as I do; if Dinis wants add_repo, only with access read, granted per role, and the hourly review checks every attach"
+     },
+     "c": {
+      "ask": "cl-6.dev: data/by-place/** and data/schemas/** in the website (the signed place sync)",
+      "evidence": "dev stopped the sync until decided, so place data goes stale",
+      "risk": "moderate: it is signed place data; the places agent writes data/by-place/*.json itself; two writers on one path, and the signature must stay the place agent's (site identity rule of the PrompTugal policy)",
+      "alternative": "the sync runs as a CI step under security's review, not as a dev write; or cl-6.places writes it; Dinis chooses"
+     },
+     "d": {
+      "ask": "cl-6.designer: desks/designer-vicky/charts/**",
+      "risk": "another operator's agent's desk: P7's question; not a path fix"
+     },
+     "e": {
+      "ask": "cl-6.events and cl-6.library join P9 (team/keys.json, pages.yml, one branch, one PR)",
+      "note": "done in P9: its role list now names them"
+     }
+    },
+    "needs": "Dinis's yes, in this session, per item or for all; until then each stays outside its grant, logged and counted as a breach by the agent's own account"
    }
   ]
  },

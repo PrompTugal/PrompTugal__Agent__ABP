@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T11:19Z",
+ "updated": "2026-11-26T11:20Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -116,6 +116,10 @@
   {
    "at": "2026-11-26T11:19Z",
    "event": "P9 widened to all section key PRs; P11 per-role path gaps (weather, bulletins, customers, designer)"
+  },
+  {
+   "at": "2026-11-26T11:20Z",
+   "event": "P11 rewritten as one proposal (items a to e); template path fixed (runs/cl-6.<name>/)"
   }
  ],
  "waiting_on": [
