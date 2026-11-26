@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.4.4 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.5.0 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "9d02d24c9a5d7ebf",
+ "policy_sha256_16": "ca1a5451f32ced38",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:01Z",
+ "updated": "2026-11-26T16:13Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -162,6 +162,10 @@
   {
    "at": "2026-11-26T16:01Z",
    "event": "findings A6 updated, A7 (conductor 7 extra repos), A8 (nine sessions without a role); P14 extended"
+  },
+  {
+   "at": "2026-11-26T16:13Z",
+   "event": "hook kit v2 for security review (abp/kit-v2): signed pins, fail closed, kind breaker; policy v1.5.0 breakers R3 R4 R5 R8 and tamper"
   }
  ],
  "waiting_on": [

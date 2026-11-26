@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.4.5",
+ "version": "1.5.0",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -94,7 +94,7 @@
   }
  ],
  "breakers": {
-  "about": "rule id -> {on, since, why, by}: an 'on' breaker blocks that rule even in observe mode. R3's also blocks every mcp__ tool not granted. Turned on only by cl-6.abp (tightening) or the owner; never off without the owner.",
+  "about": "rule id -> {on, since, why, by}: an 'on' breaker blocks that rule even in observe mode. R3's also blocks every mcp__ tool not granted. Turned on only by cl-6.abp (tightening) or the owner; never off without the owner. kinds: a breaker for a kind of denial (tamper), honoured by hook kit v2 (abp/kit-v2); the v1 hook ignores it.",
   "rules": {
    "R3": {
     "on": true,
@@ -107,6 +107,26 @@
     "since": "2026-11-26",
     "by": "cl-6.abp",
     "why": "only cl-6.maestro starts sessions and wakes, at Dinis's word (the conductor's brief of 26 November); no cl-6 role is granted create_session, create_trigger, update_trigger, fire_trigger or send_later"
+   },
+   "R5": {
+    "on": true,
+    "since": "2026-11-26T16:12Z",
+    "by": "cl-6.abp",
+    "why": "push to dev only: no push to main, no force-push, no deletion, no tags (cl-6.security's requirement 1 for P8, 26 Nov; applies where the hook is installed)"
+   },
+   "R8": {
+    "on": true,
+    "since": "2026-11-26T16:12Z",
+    "by": "cl-6.abp",
+    "why": "no key or credential read into the conversation (cl-6.security requirement 1 for P8)"
+   }
+  },
+  "kinds": {
+   "tamper": {
+    "on": true,
+    "since": "2026-11-26T16:12Z",
+    "by": "cl-6.abp",
+    "why": "a write to a protected path (.claude/**, abp/*, HOLD.md, settings files, .git/config) is blocked even in observe mode: an agent cannot edit or switch off its own hooks (cl-6.security requirement 2 for P8). R6 as a whole stays observe until P11 and the other path gaps are decided, because blocking every out-of-grant write would stop agents whose grant is still open"
    }
   }
  },
@@ -1329,7 +1349,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:02Z",
+ "updated": "2026-11-26T16:12Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
