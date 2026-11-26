@@ -78,8 +78,10 @@ function checkProtected(who, P, mode, ref, dst, dir) {   // v2.1: a protected pa
     files = gl(['diff', '--cached', '--name-only']); blob = x => gb(['show', ':' + x]); treeFiles = gl(['ls-files', '--', '.claude', 'abp'])
     base = Math.max(seqOf(gb(['show', 'HEAD:abp/pins.json'])), seqOf(gb(['show', 'refs/remotes/origin/' + tg + ':abp/pins.json'])))
   } else {
-    files = gl(['log', ref, '--not', '--remotes', '--name-only', '--format=']); blob = x => gb(['show', ref + ':' + x]); treeFiles = gl(['ls-tree', '-r', '--name-only', ref, '--', '.claude', 'abp'])
-    base = seqOf(gb(['show', 'refs/remotes/origin/' + (dst || tg) + ':abp/pins.json']))
+    // v2.2b (B1): the real tip of the destination, read from the remote; refs/remotes/* is never trusted (the agent can write it by fetch, symbolic-ref or a file write)
+    const rt = (gb(['ls-remote', 'origin', 'refs/heads/' + (dst || tg)], { encoding: 'utf8', timeout: 8000 }) || '').split(/\s/)[0], have = /^[0-9a-f]{40}$/.test(rt) && gb(['cat-file', '-e', rt + '^{commit}']) !== null
+    files = gl(have ? ['log', ref, '--not', rt, '--name-only', '--format='] : ['log', ref, '--name-only', '--format=']); blob = x => gb(['show', ref + ':' + x]); treeFiles = gl(['ls-tree', '-r', '--name-only', ref, '--', '.claude', 'abp'])   // tip unknown: every commit reachable from ref
+    base = have ? seqOf(gb(['show', rt + ':abp/pins.json'])) : 0
   }
   const hits = [...new Set(files)].map(x => [x, isP(x)]).filter(([, d]) => d); if (!hits.length) return null
   let pins = null, why = 'no abp/pins.json with a signature in the commit'

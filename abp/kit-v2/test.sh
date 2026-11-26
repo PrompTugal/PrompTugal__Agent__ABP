@@ -207,4 +207,14 @@ rm -rf $S
 r=$(echo "$W" | env -i PATH=/nonexistent CLAUDE_PROJECT_DIR=$T /bin/bash -c "$(node -p 'require(process.argv[1]).hooks.PreToolUse[0].hooks[0].command' $T/.claude/settings.json)" 2>/dev/null)
 deny  "no node at all: the shell prints the deny" "$r"
 [[ -n "${ABP_TEST_DEBUG:-}" ]] && grep -h hook-error $T/log/*.jsonl 2>/dev/null | tail -3 | cut -c1-400
+echo "--- v2.2b B1 by ref writes"
+deny  "B1: git symbolic-ref on a remote ref is refused" "$(bash_ 'git symbolic-ref refs/remotes/origin/y refs/heads/dev')"
+deny  "B1: git pack-refs is refused" "$(bash_ 'git pack-refs --all')"
+deny  "B1: a redirect into .git/refs/remotes is refused" "$(bash_ 'git rev-parse dev > .git/refs/remotes/origin/x')"
+deny  "B1: a write to .git/packed-refs is refused" "$(wr $T/.git/packed-refs)"
+# a hook-removing commit, then a forged remote-tracking ref, then a push: the check must still see the change
+(cd $T && echo y >> .claude/settings.json && git add .claude/settings.json && git -c user.name=t -c user.email=t@t commit -q -m c) 2>/dev/null
+mkdir -p $T/.git/refs/remotes/origin; git -C $T rev-parse dev > $T/.git/refs/remotes/origin/dev
+deny  "B1: a push after a forged refs/remotes/origin/dev is still refused" "$(bash_ 'git push origin dev')"
+git -C $T reset -q --hard HEAD~1; rm -f $T/.git/refs/remotes/origin/dev
 echo "passed $pass, failed $fail"
