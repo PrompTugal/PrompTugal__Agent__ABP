@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T02:40Z",
+ "updated": "2026-11-26T02:42Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -76,6 +76,10 @@
   {
    "at": "2026-11-26T02:40Z",
    "event": "cl-6.conductor says its model is opus and the list entry is wrong; following agent.json (a relay, not Dinis; the policy does not set models)"
+  },
+  {
+   "at": "2026-11-26T02:42Z",
+   "event": "hook prints the R14 line to an unidentified session at start and on each prompt; the hook differs from the kit in three lines"
   }
  ],
  "waiting_on": [
