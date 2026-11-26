@@ -540,7 +540,8 @@
      "a code change to accept an outside parent is cl-6.dev's normal code path, reviewed by security, not a grant"
     ],
     "expires": "2026-11-30T23:59:59Z",
-    "used": false
+    "used": true,
+    "used_note": "26 Nov 2026 18:49Z, reported by cl-6.dev (not verified by me; the website is not attached to me): one signed commit 43e8b32c4 (v0.1.2335), data/by-place/places.json, nine lines, the london entry only; cl-6.security reviewed the diff before the push and post-reviewed it at 18:39Z (per cl-6.dev). The grant is spent: no further write under this record; my hourly review checks the commit when the website is readable"
    },
    "subagents": true,
    "never": "changes content or disables a check to make the gate pass, reviews what it wrote without security, or edits the hooks, the policy or the version files",
