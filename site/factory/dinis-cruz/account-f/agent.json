@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T06:24Z",
+ "updated": "2026-11-26T07:17Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -96,9 +96,13 @@
   {
    "at": "2026-11-26T06:24Z",
    "event": "twins' real desks are Vicky's (desks/<role>-vicky/): a widening, proposal P7; grants unchanged"
+  },
+  {
+   "at": "2026-11-26T07:17Z",
+   "event": "hand-written run report template for sessions without the hooks; proposal P8 (install the kit in every home and News repository)"
   }
  ],
  "waiting_on": [
-  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P7; the website attached to this session for board/abp/; the hold file name"
+  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P8; the website attached to this session for board/abp/; the hold file name"
  ]
 }

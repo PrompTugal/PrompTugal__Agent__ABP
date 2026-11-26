@@ -1144,6 +1144,15 @@
     "risk": "two agents on one desk: overwrites and unclear authorship of what is published; the hook cannot tell the twins apart on a shared path, so only the commit trailers (Agent:) and the hourly review can",
     "alternative": "the twins keep their own desks (desks/<name>-dinis/) and cl-6.reviewer's covers path alone is granted",
     "needs": "Dinis's yes; until then A5 stays stuck"
+   },
+   {
+    "id": "P8",
+    "since": "2026-11-26",
+    "role": "cl-6.abp",
+    "proposal": "cl-6.abp installs the hook kit in every cl-6 agent's home repository and in the News repositories: .claude/settings.json, .claude/hooks/abp.mjs, abp/policies.json (or a copy of its generated ABP), abp/tools.mjs; each commit signed and reviewed by cl-6.security; the session of each agent is wired to load it",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.startups cannot file its R10 run report because the hook kit is not installed in its session and the install needs writes to protected paths. Only my own repository and (when attached) the website have the kit today, so every other cl-6 session runs with no hook at all: no log, no R3 or R4 breaker, no run report",
+    "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
+    "needs": "Dinis's yes, and each repository attached to cl-6.abp with push access; until then agents file hand-written run reports (abp/templates/run-report-by-hand.md)"
    }
   ]
  },
