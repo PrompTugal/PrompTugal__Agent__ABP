@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.dev@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:18fdcaee97ad8d19)
+policy: abp/policies.json v1.7.8 (sha256:0e7696dcf07d953a)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.dev@PrompTugal.dinis
@@ -26,7 +26,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 - Any connector (mcp__ tools) not granted above or allowed to every role (github: get_, list_, search_, pull_request_read, issue_read, actions_get, actions_list; claude-code-remote: read_documentation, get_environment, register_repo_root, send_message) (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
 - Pushing anywhere but `dev` on its remote, force-push, deletion, tags, history rewrites, empty commits (R5).
-- Writing outside the paths above, or to a protected path: `.claude/**`, `abp/**` (cl-6.abp), `board/abp/**` (cl-6.abp), `HOLD.md` (cl-6.security), `board/HOLD.md` (cl-6.security), `newsroom/build/version.txt`, `newsroom/versions.json`, `design/brand/**`, `~/.claude/settings*.json`, `.git/config`, `**/.claude/settings*.json`, `newsroom/tools/place-signers.json` (cl-6.security), `~/.abp/keys/**`, `~/.abp/log/**`, `~/.abp/salt`, `newsroom/tools/abp-paths.json` (cl-6.dev), `newsroom/tools/abp-signers.json` (cl-6.dev), `~/.abp/seq/**`, `newsroom/tools/operator-keys.json`, `~/.gitconfig`, `~/.config/git/**`, `.git/refs/**`, `.git/packed-refs`, `.git/HEAD` (R6).
+- Writing outside the paths above, or to a protected path: `.claude/**`, `abp/**` (cl-6.abp), `board/abp/**` (cl-6.abp), `HOLD.md` (cl-6.security), `board/HOLD.md` (cl-6.security), `newsroom/build/version.txt`, `newsroom/versions.json`, `design/brand/**`, `~/.claude/settings*.json`, `.git/config`, `**/.claude/settings*.json`, `newsroom/tools/place-signers.json` (cl-6.security), `~/.abp/keys/**`, `~/.abp/log/**`, `~/.abp/salt`, `newsroom/tools/abp-paths.json` (cl-6.dev), `newsroom/tools/abp-signers.json` (cl-6.dev), `~/.abp/seq/**`, `newsroom/tools/operator-keys.json`, `.github/workflows/abp-pins.yml`, `~/.gitconfig`, `~/.config/git/**`, `.git/refs/**`, `.git/packed-refs`, `.git/HEAD` (R6).
 - Sending anything to a host not listed; GitHub writes (R7). Printing the environment or reading a key (R8). Committing under another name (R9).
 
 ## Core rules (every agent)

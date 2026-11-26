@@ -390,6 +390,11 @@
     "why": "a gate file of the website: the fingerprints of operators whose key may vouch for any board/keys.json entry (empty until Dinis states his). Owner none: not even cl-6.dev may write the list that makes an operator; Dinis's own signed commit is the route (cl-6.security O1, 26 Nov)"
    },
    {
+    "glob": ".github/workflows/abp-pins.yml",
+    "owner": null,
+    "why": "the CI check that rejects a .claude/** or abp/** change not signed by cl-6.abp's key (P8 condition): the check must not be editable by the push it checks (cl-6.security, 26 Nov 2026, relayed by cl-6.conductor from cl-6.dev; a tightening I make on my own remit, not a decision of Dinis). Owner none: a change comes only by a signed commit made outside a live session and reviewed by cl-6.security"
+   },
+   {
     "glob": "~/.gitconfig",
     "owner": null,
     "why": "git's global configuration can redirect git to another host (insteadOf, proxy): cl-6.security B5, 26 Nov"

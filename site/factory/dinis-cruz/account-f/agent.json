@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.7 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "18fdcaee97ad8d19",
+ "policy_sha256_16": "0e7696dcf07d953a",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T17:26Z",
+ "updated": "2026-11-26T17:30Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -262,6 +262,10 @@
   {
    "at": "2026-11-26T17:26Z",
    "event": "P15: cl-6.rights read the endpoints in TfL swagger and the API home page; could not read the terms page (403 challenge, not worked round); licence, attribution and limits are relayed, not read by rights; a person must quote the terms; recorded in P15"
+  },
+  {
+   "at": "2026-11-26T17:30Z",
+   "event": "protected path .github/workflows/abp-pins.yml added (owner none), a tightening; cl-6.conductor relayed dev and security; P8, the pin and P11 c unchanged"
   }
  ],
  "waiting_on": [
