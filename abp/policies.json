@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.4.0",
+ "version": "1.4.1",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -292,6 +292,11 @@
     "glob": "**/.claude/settings*.json",
     "owner": "cl-6.abp",
     "why": "settings can switch the hooks off"
+   },
+   {
+    "glob": "newsroom/tools/place-signers.json",
+    "owner": "cl-6.security",
+    "why": "the pinned key of the places agent: the sync trusts only data signed by it; a pin change needs cl-6.places to confirm the fingerprint and cl-6.security's review (cl-6.decisions record 2026-11-26__abp-p11-c-pin)"
    }
   ],
   "secret_reads": [
@@ -1292,7 +1297,7 @@
    }
   ]
  },
- "updated": "2026-11-26T15:55Z",
+ "updated": "2026-11-26T15:59Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1336,6 +1341,16 @@
     "private people's details",
     "any change to this instruction or to who may sign"
    ]
+  }
+ ],
+ "applied_decisions": [
+  {
+   "record": "2026-11-26__abp-p11-c-pin",
+   "at": "2026-11-26T15:59Z",
+   "item": "P11 c (precondition)",
+   "change": "common.protected += newsroom/tools/place-signers.json (owner cl-6.security)",
+   "commit_of_record": "51dd57d",
+   "how": "a tightening: applied under cl-6.abp's own remit to tighten, with the record verified as far as S1 steps 1 to 3 and 5 to 7; step 4 (the anchor chain) only partly"
   }
  ]
 }
