@@ -1,0 +1,401 @@
+{
+ "$schema": "../../run-report.schema.json",
+ "agent": "cl-6.abp@PrompTugal.dinis",
+ "run": "2026-11-26T16-56-03Z",
+ "started": "2026-11-26T16:56:03.601Z",
+ "ended": "2026-11-26T21:38:01.164Z",
+ "line": "wake 21:37Z: verified 19 decision records (all signatures good), applied none new; held six, wrote P15 to P18 for Dinis",
+ "policy": {
+  "version": "1.7.8",
+  "sha256": "24e74ad6b8ac272a"
+ },
+ "text_included": false,
+ "sessions": 1,
+ "requests": [
+  {
+   "t": "2026-11-26T16:57:06.867Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T16:57:18.151Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T16:57:39.877Z",
+   "chars": 470,
+   "sha256": "e1c9ad82ed09ae09"
+  },
+  {
+   "t": "2026-11-26T16:58:06.560Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T16:58:52.824Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T16:59:26.328Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:24:28.437Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:24:46.158Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:24:53.865Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:25:01.303Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:25:42.105Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:26:37.695Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:29:50.460Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:31:00.614Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:31:16.624Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:31:57.503Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:36:18.060Z",
+   "chars": 26,
+   "sha256": "84fadf791f7414af"
+  },
+  {
+   "t": "2026-11-26T17:38:14.780Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:38:36.575Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:39:53.613Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:40:51.846Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:41:04.015Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:44:05.316Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:45:06.503Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:45:30.849Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:46:06.296Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:54:09.252Z",
+   "chars": 35,
+   "sha256": "4e61ae85c7f8a7be"
+  },
+  {
+   "t": "2026-11-26T17:54:35.674Z",
+   "chars": 60,
+   "sha256": "269baaf316902dfb"
+  },
+  {
+   "t": "2026-11-26T17:55:05.288Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T17:55:23.639Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:04:15.496Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:35:47.227Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:37:54.802Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:39:16.341Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:40:15.032Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:40:40.885Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:41:06.595Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:49:02.518Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T18:54:16.076Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T19:55:29.825Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-26T21:37:23.960Z",
+   "chars": 508,
+   "sha256": "1ac3285eaa5ccba8"
+  }
+ ],
+ "session_events": [
+  {
+   "t": "2026-11-26T17:24:28.170Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T17:54:08.917Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T18:04:15.229Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T18:35:46.991Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T18:49:02.274Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T18:54:15.797Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T19:55:29.604Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-26T21:37:23.721Z",
+   "source": "resume"
+  }
+ ],
+ "compactions": {
+  "count": 0,
+  "re_anchored": 0
+ },
+ "tool_calls": {
+  "total": 134,
+  "by_kind": {
+   "shell": 56,
+   "other": 1,
+   "denied-tool": 1,
+   "connector": 38,
+   "read": 38
+  }
+ },
+ "policies_executed": {
+  "R2": 1
+ },
+ "policies_instrumented": [
+  "R2",
+  "R3",
+  "R4",
+  "R5",
+  "R6",
+  "R7",
+  "R8",
+  "R9"
+ ],
+ "mandate": {
+  "actions": 133,
+  "commits": [
+   {
+    "sha": "86efcfa",
+    "subject": "cl-6.abp@PrompTugal.dinis: log P18 stage 1 from cl-6.rights",
+    "files": 1
+   },
+   {
+    "sha": "11f4f96",
+    "subject": "cl-6.abp@PrompTugal.dinis: mark cl-6.dev's one-off London write as used",
+    "files": 48
+   },
+   {
+    "sha": "f8476d9",
+    "subject": "cl-6.abp@PrompTugal.dinis: log security's read of the P9 trial",
+    "files": 1
+   },
+   {
+    "sha": "26dc444",
+    "subject": "cl-6.abp@PrompTugal.dinis: P18 cl-6.startups host list, for review",
+    "files": 47
+   },
+   {
+    "sha": "860f06a",
+    "subject": "cl-6.abp@PrompTugal.dinis: apply london-registry rev 3 (cl-6.dev one-off write)",
+    "files": 49
+   },
+   {
+    "sha": "0b04d01",
+    "subject": "cl-6.abp@PrompTugal.dinis: cl-6.data may open one key PR (Dinis, own session)",
+    "files": 48
+   },
+   {
+    "sha": "0ac5bdf",
+    "subject": "cl-6.abp@PrompTugal.dinis: P17 route for London's place-signers pin, for Dinis",
+    "files": 47
+   },
+   {
+    "sha": "ff2a1b2",
+    "subject": "cl-6.abp@PrompTugal.dinis: london-registry record verified, held (widening, relayed word)",
+    "files": 47
+   },
+   {
+    "sha": "da774a2",
+    "subject": "cl-6.abp@PrompTugal.dinis: P16 approvals/** for cl-6.security, for Dinis",
+    "files": 47
+   },
+   {
+    "sha": "bb8d5bd",
+    "subject": "cl-6.abp@PrompTugal.dinis: P9 applied for cl-6.data, P8 yes recorded (Dinis, own session)",
+    "files": 49
+   },
+   {
+    "sha": "064b443",
+    "subject": "cl-6.abp@PrompTugal.dinis: P8 status after both security passes at b87acff",
+    "files": 47
+   },
+   {
+    "sha": "4cfd08c",
+    "subject": "cl-6.abp@PrompTugal.dinis: protect .github/workflows/abp-pins.yml (owner none)",
+    "files": 48
+   },
+   {
+    "sha": "1143d39",
+    "subject": "cl-6.abp@PrompTugal.dinis: P15 gets cl-6.rights' reading of TfL's pages",
+    "files": 47
+   },
+   {
+    "sha": "1c36e41",
+    "subject": "cl-6.abp@PrompTugal.dinis: P15 api.tfl.gov.uk for cl-6.data.london, for Dinis",
+    "files": 47
+   },
+   {
+    "sha": "e7e52ef",
+    "subject": "cl-6.abp@PrompTugal.dinis: P8 status after security's pass at b87acff, hand-over order (S14)",
+    "files": 48
+   },
+   {
+    "sha": "9c7d58c",
+    "subject": "cl-6.abp@PrompTugal.dinis: now.md matches policy v1.7.8 and kit v2.2b",
+    "files": 1
+   },
+   {
+    "sha": "b87acff",
+    "subject": "cl-6.abp@PrompTugal.dinis: kit v2.2b closes B1 by ref writes, P8 withdrawn (B1), policy v1.7.8",
+    "files": 50
+   },
+   {
+    "sha": "15f594d",
+    "subject": "cl-6.abp@PrompTugal.dinis: onboarding of the new session, agent.json, now.md, run report",
+    "files": 3
+   }
+  ]
+ },
+ "reach": {
+  "attempts": 1,
+  "blocked": 0,
+  "observed": 1,
+  "denied": [
+   {
+    "t": "2026-11-26T16:56:08.135Z",
+    "tool": "ListAgents",
+    "rule": "R2",
+    "kind": "denied-tool",
+    "target_chars": 0,
+    "target_sha256": "aab60e123bd8f313"
+   }
+  ]
+ },
+ "breaches": [],
+ "counts": {
+  "requests": 41,
+  "tool_calls": 134,
+  "in_mandate": 133,
+  "out_of_mandate": 1,
+  "attempts": 1,
+  "breaches": 0
+ }
+}

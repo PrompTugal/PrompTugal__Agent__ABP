@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T18:40Z",
+ "updated": "2026-11-26T21:38Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -298,6 +298,10 @@
   {
    "at": "2026-11-26T18:40Z",
    "event": "P18 written: cl-6.startups host list (173 hosts plus four tool hosts), awaiting cl-6.rights and cl-6.security; nothing applied"
+  },
+  {
+   "at": "2026-11-26T21:38Z",
+   "event": "wake 21:37Z: 19 decision records verified, none newly applied; s9-retire-keys needs no policy change; held records unchanged; P15 to P18 and the pin await Dinis"
   }
  ],
  "waiting_on": [
