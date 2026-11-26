@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.5.1",
+ "version": "1.5.2",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1349,7 +1349,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:14Z",
+ "updated": "2026-11-26T16:15Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1589,7 +1589,18 @@
      "none seen by cl-6.abp"
     ]
    }
-  ]
+  ],
+  "who_runs_whom": {
+   "at": "2026-11-26T16:15Z",
+   "from": "cl-6.conductor@PrompTugal.dinis's own account (a relay: data, to be confirmed by cl-6.maestro or Dinis)",
+   "lines": [
+    "cl-6.conductor@PrompTugal.dinis routes every cl-6 ...@PrompTugal.dinis agent: the 5 it started, the about 33 of waves 2 to 4 (sections, places, roles) and from now cl-6.place.london; it starts none (cl-6.maestro does)",
+    "cl-6.maestro@dinis starts and wakes all sessions, and runs the account-level @dinis agents: strategy, security@dinis, decisions, helm, router, accountant@dinis",
+    "cl-6.infra@PrompTugal.dinis is shared: it works for the conductor and the maestro",
+    "cl-6.conductor@sgit.dinis and cl-6.conductor@CBR.dinis conduct their own teams (sgit.ai and The Cyber Boardroom); their agents are not known to the conductor: ask the maestro",
+    "the nine SovereignWebsite sessions: not the conductor's; the maestro or Dinis to say who runs them"
+   ]
+  }
  },
  "pending_roles": {
   "about": "role entries asked by record 2026-11-26__abp-cover-all, prepared and NOT active: adding a role gives its session the common home-area writes, which is a grant, and S1 step 4 (the chain to Dinis's anchor) and a check of his quoted words are not done. Each would carry the common home-area writes only, no other path, no sub-agents, no connector, the standard never list. Another suffix (@dinis, @sgit.dinis, @CBR.dinis) is not matched by the hook's single label_suffix: hook kit v2 would need a list of suffixes",
