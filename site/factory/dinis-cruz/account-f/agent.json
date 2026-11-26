@@ -60,7 +60,7 @@
   "cl-6.analyst",
   "cl-6.place.london"
  ],
- "updated": "2026-11-26T15:55Z",
+ "updated": "2026-11-26T15:57Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -145,10 +145,15 @@
   {
    "at": "2026-11-26T15:55Z",
    "event": "Dinis's own line adopted: S1 (apply what cl-6.decisions signs, except one-way doors) in core policy v1.4.0, R15 for all; endorsement scope excludes widenings: narrower wins; incident write-up for the maestro"
+  },
+  {
+   "at": "2026-11-26T15:57Z",
+   "event": "wake set by cl-6.maestro: 10:37 and 21:37 Lisbon, S1/R15 line first"
   }
  ],
  "waiting_on": [
   "Dinis: the endorsement of cl-6.decisions excludes widening permissions, so most of P1 to P11 come back as for-dinis: widen its scope, or say yes to named items here; the website attached to my session; IaC #25",
   "cl-6.decisions: the signed decisions (none yet)"
- ]
+ ],
+ "wake": "10:37 and 21:37 Lisbon (scheduled task trig_01UBF8M2222JWokDoFs2skhV, set by cl-6.maestro; next run 21:37 UTC, 26 Nov); the S1 and R15 line first"
 }
