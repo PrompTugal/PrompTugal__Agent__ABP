@@ -1114,7 +1114,7 @@
     "since": "2026-11-26",
     "role": "all cl-6 roles",
     "proposal": "add history/** to common.writes, so each agent writes the history of what it needs in its own home repository",
-    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent; also cl-6.devops (history/ and findings/) and cl-6.cyber (history/**, board/ready-to-ship/**), by their own run reports of 26 Nov; also asked via the conductor by cl-6.weather, cl-6.bulletins, cl-6.customers and cl-6.designer (their ABP readings); also cl-6.synthetic (via the conductor)",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent; also cl-6.devops (history/ and findings/) and cl-6.cyber (history/**, board/ready-to-ship/**), by their own run reports of 26 Nov; also asked via the conductor by cl-6.weather, cl-6.bulletins, cl-6.customers and cl-6.designer (their ABP readings); also cl-6.synthetic (via the conductor); also cl-6.journalist (history/** and site/passes/**, commit 442573e, via the conductor)",
     "risk": "low if only in the agent's own home repository: a path glob cannot tell a home from the website, so history/** would also open that path in the website; the hourly review would check commits against each role's repos",
     "alternative": "grant it per role, as the history of its own repository, after its first run report shows the need",
     "needs": "Dinis's yes; until then no cl-6 role writes history/**"
@@ -1186,7 +1186,7 @@
     "evidence": "cl-6.conductor's messages of 26 Nov relaying the reporters, and the run reports of startups, devops and cyber; several agents now refuse routed work for want of a grant; I have not seen the setup brief",
     "items": {
      "a": {
-      "ask": "every home: history/** (P5), and where the agent uses them: prepared/**, review/**, site/specs/**, site/ready-to-ship/**, site/key-pr/**",
+      "ask": "every home: history/** (P5), and where the agent uses them: prepared/**, review/**, site/specs/**, site/ready-to-ship/**, site/key-pr/**; cl-6.journalist: site/passes/**",
       "risk": "low: its own home repository; a path glob cannot tell a home from the website, so it also opens those paths there",
       "how": "grant per role, from its run report, not for all 42; history/** for all if Dinis says P5 yes"
      },
