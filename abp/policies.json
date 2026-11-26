@@ -1491,6 +1491,24 @@
     ],
     "risk": "infrastructure changes are the highest-impact writes of all: the barrier must be the IaC repository itself (branch protection, required reviews, no self-approval), not my hook",
     "needs": "Dinis's word; AWS and GitHub App privileges remain his alone"
+   },
+   {
+    "id": "P15",
+    "since": "2026-11-26",
+    "role": "cl-6.data.london",
+    "proposal": "one new network host, api.tfl.gov.uk, read-only (GET and HEAD), allowed by path: /Line/Mode/tube/Status and /Line/Mode/tube/Disruption only, added to the London environment env_014fJkugLPBiSUBfBqSeK1G7 and to the role's network.allow in the same change",
+    "evidence": "cl-6.data.london (17:24Z, its own account): tfl.gov.uk answers it with a 403 and a JavaScript challenge, so it reads no TfL status; it will not work round the challenge (R13). Endpoints named from memory, not checked against TfL's documentation. cl-6.security@PrompTugal.dinis (17:25Z, from the design, TfL pages not fetched): acceptable in principle on conditions, not an objection, a contained widening",
+    "would_change": "the London environment's allowed hosts (Dinis's alone) and the role's network.allow",
+    "risk": "low exfiltration (an attacker cannot read TfL's logs; the path list closes most of it); the larger risk is outside text: disruption descriptions must go through plain() before any page shows them, never as Markdown (W1, W2)",
+    "conditions": [
+     "GET and HEAD only, capture phase, each request logged; no redirect to another host (curl -L is denied by N1); do not retry tfl.gov.uk with other headers",
+     "allow by path, as the github owner paths; any other path on that host is a finding",
+     "an app key, if needed, is a credential: Dinis adds it as a network secret on the London environment (request_credential or Settings); never in a repository, run report, log, chat or logged URL; the log hashes query strings and the run report strips it",
+     "registering for a key means accepting terms: Dinis's act, not an agent's (R13)",
+     "cl-6.rights confirms from TfL's own pages the terms, the attribution wording and any rate limits before the first read; cl-6.data.london records them with the attribution before any data",
+     "the environment's allow_package_managers and allow_mcp_servers stay false"
+    ],
+    "needs": "Dinis's yes in my session; cl-6.rights' confirmation of the terms (not yet asked: I have no session id for cl-6.rights, so I ask cl-6.maestro to reach it); then Dinis makes the environment change. cl-6.abp changes nothing until then"
    }
   ]
  },
