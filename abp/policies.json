@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.6",
+ "version": "1.7.7",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1474,7 +1474,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:52Z",
+ "updated": "2026-11-26T16:53Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1517,7 +1517,13 @@
     "AWS, GitHub App privileges",
     "private people's details",
     "any change to this instruction or to who may sign"
-   ]
+   ],
+   "root": {
+    "at": "2026-11-26T16:53Z",
+    "from": "Dinis Cruz, typed in cl-6.abp's own session",
+    "words": "cl-6.decisions' signing key is sha256:2c3824641f5b8470",
+    "effect": "step 4 of the verification (chain to the owner) is met for this key: a record verifies against site/keys/cl-6.decisions.json only if that file's signing fingerprint is exactly this value. It does not say P8 yes, and it widens no one-way door."
+   }
   }
  ],
  "applied_decisions": [
