@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.5.0",
+ "version": "1.5.1",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1349,7 +1349,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:12Z",
+ "updated": "2026-11-26T16:14Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1403,6 +1403,20 @@
    "change": "common.protected += newsroom/tools/place-signers.json (owner cl-6.security)",
    "commit_of_record": "51dd57d",
    "how": "a tightening: applied under cl-6.abp's own remit to tighten, with the record verified as far as S1 steps 1 to 3 and 5 to 7; step 4 (the anchor chain) only partly"
+  },
+  {
+   "record": "2026-11-26__abp-cover-all",
+   "at": "2026-11-26T16:14Z",
+   "item": "D-ABP-COVER-ALL",
+   "commit_of_record": "ef4b3c5",
+   "applied": [
+    "maps.websites",
+    "maps.conductors (data only, no grant)"
+   ],
+   "not_applied": [
+    "the nine role entries: held in pending_roles"
+   ],
+   "why": "signature, key, endorsement, commit signature and expiry verified (S1 steps 1 to 3, 5, 6); step 4 (anchor chain) still partial; the roles are grants (a widening: outside the endorsement's own scope unless Dinis's own words are checked, which I cannot do: list_events is not in my grant); the security review in the record is only 'asked after signing'. The maps grant nothing."
   }
  ],
  "findings": [
@@ -1424,5 +1438,216 @@
    "what": "nine sessions have no role in this policy: the SovereignWebsite and @dinis sessions (router, helm, decisions, security, strategy, accountant, maestro new and old, conductor@sgit and conductor@CBR). They are not PrompTugal cl-6 agents of this policy's brief; cl-6.decisions signs records that this policy applies, so its own reach matters most",
    "status": "not covered by me: Dinis to say whether cl-6.abp writes roles for them (I would start with cl-6.decisions, then maestro)"
   }
- ]
+ ],
+ "maps": {
+  "about": "data, not a grant. From the conductor's sessions list and cl-6.abp's own list_sessions of 26 Nov, as far as I can see: a parent is the session that created a session, not necessarily who runs it; sites are the News repositories named in the sessions list",
+  "at": "2026-11-26T16:14Z",
+  "source": "cl-6.decisions record 2026-11-26__abp-cover-all (commit ef4b3c5), part 2 and 3",
+  "websites": [
+   {
+    "repo": "PrompTugal/PrompTugal__News__Website",
+    "kept_by": [
+     "cl-6.dev (build)",
+     "cl-6.journalist (articles)",
+     "cl-6.abp",
+     "and the other roles in their grants"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Data",
+    "kept_by": [
+     "cl-6.data"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Weather",
+    "kept_by": [
+     "cl-6.weather"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Travel",
+    "kept_by": [
+     "cl-6.travel"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Civic",
+    "kept_by": [
+     "cl-6.civic"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Startups",
+    "kept_by": [
+     "cl-6.startups"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Library",
+    "kept_by": [
+     "cl-6.library"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Signals",
+    "kept_by": [
+     "cl-6.signals"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Cyber",
+    "kept_by": [
+     "cl-6.cyber"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Events",
+    "kept_by": [
+     "cl-6.events"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Live",
+    "kept_by": [
+     "cl-6.live"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Videos",
+    "kept_by": [
+     "cl-6.videos"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Bulletins",
+    "kept_by": [
+     "cl-6.bulletins"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Fringe",
+    "kept_by": [
+     "cl-6.fringe"
+    ]
+   },
+   {
+    "repo": "PrompTugal/PrompTugal__News__Swarm",
+    "kept_by": [
+     "cl-6.swarm"
+    ]
+   }
+  ],
+  "conductors": [
+   {
+    "conductor": "cl-6.conductor@PrompTugal.dinis",
+    "session": "session_016CrbJKttr9TiHHDsuGnmF1",
+    "created": [
+     "cl-6.abp",
+     "cl-6.journalist",
+     "cl-6.dev",
+     "cl-6.security",
+     "cl-6.correspondent"
+    ],
+    "note": "its role: thinks, plans, routes; proposes sessions to cl-6.maestro"
+   },
+   {
+    "conductor": "cl-6.maestro@dinis (new)",
+    "session": "session_016CrbJLv54Kh4CSTzagW2G3",
+    "created": [
+     "cl-6.conductor@sgit.dinis",
+     "cl-6.conductor@CBR.dinis"
+    ],
+    "note": "starts sessions and wakes at Dinis's word"
+   },
+   {
+    "conductor": "cl-6.maestro@dinis (old, archived)",
+    "session": "session_016CrbJJo93LZ9avM8raocz4",
+    "created": [
+     "cl-6.conductor@PrompTugal.dinis",
+     "cl-6.infra",
+     "the 30 or so other cl-6 PrompTugal agents of waves 2 to 4 and the sections",
+     "cl-6.strategy@dinis",
+     "cl-6.security@dinis",
+     "cl-6.decisions@dinis",
+     "cl-6.helm@dinis",
+     "cl-6.router@dinis",
+     "cl-6.accountant@dinis"
+    ]
+   },
+   {
+    "conductor": "cl-6.conductor@sgit.dinis",
+    "session": "session_016CrbJJApzXjpoWrGMpA4u9",
+    "created": [
+     "none seen by cl-6.abp"
+    ]
+   },
+   {
+    "conductor": "cl-6.conductor@CBR.dinis",
+    "session": "session_016CrbJMcK18EPwejc2vhzB5",
+    "created": [
+     "none seen by cl-6.abp"
+    ]
+   }
+  ]
+ },
+ "pending_roles": {
+  "about": "role entries asked by record 2026-11-26__abp-cover-all, prepared and NOT active: adding a role gives its session the common home-area writes, which is a grant, and S1 step 4 (the chain to Dinis's anchor) and a check of his quoted words are not done. Each would carry the common home-area writes only, no other path, no sub-agents, no connector, the standard never list. Another suffix (@dinis, @sgit.dinis, @CBR.dinis) is not matched by the hook's single label_suffix: hook kit v2 would need a list of suffixes",
+  "sessions": [
+   {
+    "label": "cl-6.router@dinis",
+    "id": "session_016CrbJJ742C2CdXXkrRs1Zq",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.helm@dinis",
+    "id": "session_016CrbJMrS4XKpxUPGCj2Yhf",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.decisions@dinis",
+    "id": "session_016CrbJMwTgwKXwaYUTEopQk",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.security@dinis",
+    "id": "session_016CrbJJS2JEBgcWYnXZQGrE",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.strategy@dinis",
+    "id": "session_016CrbJKwZL7zgYhVwDosQsT",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.accountant@dinis",
+    "id": "session_016CrbJJ7NP5eaJypGAHgdGi",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.maestro@dinis",
+    "id": "session_016CrbJLv54Kh4CSTzagW2G3",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.conductor@sgit.dinis",
+    "id": "session_016CrbJJApzXjpoWrGMpA4u9",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   },
+   {
+    "label": "cl-6.conductor@CBR.dinis",
+    "id": "session_016CrbJMcK18EPwejc2vhzB5",
+    "status": "pending",
+    "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
+   }
+  ]
+ }
 }
