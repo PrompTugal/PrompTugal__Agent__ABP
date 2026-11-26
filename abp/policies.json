@@ -1181,7 +1181,7 @@
    {
     "id": "P11",
     "since": "2026-11-26",
-    "role": "every cl-6 role that reported a gap after reading its ABP (dev, weather, bulletins, customers, designer, rights, backup, events, library, researcher, ontologist, accountant), cl-6.places",
+    "role": "every cl-6 role that reported a gap after reading its ABP (dev, weather, bulletins, customers, designer, rights, backup, events, library, researcher, ontologist, accountant), cl-6.places, cl-6.journalist",
     "proposal": "ONE answer for the grants that the setup brief of Dinis's start (done before the grants existed) needed. Items a to e; Dinis can say yes to all, or name the items",
     "evidence": "cl-6.conductor's messages of 26 Nov relaying the reporters, and the run reports of startups, devops and cyber; several agents now refuse routed work for want of a grant; I have not seen the setup brief",
     "items": {
@@ -1221,6 +1221,14 @@
       "finding": "v1.2.0 grants cl-6.places no sub-agents, as for most roles (P2 is the general proposal); it follows the grant and runs the places serially, correctly",
       "my_recommendation": "keep the grant and change the wake prompt to serial, until the hook is installed (P8): a sub-agent's calls may not be seen by a hook in the parent's session, I have not confirmed it. If Dinis wants sub-agents for the places, grant it to cl-6.places alone (subagents: true), not to all 42 roles; I do that in one line",
       "needs": "Dinis's choice"
+     },
+     "h": {
+      "ask": "cl-6.journalist: the website's content/about/** (content/about/index.md now: the F06 rewrite drafted by journalist, with security), and later other content pages if Dinis names them",
+      "finding": "checked against v1.2.0: no role covers content/about/index.md in the website. The 14 section roles hold content/**, but only in their own News repositories (their repos lists do not include the website); cl-6.journalist has content/articles/** only; cl-6.dev and the others have no content grant",
+      "ask_narrow": "content/about/** only, not content/**: a path glob cannot tell the website's content/ from a section repository's, so content/** for the journalist would open every content page of the website to it",
+      "alternative": "the page stays a draft in journalist's home area (site/factory/dinis-cruz/account-f/) and Dinis or cl-6.dev lands it",
+      "risk": "an about page is the site's own voice about itself and its publisher; security reviews the commit; the hook cannot see the review",
+      "needs": "Dinis's yes; until then nobody lands content/about/index.md"
      }
     },
     "needs": "Dinis's yes, in this session, per item or for all; until then each stays outside its grant, logged and counted as a breach by the agent's own account"

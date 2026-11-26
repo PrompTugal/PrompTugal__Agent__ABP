@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.weather@PrompTugal.dinis"
-policy: abp/policies.json v1.2.0 (sha256:08db7dbf6337547f)
+policy: abp/policies.json v1.2.0 (sha256:d8aeed1266960786)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.weather@PrompTugal.dinis
