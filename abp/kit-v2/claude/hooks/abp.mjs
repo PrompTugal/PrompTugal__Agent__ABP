@@ -70,7 +70,7 @@ function checkBash(who, cmd, cwd, P) {
   for (const seg of segs(cmd.replace(/(<<-?\s*['"]?(\w+)['"]?[^\n]*)\n[\s\S]*?\n\s*\2\s*(?=\n|$)/g, '$1'))) {   // heredoc body: data
     if (/^(cd|pushd|popd)(\s|$)/.test(seg)) {   // v2 (F4): options, pushd, popd; a target that cannot be resolved statically makes the cwd unknown
       const m = /^(?:cd|pushd)\s+(?:(?:--|-[LPe@]+)\s+)*["']?([^"'\s]+)["']?$/.exec(seg)
-      here = m && !/[$`]|^-$/.test(m[1]) ? path.resolve(here || ROOT, tilde(m[1])) : null; continue }
+      here = m && !/[$`*?\[]|^-$/.test(m[1]) ? path.resolve(here || ROOT, tilde(m[1])) : null; continue }
     const t = (seg.match(/"[^"]*"|'[^']*'|\S+/g) || []).map(x => x.replace(/^["']|["']$/g, '')), verb = path.basename(t[0]), args = t.slice(1), f = args.filter(a => !/^[->]/.test(a))
     for (const [rule, re, why] of P.shell_deny || []) if (new RegExp(re).test(seg)) return deny(rule, `${verb}: ${why}`, 'shell')
     const SIGNING = (verb === 'ssh-keygen' && (args.includes('-y') || args.includes('-l') || args.includes('-lf') || (args.includes('-Y') && args[args.indexOf('-Y') + 1] === 'sign'))) || (verb === 'git' && /^(commit|config)$/.test(args.find(a => !a.startsWith('-') && !a.includes('=')) || ''))   // v2 (G4): only signing and the public half may name a key
@@ -80,7 +80,7 @@ function checkBash(who, cmd, cwd, P) {
       if (hit(rp, P.common.secret_reads, who.role) || hit(rp + '/x', P.common.secret_reads, who.role)) return deny('R8', `${verb}: names a secret path (${tk}): keys and credentials are never read into the conversation`, 'secret') }
     const sub = verb === 'git' && args.find((a, i) => !a.startsWith('-') && !/^-[Cc]$/.test(args[i - 1])), rest = args.slice(args.indexOf(sub) + 1)
     const READV = /^(cat|ls|head|tail|wc|grep|rg|diff|stat|file|sha256sum|echo|printf|test|\[)$/, GITREAD = /^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/
-    const FIND_W = verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a)), seg2 = verb === 'git' ? seg.replace(/(-m|--message)(=|\s+)("[^"]*"|'[^']*')/g, '') : seg
+    const FIND_W = verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a)), seg2 = (verb === 'git' ? seg.replace(/(-m|--message)(=|\s+)("[^"]*"|'[^']*')/g, '') : seg).replace(/["']/g, '')   // v2 (H2): quotes inside a word are removed before matching
     if (!READV.test(verb) && !(verb === 'git' && GITREAD.test(sub || '')) && !(verb === 'find' && !FIND_W) && /(^|[\s\/'"=:])\.claude(\/|\s|$|['"])|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(seg2) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(seg2)))
       return deny('R6', `${verb}: names a protected place (.claude, HOLD.md, .git/config, ~/.abp), and it is not a read`, 'tamper')   // v2 (G2, G3): tar, unzip, patch, git checkout and the rest, whatever the verb
     if (verb === 'git' && (sub === 'commit' || sub === 'push')) {   // v2 (G3): what is about to be committed or pushed may not touch a protected path
@@ -105,20 +105,22 @@ function checkBash(who, cmd, cwd, P) {
       const sends = args.some(a => /^(-d|--data.*|-F|--form.*|-T|--upload-file|--json|--post-.*)$/.test(a)) || x >= 0 && !/^(GET|HEAD|OPTIONS)$/i.test(args[x + 1])
       if (sends && (!hosts.length || hosts.some(h => !g.send.includes(h)))) return deny('R7', `${verb} sends to ${hosts.join(', ') || 'an unnamed host'}, not in the grant`, 'send')
     }
-    const w = [...seg.matchAll(/(?:^|[^0-9<>])(?:&>|>>|>\||>)\s*([^\s;&|<>]+)/g)].map(m => m[1]).filter(x => !/^&|^\/dev\//.test(x))   // its writes
+    const w = [...seg.matchAll(/(?:^|[^<>])(?:&>|>>|>\||>)\s*([^\s;&|<>]+)/g)].map(m => m[1]).filter(x => !/^&|^\/dev\//.test(x))   // v2 (H2): a file descriptor number before the > is a redirect too   // its writes
     if (/^(tee|rm|rmdir|truncate|unlink|touch|mkdir|ln|mv)$/.test(verb)) w.push(...f)   // v2 (F2): ln and mv: every argument
     else if (/^(sed|perl)$/.test(verb) && args.some(a => /^(-[a-z]*i|--in-place)/.test(a)) || /^(chmod|chown)$/.test(verb)) w.push(...f.slice(1))
     else if (/^(cp|install|rsync)$/.test(verb)) w.push(...f, ...args.filter(a => /^--[a-z-]+=/.test(a)).map(a => a.replace(/^--[a-z-]+=/, '')))   // v2 (G1, G5): every argument of cp, rsync, install, and --link-dest=
     else if (verb === 'dd') w.push(...args.filter(a => /^of=/.test(a)).map(a => a.slice(3)))   // v2 (G2)
     else if (verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a))) w.push(...f)   // v2 (G2)
     if (w.length && here === null) return deny('R6', `${verb}: writes while the working directory is unknown (cd to a variable, \`cd -\`, popd)`, 'tamper')   // v2 (F4)
-    for (const x of w) { const xx = x.replace(/^["']|["']$/g, ''); if (/[$`]/.test(xx)) return deny('R6', `${verb}: a write target built at run time (${xx}) cannot be checked`, 'tamper')   // v2 (G2)
+    for (const x of w) { const xx = x.replace(/["']/g, ''); if (/[$`*?\[]/.test(xx)) return deny('R6', `${verb}: a write target built at run time (${xx}) cannot be checked`, 'tamper')   // v2 (G2)
      
       if (/(^|\/)\.claude(\/|$)|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(xx) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(xx))) return deny('R6', `${verb}: ${xx} names a protected place`, 'tamper')   // v2 (F4): by its text too, whatever the cwd
       const d = guarded(who, path.resolve(here || ROOT, tilde(xx)), P) || !who.role && anon(); if (d) return d }
   }
   return allow('shell')
 }
+const secretPaths = P => P.common.secret_reads.map(g => tilde(fill(g))).filter(g => path.isAbsolute(g)).map(g => g.split(/[*?]/)[0].replace(/\/$/, ''))   // v2 (H1): the fixed absolute part of each secret glob
+const secretHit = (at, P) => hit(at, P.common.secret_reads) || hit(at + '/x', P.common.secret_reads) || secretPaths(P).some(sp => sp && (at === sp || sp.startsWith(at.replace(/\/$/, '') + path.sep) || at.startsWith(sp + path.sep)))   // the path, a directory above it, or inside it
 export function decide(inp, who, P) {
   const tool = inp.tool_name || '', ti = inp.tool_input || {}, g = grantOf(who, P), T = P.tools, f = ti.file_path || ti.notebook_path || ti.path, at = path.resolve(inp.cwd || ROOT, f || '.')
   if (tool.startsWith('mcp__')) {   // with R3's breaker on, every mcp__ denial blocks
@@ -130,7 +132,8 @@ export function decide(inp, who, P) {
   if (flag) return g[flag] ? allow(flag) : deny(flag === 'subagents' ? 'R4' : 'R7', `${tool} is not in ${who.agent || 'this session'}'s grant`, flag)
   if (!T.builtin_allowed.includes(tool)) return deny('R2', `${tool} is in no grant (deny by default)`, 'denied-tool')
   if (/^(Edit|MultiEdit|Write|NotebookEdit)$/.test(tool)) return f ? checkWrite(who, at, P) : who.role ? allow('write') : anon()
-  if (f && hit(at, P.common.secret_reads)) return deny('R8', `${f}: never read keys or credentials`, 'secret')
+  if (f && secretHit(at, P)) return deny('R8', `${f}: never read keys or credentials (a search or listing of a directory that holds them too)`, 'secret')
+  if (tool === 'Glob' && ti.pattern && /^[~/]/.test(ti.pattern)) { const pre = path.resolve(tilde(String(ti.pattern).split(/[*?\[{]/)[0])); if (secretHit(pre, P)) return deny('R8', `Glob ${ti.pattern}: never list keys or credentials`, 'secret') }
   return tool === 'Bash' ? checkBash(who, String(ti.command || ''), inp.cwd, P) : allow(/^(Read|Grep|Glob|LS)/.test(tool) ? 'read' : 'other')
 }
 const redact = s => String(s ?? '').slice(0, 400).replace(/-----BEGIN [^-]*-----[\s\S]*?(-----END [^-]*-----|$)|\b(sk-[\w-]{16,}|gh[pousr]_\w{20,}|github_pat_\w{20,}|AKIA[0-9A-Z]{16}|xox[abprs]-[\w-]{10,}|AIza[\w-]{35}|[0-9a-f]{32,})\b/gi, '[redacted]').replace(/[\w.%+-]+@[\w-]+(\.[\w-]+)*\.[a-z]{2,}\b/gi, '[address]').slice(0, 240)

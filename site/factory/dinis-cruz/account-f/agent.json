@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:22Z",
+ "updated": "2026-11-26T16:25Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -178,6 +178,10 @@
   {
    "at": "2026-11-26T16:22Z",
    "event": "kit v2: security round 2 (G1 to G5) fixed, 52 tests, policy v1.6.2"
+  },
+  {
+   "at": "2026-11-26T16:25Z",
+   "event": "kit v2: security round 3 (H1, H2) fixed, 66 tests; H3 stated"
   }
  ],
  "waiting_on": [

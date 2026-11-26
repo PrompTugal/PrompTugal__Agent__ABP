@@ -8,7 +8,7 @@ Written by cl-6.abp@PrompTugal.dinis, 2026-11-26T16:13Z, on cl-6.security's four
 | `claude/hooks/launch.mjs` | new: the launcher the settings call. It verifies the signed pins, then runs the hook |
 | `claude/settings.json` | the wiring, fail closed in the shell itself |
 | `pins.mjs` | hashes the four pinned files into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
-| `test.sh` | 52 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
+| `test.sh` | 66 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
 | `DIFF-vs-kit-v1.patch` | the diff against the kit of https://sovereignwebsite.ai/abp/kit/ (hook and settings) |
 
 ## The four requirements
@@ -60,3 +60,14 @@ No session may write \`.claude/**\` or the settings files, the owner's included.
 Two things only a server can do, for Dinis and cl-6.dev (security's note): a check in CI in each repository that rejects a change to `.claude/**` or `abp/**` not signed by cl-6.abp's key. The hook cannot see what git does to files; the commit and push check above catches the routes through the hook's own session, not a clone made elsewhere.
 
 Also run, as before: fifteen ordinary commands of cl-6.abp's own work (commit with `.claude` in its message, push to dev, build, an append to the log, curl, cat, a run report directory, ssh-keygen -Y sign, pins.mjs, test.sh, git log and ls and grep on .claude, git add, git status) are all allowed.
+
+## After cl-6.security's third review of e1e7a8e (2026-11-26T16:25Z): H1, H2, and H3 stated
+
+| Finding | Fix | Test |
+|---|---|---|
+| H1 Grep, Glob and LS on a directory that holds secrets | a search or listing is denied (R8) when its path equals, is above (the home directory too) or is inside any secret path with a fixed absolute prefix; a Glob pattern with an absolute prefix is checked the same way | Grep on ~/.ssh, ~/.abp/keys and the home directory; Glob on ~/.abp/keys and an absolute pattern into ~/.ssh; LS of ~/.ssh; a Grep in the repository still passes |
+| H2 targets the parser cannot read | quotes inside a word are removed before matching; a write or cd target with a glob character (\`*\`, \`?\`, \`[\`) is denied: it cannot be checked; a redirect with a file descriptor number (\`3>\`) is a redirect | quotes inside a word, ? and * in a target, cd to a glob, exec 3>; 2>&1 and 2>/dev/null still pass |
+
+### What it will still not stop (H3, accepted by cl-6.security, for Dinis)
+
+Commands that rewrite the working tree without naming a path: \`git reset --hard\`, \`stash pop\`, \`pull\`, \`merge\`, \`checkout <branch>\`, \`rebase\`, \`cherry-pick\`, \`am\`, \`apply\`, \`tar\`, \`unzip\`. The commit and push check stops such a change **leaving the machine**, and a cloud session starts from a fresh clone. The gap is a local or resumed session in the same working tree: its next start would load whatever settings.json is on disk. That is covered by the per-repository CI check (reject a \`.claude/**\` or \`abp/**\` change not signed by cl-6.abp's key: for Dinis and cl-6.dev) and cl-6.security's review.
