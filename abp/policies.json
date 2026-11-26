@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.1",
+ "version": "1.7.3",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -119,6 +119,12 @@
     "since": "2026-11-26T16:12Z",
     "by": "cl-6.abp",
     "why": "no key or credential read into the conversation (cl-6.security requirement 1 for P8)"
+   },
+   "N1": {
+    "on": true,
+    "since": "2026-11-26T16:48Z",
+    "by": "cl-6.abp",
+    "why": "network: DNS tools and redirect-following fetches are blocked from day one (cl-6.security B2 and B4, C: N1 from day one for the no-network class); the host allow-lists themselves are enforced by hook v2.2 and the environments, after the measure phase"
    }
   },
   "kinds": {
@@ -247,6 +253,26 @@
    "R5",
    "^git\\s(.*\\s)?(-c\\s*push\\.|config\\s(.*\\s)?push\\.)",
    "push settings (push.default and the rest) are the owner's"
+  ],
+  [
+   "N1",
+   "^(dig|nslookup|host|getent|ping|traceroute|tracepath|resolvectl|drill)(\\s|$)",
+   "DNS and network probes are a channel (cl-6.security B4, 26 Nov)"
+  ],
+  [
+   "N1",
+   "^(curl|wget)\\s(.*\\s)?(-[a-zA-Z]*L[a-zA-Z]*|--location\\S*|--max-redirs\\S*)(\\s|$)",
+   "no redirects followed: the final host would not be the one checked (cl-6.security B2)"
+  ],
+  [
+   "R5",
+   "^git\\s(.*\\s)?(-c\\s*|config\\s(.*\\s)?)(url\\.\\S*insteadOf|http\\.proxy|http\\.\\S*extraHeader|credential\\.helper|core\\.sshCommand)",
+   "git that resolves elsewhere (cl-6.security B5)"
+  ],
+  [
+   "R5",
+   "^(export|unset)\\s+(GIT_(SSH_COMMAND|PROXY_COMMAND|CONFIG\\w*)|HTTPS?_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy)\\b",
+   "the proxy and git's command variables are the environment's (cl-6.security B5)"
   ]
  ],
  "shell_deny_about": "[rule, regex, reason], tested on each shell segment (leading VAR=, sudo, env removed); the hook also checks the push branch, commit names, sends and protected writes",
@@ -357,6 +383,16 @@
     "glob": "newsroom/tools/operator-keys.json",
     "owner": null,
     "why": "a gate file of the website: the fingerprints of operators whose key may vouch for any board/keys.json entry (empty until Dinis states his). Owner none: not even cl-6.dev may write the list that makes an operator; Dinis's own signed commit is the route (cl-6.security O1, 26 Nov)"
+   },
+   {
+    "glob": "~/.gitconfig",
+    "owner": null,
+    "why": "git's global configuration can redirect git to another host (insteadOf, proxy): cl-6.security B5, 26 Nov"
+   },
+   {
+    "glob": "~/.config/git/**",
+    "owner": null,
+    "why": "git's global configuration can redirect git to another host (insteadOf, proxy): cl-6.security B5, 26 Nov"
    }
   ],
   "secret_reads": [
@@ -1168,7 +1204,11 @@
     "PrompTugal/PrompTugal__Agent__Place__London"
    ],
    "model": "sonnet (not set by me: maestro's)",
-   "first_prompt_must_state": "its grant (abp/cl-6.place.london.md): no add_repo, no create_session, no scheduled task; it makes its own key and publishes it alone in its first commit"
+   "first_prompt_must_state": "its grant (abp/cl-6.place.london.md): no add_repo, no create_session, no scheduled task; it makes its own key and publishes it alone in its first commit",
+   "network": {
+    "allow": [],
+    "environment": "no outside network: reads its data by public clone (cl-6.maestro, 26 Nov)"
+   }
   },
   "cl-6.infra": {
    "focus": "the GitHub and AWS side of the cl-6 agents: PrompTugal__IaC (policy/abp.json is its GitHub and AWS policy) and its own home; the paths are those I know (home area and policy/abp.json): everything else in IaC is to be named by cl-6.infra in its run report and proposed",
@@ -1428,7 +1468,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:46Z",
+ "updated": "2026-11-26T16:48Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1931,6 +1971,34 @@
     ],
     "never": "uses any connector (an Instagram or LinkedIn account is a connector, Dinis's alone), posts, comments or sends a message to any outside service (R7), logs in to any site, starts a session, creates or changes a scheduled task, uses a sub-agent, attaches a repository (no add_repo), holds or uses a credential (it does not render through OpenRouter and is not put on an environment holding OPEN_ROUTER_KEY), writes outside its own home, writes board/keys.json or any website file at all (it publishes its own key in its own home, site/keys/cl-6.social.json, a common write; a website entry, if ever needed, comes from the website's own flow, reviewed by cl-6.security), prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; music, fonts and images are checked by cl-6.rights and the script and the cut by cl-6.security before Dinis sees them; uses a synthetic voice, face or likeness of a real person, Dinis included, without his explicit yes for that piece; shows a screenshot or capture of any real interface that shows another person's data; uses an image, clip or audio that is downloaded and reused (only re-drawn, or licence-checked by cl-6.rights); leaves a draft without the label that says it is AI-drafted; and puts into a draft anything from another account's lanes (vicky, indi and the others) or their agents' names beyond what the published site already shows, or any prompt or message text from any session (not only transcript text)",
     "first_prompt_must_state": "its grant (abp/cl-6.social.md once active): its own home only; no connector; no post, comment or message to any outside service; no session, no scheduled task, no sub-agent; no login to any site; its own key published alone in its first commit"
+   },
+   "cl-6.data.london": {
+    "focus": "DRAFT, started by cl-6.maestro at Dinis's word (~16:47 UTC, 26 Nov, as it reports): the only agent that makes London's network requests: the London data collector, in PrompTugal__Agent__Data, its own area site/factory/dinis-cruz/account-f/london/; it logs each request in its own network-log.jsonl (host, port, time, outcome: no path, no query)",
+    "writes": [
+     "site/factory/dinis-cruz/account-f/london/**"
+    ],
+    "subagents": false,
+    "repos": [
+     "PrompTugal/PrompTugal__Agent__Data"
+    ],
+    "network": {
+     "allow": [
+      "tfl.gov.uk",
+      "www.london.gov.uk",
+      "data.london.gov.uk",
+      "www.londoncouncils.gov.uk",
+      "www.ons.gov.uk",
+      "www.nomisweb.co.uk"
+     ],
+     "environment": "PrompTugal data (London) (env_014fJkugLPBiSUBfBqSeK1G7): exactly these six hosts",
+     "methods": [
+      "GET",
+      "HEAD"
+     ],
+     "log": "network-log.jsonl in its area"
+    },
+    "never": "starts a session, creates or changes a scheduled task, attaches a repository (no add_repo), uses a connector, requests a host outside the six (a host in the environment and not in this list, or the reverse, is a finding), follows a redirect to another host, sends (POST and the like: R7), logs in, passes a bot challenge or a paywall, accepts terms (R13), uses a source whose terms are not on the register (R15 of the PrompTugal policy) or whose licence is unclear (R12), uses a shortener, an archive-save or a fetch-for-me relay, runs a search engine, installs a package, writes outside site/factory/dinis-cruz/account-f/london/ in the shared repository (the common home area also covers cl-6.data's own area there: the split is the review's, not the hook's, until common writes are scoped per role), prints or commits a key or a token, names a private person",
+    "first_prompt_must_state": "its grant: only the six hosts, only GET and HEAD, every request logged in network-log.jsonl, no session, no scheduled task, no add_repo"
    }
   },
   "review": "cl-6.security@PrompTugal.dinis, 26 Nov 16:40 UTC: tight on access; agree once four changes are made: (1) no website file at all; (2) drafts/** as its explicit place; (3) no synthetic likeness, no capture of a real interface with another person's data, no downloaded and reused media, every draft labelled AI-drafted; (4) nothing from another account's lanes, no prompt or message text from any session. All four made in v1.6.9; the root remains Dinis's"
@@ -1968,6 +2036,46 @@
   "design": [
    "abp/network/DESIGN.md (cl-6.abp)",
    "SovereignWebsite/Site__Agent__Security site/factory/dinis-cruz/account-f/designs/2026-11-26-network-capture.md (cl-6.security, commit 7a77912): to be one agreed version"
-  ]
+  ],
+  "github_owners": [
+   "PrompTugal",
+   "SovereignWebsite"
+  ],
+  "github_note": "github.com and raw.githubusercontent.com only by owner path; the owner/repo is logged in the clear; gist.github.com, api.github.com, codeload.github.com and objects.githubusercontent.com are denied (cl-6.security A)",
+  "deny_hosts": [
+   "bit.ly",
+   "t.co",
+   "tinyurl.com",
+   "archive.ph",
+   "r.jina.ai",
+   "translate.goog",
+   "webcache.googleusercontent.com",
+   "gist.github.com",
+   "api.github.com",
+   "codeload.github.com",
+   "objects.githubusercontent.com"
+  ],
+  "deny_paths": [
+   "web.archive.org/save/"
+  ],
+  "deny_note": "shorteners and fetch-for-me relays: never, even for data agents (cl-6.security B3); enforced by hook v2.2",
+  "own_sites": {
+   "hosts": [
+    "promptugal.news",
+    "*.promptugal.news",
+    "data.promptugal.news"
+   ],
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "roles": [
+    "cl-6.security"
+   ],
+   "note": "the live site, for the roles that review or route (cl-6.security C(a))"
+  },
+  "websearch": "a send: denied for the no-network class and for every role that is not a data reader (hook v2.2: a per-role tool deny); the query is logged as a keyed hash",
+  "package_managers": "denied for the no-network class: the environment is set with allow_package_managers false (Dinis's); in the hook an unpinned npx or pip install is a network act (v2.2)",
+  "n1": "rule N1: a network act outside the agent's list; its breaker is on for the shell rules that already exist (DNS tools, curl and wget that follow redirects) and will cover hosts when hook v2.2 reads network.allow"
  }
 }

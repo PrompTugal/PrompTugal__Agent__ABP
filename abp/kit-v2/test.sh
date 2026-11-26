@@ -25,6 +25,8 @@ deny  "a shell write to .claude is blocked" "$(bash_ 'echo x > .claude/hooks/abp
 deny  "a write to abp/policies.json is blocked" "$(wr $T/abp/policies.json)"
 deny  "a push to main is blocked (R5)" "$(bash_ 'git push --force origin main')"
 allow "F8: git push origin HEAD on dev is allowed" "$(bash_ 'git push origin HEAD')"
+deny  "N1: dig is refused (DNS is a channel)" "$(bash_ 'dig example.org')"
+deny  "N1: curl -sL is refused (no redirects followed)" "$(bash_ 'curl -sL https://x.example/a')"
 deny  "low: git -c push.default=matching push is refused (push settings are the owner's)" "$(bash_ 'git -c push.default=matching push')"
 deny  "a session tool is blocked (R4)" "$(run '{"tool_name":"mcp__claude-code-remote__create_session","tool_input":{}}')"
 deny  "reading a key is blocked (R8)" "$(run '{"tool_name":"Read","tool_input":{"file_path":"'$HOME'/.ssh/id_rsa"}}')"
