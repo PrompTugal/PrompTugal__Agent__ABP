@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.telemetry@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:0e7696dcf07d953a)
+policy: abp/policies.json v1.7.8 (sha256:7f949266d01f9c25)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.telemetry@PrompTugal.dinis
