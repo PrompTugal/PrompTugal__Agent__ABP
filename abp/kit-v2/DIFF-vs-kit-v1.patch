@@ -1,14 +1,16 @@
 diff --git aabp-hook.mjs b/claude/hooks/abp.mjs
-index 308656d..f8f0aff 100644
+index 308656d..ef8167a 100644
 --- aabp-hook.mjs
 +++ b/claude/hooks/abp.mjs
-@@ -5,20 +5,21 @@
+@@ -5,20 +5,22 @@
  import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import crypto from 'node:crypto'
  import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url'
  const SELF = fileURLToPath(import.meta.url), HOME = os.homedir()
-+const TEST = process.env.ABP_TEST === '1'   // v2: no environment override of the policy, the log, the keys or the role outside tests
- export const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(SELF), '../..'), ABP = path.join(ROOT, 'abp')
+-export const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(SELF), '../..'), ABP = path.join(ROOT, 'abp')
 -export const LOG = process.env.ABP_LOG_DIR || path.join(HOME, '.abp/log')
++const real = q => { try { return fs.realpathSync.native(q) } catch { let d = path.dirname(q), tail = path.basename(q); for (let i = 0; i < 40; i++) { try { return path.join(fs.realpathSync.native(d), tail) } catch { tail = path.join(path.basename(d), tail); const n = path.dirname(d); if (n === d) break; d = n } } return q } }   // v2 (F2): the real path, symlinks resolved, even for a file that does not exist yet
++const TEST = process.env.ABP_TEST === '1'   // v2: no environment override of the policy, the log, the keys or the role outside tests
++export const ROOT = real(process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(SELF), '../..')), ABP = path.join(ROOT, 'abp')
 +export const LOG = (TEST && process.env.ABP_LOG_DIR) || path.join(HOME, '.abp/log')
  const sha = (s, k) => (k ? crypto.createHmac('sha256', k) : crypto.createHash('sha256')).update(String(s ?? '')).digest('hex').slice(0, 16)
  // What the owner typed is logged as length and a hash keyed by a per-machine salt (~/.abp/salt), not as text
@@ -28,7 +30,70 @@ index 308656d..f8f0aff 100644
      for (const d of fs.readdirSync(dir)) try { const k = re.exec(JSON.parse(fs.readFileSync(path.join(dir, d, 'metadata.json'))).label); if (k?.[2] || !suf && k) ids.add(k[1].toLowerCase()) } catch {} } catch {}
    const [r] = ids; return ids.size === 1 ? { role: r, agent: r + suf, how: e ? 'ABP_ROLE' : 'key label' } : { role: null, agent: null, how: ids.size ? 'ambiguous: ' + [...ids] : 'no agent key' }
  }
-@@ -112,14 +113,15 @@ if (path.resolve(process.argv[1] || '') === SELF) try {
+@@ -34,10 +36,15 @@ const rel = a => { const r = path.relative(ROOT, a); return r.startsWith('..') |
+ const allow = kind => ({ decision: 'allow', kind }), deny = (rule, reason, kind) => ({ decision: 'deny', rule, reason, kind })
+ const anon = () => deny('R6', 'an unidentified session (no role) writes nothing', 'write-unidentified')
+ const norm = u => String(u || '').toLowerCase().replace(/^[a-z+]+:\/\/([^@/]*@)?|^[^@/\s]+@|\.git\/?$|\/$/g, '').replace(/^([^/:]+):(?!\d+\/)/, '$1/')
+-function guarded(who, abs, P) {
+-  const t = rel(abs) ?? abs
+-  for (const p of P.common.protected) { const re = globRe(fill(p.glob, who.role))
+-    if (re.test(t) || re.test(t + '/x')) return p.owner && p.owner === who.role ? null : deny('R6', `${t} is protected: ${p.why}`, 'tamper') }
++const KEYS = path.join(HOME, '.abp/keys')
++const hasLabel = () => { try { return fs.readdirSync(KEYS).some(d => { try { return !!JSON.parse(fs.readFileSync(path.join(KEYS, d, 'metadata.json'))).label } catch { return false } }) } catch { return false } }
++function guarded(who, abs, P) {   // v2: every form of the path (as given, and with symlinks resolved) is checked; ~/.abp/keys is open only while it holds no label (the R14 bootstrap)
++  for (const a of new Set([abs, real(abs)])) {
++    if ((a === KEYS || a.startsWith(KEYS + path.sep)) && !hasLabel()) continue
++    const t = rel(a) ?? a
++    for (const p of P.common.protected) { const re = globRe(fill(p.glob, who.role))
++      if (re.test(t) || re.test(t + '/x') || re.test(a) || re.test(a + '/x')) return p.owner && p.owner === who.role ? null : deny('R6', `${t} is protected: ${p.why}`, 'tamper') }
++  }
+ }
+ export function checkWrite(who, abs, P) {
+   const r = rel(abs), pr = guarded(who, abs, P)
+@@ -58,16 +65,22 @@ function segs(c) {
+ }
+ function checkBash(who, cmd, cwd, P) {
+   const g = grantOf(who, P), G = P.git || {}, suf = P.identity?.label_suffix || ''
+-  let here = cwd || ROOT
++  let here = cwd ? real(cwd) : ROOT
+   for (const seg of segs(cmd.replace(/(<<-?\s*['"]?(\w+)['"]?[^\n]*)\n[\s\S]*?\n\s*\2\s*(?=\n|$)/g, '$1'))) {   // heredoc body: data
+-    const cd = /^cd\s+["']?([^"'\s]+)["']?$/.exec(seg); if (cd) { here = path.resolve(here, tilde(cd[1])); continue }
++    if (/^(cd|pushd|popd)(\s|$)/.test(seg)) {   // v2 (F4): options, pushd, popd; a target that cannot be resolved statically makes the cwd unknown
++      const m = /^(?:cd|pushd)\s+(?:(?:--|-[LPe@]+)\s+)*["']?([^"'\s]+)["']?$/.exec(seg)
++      here = m && !/[$`]|^-$/.test(m[1]) ? path.resolve(here || ROOT, tilde(m[1])) : null; continue }
+     const t = (seg.match(/"[^"]*"|'[^']*'|\S+/g) || []).map(x => x.replace(/^["']|["']$/g, '')), verb = path.basename(t[0]), args = t.slice(1), f = args.filter(a => !/^[->]/.test(a))
+     for (const [rule, re, why] of P.shell_deny || []) if (new RegExp(re).test(seg)) return deny(rule, `${verb}: ${why}`, 'shell')
++    if (!/^(ssh-keygen|git)$/.test(verb) && !/abp\/kit-v2\/(pin|test)\.sh$/.test(t[1] || '')) for (const tk of t.slice(1)) { if (/^-/.test(tk) && !tk.includes('/')) continue   // v2 (F7): whatever the verb, a secret path in a segment is refused
++      const rp = path.resolve(here || ROOT, tilde(tk.replace(/^[<>]+/, ''))); if ((rp === KEYS || rp.startsWith(KEYS + path.sep)) && !hasLabel()) continue; if (hit(rp, P.common.secret_reads, who.role)) return deny('R8', `${verb}: names a secret path (${tk}): keys and credentials are never read into the conversation`, 'secret') }
+     const sub = verb === 'git' && args.find((a, i) => !a.startsWith('-') && !/^-[Cc]$/.test(args[i - 1])), rest = args.slice(args.indexOf(sub) + 1)
++    if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
++      const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
+     if (!who.role && /^(push|commit)$/.test(sub)) return anon()
+     if (sub === 'push') {   // the branch, then the remote and its push URL
+       const gx = (...a) => { try { return execFileSync('git', a, { cwd: here, encoding: 'utf8', stdio: 'pipe', timeout: 3000 }).trim() } catch { return '' } }, [rm = /--repo=(\S+)/.exec(seg)?.[1], ...refs] = rest.filter(a => !/^(-|\d*[<>&])/.test(a)), tg = g.worker ? `work/${who.role}` : G.push_branch || 'dev', b = gx('rev-parse', '--abbrev-ref', 'HEAD')
+-      if (refs.length ? !refs.every(r => new RegExp(`^(HEAD:|${esc(tg)}:)?(refs/heads/)?${esc(tg)}$`).test(r)) : b !== tg) return deny('R5', `git push ${refs.join(' ') || 'from ' + b}: push to ${tg} only`, 'git-push')
++      if (refs.length ? !refs.every(r => (r === 'HEAD' && b === tg) || new RegExp(`^(HEAD:|${esc(tg)}:)?(refs/heads/)?${esc(tg)}$`).test(r)) : b !== tg) return deny('R5', `git push ${refs.join(' ') || 'from ' + b}: push to ${tg} only`, 'git-push')
+       const o = G.remote || 'origin', r = rm || gx('config', `branch.${b}.pushRemote`) || gx('config', 'remote.pushDefault') || gx('config', `branch.${b}.remote`) || o
+       if (![o, G.remote_url, ...g.push_remotes].some(x => x && norm(x) === norm(r))) return deny('R5', `git push to ${r}: push to ${o} only`, 'git-push')
+       if (norm(r) === norm(o) && G.remote_url && norm(gx('remote', 'get-url', '--push', o)) !== norm(G.remote_url)) return deny('R5', `${o}'s push URL is not ${G.remote_url}`, 'git-push')
+@@ -80,10 +93,13 @@ function checkBash(who, cmd, cwd, P) {
+       if (sends && (!hosts.length || hosts.some(h => !g.send.includes(h)))) return deny('R7', `${verb} sends to ${hosts.join(', ') || 'an unnamed host'}, not in the grant`, 'send')
+     }
+     const w = [...seg.matchAll(/(?:^|[^0-9&<>])>>?\s*([^\s;&|<>]+)/g)].map(m => m[1]).filter(x => !/^&|^\/dev\//.test(x))   // its writes
+-    if (/^(tee|rm|rmdir|truncate|unlink|touch|mkdir)$/.test(verb)) w.push(...f)
++    if (/^(tee|rm|rmdir|truncate|unlink|touch|mkdir|ln|mv)$/.test(verb)) w.push(...f)   // v2 (F2): ln and mv: every argument
+     else if (/^(sed|perl)$/.test(verb) && args.some(a => /^(-[a-z]*i|--in-place)/.test(a)) || /^(chmod|chown)$/.test(verb)) w.push(...f.slice(1))
+-    else if (/^(cp|mv|ln|install|rsync)$/.test(verb) && f.length > 1) w.push(f.at(-1))
+-    for (const x of w) { const d = guarded(who, path.resolve(here, tilde(x.replace(/^["']|["']$/g, ''))), P) || !who.role && anon(); if (d) return d }
++    else if (/^(cp|install|rsync)$/.test(verb) && f.length > 1) w.push(f.at(-1))
++    if (w.length && here === null) return deny('R6', `${verb}: writes while the working directory is unknown (cd to a variable, \`cd -\`, popd)`, 'tamper')   // v2 (F4)
++    for (const x of w) { const xx = x.replace(/^["']|["']$/g, '')
++      if (/(^|\/)\.claude(\/|$)|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(xx) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(xx))) return deny('R6', `${verb}: ${xx} names a protected place`, 'tamper')   // v2 (F4): by its text too, whatever the cwd
++      const d = guarded(who, path.resolve(here || ROOT, tilde(xx)), P) || !who.role && anon(); if (d) return d }
+   }
+   return allow('shell')
+ }
+@@ -112,14 +128,15 @@ if (path.resolve(process.argv[1] || '') === SELF) try {
      let b = ''; try { b = fs.readFileSync(path.join(ABP, `${who.role}.md`), 'utf8').replace(/^---[\s\S]*?\n---\n/, '') } catch {}
      b ||= P.core.map(c => `- **${c.id}** ${c.rule}`).join('\n')
      const on = Object.keys(P.breakers?.rules || {}).filter(r => P.breakers.rules[r].on), hold = P.hold_file && fs.existsSync(path.join(ROOT, P.hold_file))

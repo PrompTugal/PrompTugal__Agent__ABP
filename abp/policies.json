@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.5.3",
+ "version": "1.6.0",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -253,15 +253,15 @@
   ],
   "writes_outside_repo": [
    "/tmp/**",
-   "~/.abp/**",
+   "~/.abp/keys/*/metadata.json",
    "~/.claude/projects/*/memory/**"
   ],
   "send_hosts": [],
   "protected": [
    {
     "glob": ".claude/**",
-    "owner": "cl-6.abp",
-    "why": "the hooks hold every agent's policy; an agent that edits them disables its own barrier"
+    "owner": null,
+    "why": "the hooks hold every agent's policy; an agent that edits them disables its own barrier (v1.6.0: no owner exemption inside a session: an install or an update is a signed commit made outside a live session, then reviewed by cl-6.security)"
    },
    {
     "glob": "abp/*",
@@ -310,13 +310,28 @@
    },
    {
     "glob": "**/.claude/settings*.json",
-    "owner": "cl-6.abp",
-    "why": "settings can switch the hooks off"
+    "owner": null,
+    "why": "settings can switch the hooks off (v1.6.0: no owner exemption inside a session: an install or an update is a signed commit made outside a live session, then reviewed by cl-6.security)"
    },
    {
     "glob": "newsroom/tools/place-signers.json",
     "owner": "cl-6.security",
     "why": "the pinned key of the places agent: the sync trusts only data signed by it; a pin change needs cl-6.places to confirm the fingerprint and cl-6.security's review (cl-6.decisions record 2026-11-26__abp-p11-c-pin)"
+   },
+   {
+    "glob": "~/.abp/keys/**",
+    "owner": null,
+    "why": "the identity of a session: a label is written once, as the first act of a wake, while the directory holds none (R14); no later write, no removal (cl-6.security F1)"
+   },
+   {
+    "glob": "~/.abp/log/**",
+    "owner": null,
+    "why": "the audit log: only the hook appends to it (cl-6.security F3)"
+   },
+   {
+    "glob": "~/.abp/salt",
+    "owner": null,
+    "why": "the key of the log's hashes (cl-6.security F3)"
    }
   ],
   "secret_reads": [

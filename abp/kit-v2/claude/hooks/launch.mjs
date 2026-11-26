@@ -4,7 +4,7 @@
 // Anything missing, changed or unverifiable: fail closed (only reads pass). A guardrail and an audit log, not a security boundary.
 import fs from 'node:fs'; import path from 'node:path'; import crypto from 'node:crypto'; import { spawnSync } from 'node:child_process'; import { fileURLToPath } from 'node:url'
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(HERE, '../..')
-const PIN_SIGNING_FP = 'sha256:eb5b09f0fa1e6e67'   // cl-6.abp's signing key (site/keys/cl-6.abp.json): the only key whose pins load
+const PIN_KEY_SHA256 = 'eb5b09f0fa1e6e67ae643c623986869f12d6dd2526ffab53b1ca35bacd299326'   // v2 (F5): the FULL SHA-256 of the SPKI of cl-6.abp's signing key (site/keys/cl-6.abp.json): the only key whose pins load
 const mode = process.argv[2] || '', sha = b => crypto.createHash('sha256').update(b).digest('hex')
 let stdin = ''; try { stdin = fs.readFileSync(0, 'utf8') } catch {}
 let tool = ''; try { tool = JSON.parse(stdin).tool_name || '' } catch {}
@@ -18,13 +18,13 @@ const closed = why => {
 const rd = (b, o) => { const n = b.readUInt32BE(o); return [b.subarray(o + 4, o + 4 + n), o + 4 + n] }
 function verifySshsig(armored, message, namespace) {
   const body = Buffer.from(armored.replace(/-----[^-]+-----/g, '').replace(/\s+/g, ''), 'base64')
-  if (body.subarray(0, 6).toString() !== 'SSHSIG') throw new Error('not an sshsig'); let o = 10, pk, ns, rs, ha, sg
+  if (body.subarray(0, 6).toString() !== 'SSHSIG' || body.readUInt32BE(6) !== 1) throw new Error('not an sshsig version 1'); let o = 10, pk, ns, rs, ha, sg   // v2 (F6)
   ;[pk, o] = rd(body, o); [ns, o] = rd(body, o); [rs, o] = rd(body, o); [ha, o] = rd(body, o); [sg, o] = rd(body, o)
-  if (ns.toString() !== namespace) throw new Error('wrong namespace')
+  if (ns.toString() !== namespace || rs.length !== 0) throw new Error('wrong namespace or a reserved field that is not empty')
   let p = 0, t, curve, Q; [t, p] = rd(pk, p); [curve, p] = rd(pk, p); [Q, p] = rd(pk, p)
   if (t.toString() !== 'ecdsa-sha2-nistp256' || Q.length !== 65) throw new Error('not P-256')
   const spki = Buffer.concat([Buffer.from('3059301306072a8648ce3d020106082a8648ce3d030107034200', 'hex'), Q])
-  const fp = 'sha256:' + sha(spki).slice(0, 16); if (fp !== PIN_SIGNING_FP) throw new Error('signed by another key ' + fp)
+  if (sha(spki) !== PIN_KEY_SHA256) throw new Error('signed by another key')
   const h = ha.toString() === 'sha512' ? 'sha512' : ha.toString() === 'sha256' ? 'sha256' : null; if (!h) throw new Error('hash')
   const signed = Buffer.concat([Buffer.from('SSHSIG'), ...[ns, rs, ha, crypto.createHash(h).update(message).digest()].flatMap(x => { const l = Buffer.alloc(4); l.writeUInt32BE(x.length); return [l, x] })])
   let q = 0, ty, sd, r, s; [ty, q] = rd(sg, q); [sd, q] = rd(sg, q); let z = 0;[r, z] = rd(sd, z); [s, z] = rd(sd, z)

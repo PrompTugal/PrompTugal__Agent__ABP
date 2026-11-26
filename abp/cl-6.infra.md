@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.infra@PrompTugal.dinis"
-policy: abp/policies.json v1.5.3 (sha256:a3973d6518297a14)
+policy: abp/policies.json v1.6.0 (sha256:12ee4a59f7d2c0b7)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.infra@PrompTugal.dinis
@@ -11,7 +11,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 - **Focus:** the GitHub and AWS side of the cl-6 agents: PrompTugal__IaC (policy/abp.json is its GitHub and AWS policy) and its own home; the paths are those I know (home area and policy/abp.json): everything else in IaC is to be named by cl-6.infra in its run report and proposed.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.infra.json`, `runs/cl-6.infra/**`, `policy/abp.json`, `board/runs/cl-6.infra/**`, `board/team/cl-6.infra/**`.
-- **Writes (outside):** `/tmp/**`, `~/.abp/**`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
+- **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
 - **Never:** dispatches, approves or runs an apply workflow, changes AWS or GitHub App privileges (one-way doors), reads or prints a key, a token or a credential, attaches a repository, starts a session or a scheduled task, uses a connector, writes in a repository other than its two; and, until Dinis decides P14, pushes anywhere but dev or opens a pull request.
@@ -20,7 +20,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 - Any connector (mcp__ tools) not granted above or allowed to every role (github: get_, list_, search_, pull_request_read, issue_read, actions_get, actions_list; claude-code-remote: read_documentation, get_environment, register_repo_root, send_message) (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
 - Pushing anywhere but `dev` on its remote, force-push, deletion, tags, history rewrites, empty commits (R5).
-- Writing outside the paths above, or to a protected path: `.claude/**` (cl-6.abp), `abp/*` (cl-6.abp), `board/abp/**` (cl-6.abp), `HOLD.md` (cl-6.security), `board/HOLD.md` (cl-6.security), `newsroom/build/version.txt`, `newsroom/versions.json`, `design/brand/**`, `~/.claude/settings*.json`, `.git/config`, `**/.claude/settings*.json` (cl-6.abp), `newsroom/tools/place-signers.json` (cl-6.security) (R6).
+- Writing outside the paths above, or to a protected path: `.claude/**`, `abp/*` (cl-6.abp), `board/abp/**` (cl-6.abp), `HOLD.md` (cl-6.security), `board/HOLD.md` (cl-6.security), `newsroom/build/version.txt`, `newsroom/versions.json`, `design/brand/**`, `~/.claude/settings*.json`, `.git/config`, `**/.claude/settings*.json`, `newsroom/tools/place-signers.json` (cl-6.security), `~/.abp/keys/**`, `~/.abp/log/**`, `~/.abp/salt` (R6).
 - Sending anything to a host not listed; GitHub writes (R7). Printing the environment or reading a key (R8). Committing under another name (R9).
 
 ## Core rules (every agent)
