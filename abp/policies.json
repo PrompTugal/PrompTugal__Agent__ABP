@@ -596,6 +596,9 @@
     "PrompTugal/PrompTugal__Agent__Data",
     "PrompTugal/PrompTugal__News__Data"
    ],
+   "connectors": [
+    "github__create_pull_request"
+   ],
    "key_branch": {
     "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
     "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"",
@@ -607,7 +610,7 @@
     ],
     "conditions": [
      "branch named exactly key/cl-6.data, no force push; the pull request goes to dev, never main",
-     "the agent opens no pull request through a connector: the App opens it from the pushed branch",
+     "the agent opens exactly one pull request, from key/cl-6.data to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
      "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
      "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
      "a single trial: cl-6.security reads the branch once pushed before any other section repeats it",
@@ -1620,6 +1623,14 @@
   }
  ],
  "applied_decisions": [
+  {
+   "record": "Dinis's own word in cl-6.abp's session (no record)",
+   "at": "2026-11-26T17:55Z",
+   "item": "P9 key pull request, cl-6.data only",
+   "change": "roles.cl-6.data.connectors = [github__create_pull_request]; key_branch condition changed from 'the App opens the PR' to: exactly one PR from key/cl-6.data to dev in PrompTugal__News__Data, never merges",
+   "words": "yes to cl-6.data opening one key PR",
+   "limit": "cl-6.data only; the other eight section roles are not granted; the hook (R3 breaker) blocks any connector not granted, so the grant takes effect where this policy is loaded; the environment must also offer the GitHub connector to that session (Dinis's, R4); other uses of the tool are a breach"
+  },
   {
    "record": "2026-11-26__abp-p9 revision 2",
    "at": "2026-11-26T17:40Z",
