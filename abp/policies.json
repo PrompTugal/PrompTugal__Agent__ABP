@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.5.2",
+ "version": "1.5.3",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1416,7 +1416,8 @@
    "not_applied": [
     "the nine role entries: held in pending_roles"
    ],
-   "why": "signature, key, endorsement, commit signature and expiry verified (S1 steps 1 to 3, 5, 6); step 4 (anchor chain) still partial; the roles are grants (a widening: outside the endorsement's own scope unless Dinis's own words are checked, which I cannot do: list_events is not in my grant); the security review in the record is only 'asked after signing'. The maps grant nothing."
+   "why": "signature, key, endorsement, commit signature and expiry verified (S1 steps 1 to 3, 5, 6); step 4 (anchor chain) still partial; the roles are grants (a widening: outside the endorsement's own scope unless Dinis's own words are checked, which I cannot do: list_events is not in my grant); the security review in the record is only 'asked after signing'. The maps grant nothing.",
+   "update": "2026-11-26T16:15Z: cl-6.decisions says the record is at revision 2 (commit debe66b, re-signed) with cl-6.security@dinis's signed review (agree; block-2026-11-26-02, commit 4bbe95e in Site__Agent__Security) and its transcript check of Dinis's words (event 42ba693a). Not re-verified by me yet: I verify revision 2 at promotion. Still held for: the roles are a widening (home-area writes), and my chain check to Dinis's anchor is partial"
   }
  ],
  "findings": [
@@ -1659,6 +1660,7 @@
     "status": "pending",
     "grant": "common home-area writes only; shared repositories keep their own keeper's policy (for example Site__Agent__Decisions site/policy/abp.json)"
    }
-  ]
+  ],
+  "keeper_policy_note": "for cl-6.decisions@dinis: the shared repository keeps its keeper policy, SovereignWebsite/Site__Agent__Decisions site/policy/abp.json (decisions.2; writes site/**, docs/** and README.md on dev only); cl-6.decisions' own area is site/factory/dinis-cruz/account-f/ and site/keys/cl-6.decisions.json: the pending role must not be wider than those"
  }
 }
