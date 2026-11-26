@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.4",
+ "version": "1.6.5",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1389,7 +1389,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:31Z",
+ "updated": "2026-11-26T16:32Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1414,7 +1414,7 @@
     "the record is in SovereignWebsite/Site__Agent__Decisions, branch dev, site/factory/dinis-cruz/account-f/records/<date>__abp-<item>.json, with its .sig (format: site/factory/dinis-cruz/account-f/abp-decisions.md there)",
     "the .sig verifies (ssh-keygen -Y verify, namespace sovereignwebsite-decision) with the key in site/keys/cl-6.decisions.json, principal cl-6.decisions@dinis",
     "that key is endorsed for account F in site/keys/endorsements/decisions-f.json: signed by decisions.b (sha256:eefbe996d9c67a7c), expires 2026-11-30T23:59:59Z, and not on revoked.json",
-    "the endorsement chains to Dinis's anchor key (sha256:db7f79fdd87e030a) through the SIGNED statements of the pki.sgit.ai directory, not through its generated summaries (they say \"_authority: NONE\"). How: download https://pki.sgit.ai/agents/pki-agent.mjs into its own directory (read it first; sha256 e7a64cf5e86a08adbd9a62cc3c88da6722a590c9526646257d60cfa6d8ad8eba on 26 Nov 2026, 3909 lines), run it with PKI_AGENT_HOME set to a scratch directory, then `node pki-agent.mjs pin <the root fingerprint Dinis gives me>` and `node pki-agent.mjs trust sha256:eefbe996d9c67a7c`. The root must come from Dinis out of band (the tool says so too): not from cl-6.decisions, and not from the directory it is meant to check. Until he gives it, this step is not done and a widening is not applied",
+    "the endorsement chains to Dinis's anchor key (sha256:db7f79fdd87e030a) through the SIGNED statements of the pki.sgit.ai directory, not through its generated summaries (they say \"_authority: NONE\"). How: download https://pki.sgit.ai/agents/pki-agent.mjs into its own directory (read it first; sha256 e7a64cf5e86a08adbd9a62cc3c88da6722a590c9526646257d60cfa6d8ad8eba on 26 Nov 2026, 3909 lines), run it with PKI_AGENT_HOME set to a scratch directory, then `node pki-agent.mjs pin <the root fingerprint Dinis gives me>` and `node pki-agent.mjs trust sha256:eefbe996d9c67a7c`. The root must come from Dinis out of band (the tool says so too): not from cl-6.decisions, and not from the directory it is meant to check. Until he gives it, this step is not done and a widening is not applied. An equivalent root, simpler for Dinis: he says in my session the signing fingerprint of cl-6.decisions' own key (published as sha256:2c3824641f5b8470 in site/keys/cl-6.decisions.json); then that key is pinned by him and the endorsement chain is not needed for this step (its scope is still read at step 7)",
     "the record's commit on dev is signed by the same key and carries Agent: cl-6.decisions@dinis and its Claude-Session trailer",
     "status is in-force, expires is in the future, decision is grant or grant-narrower, and change names role, field and values (the item id must exist in proposed_relaxations)",
     "the change is inside the endorsement's scope. Its scope text excludes widening permissions, keys, connectors, AWS, GitHub App privileges, private people's details, the rules, money, legal commitments, one-way doors and anything of another account: a record that widens a permission is outside it unless the record quotes Dinis's own words about that item (session and event_uuid)",
@@ -1728,5 +1728,51 @@
    }
   ],
   "keeper_policy_note": "for cl-6.decisions@dinis: the shared repository keeps its keeper policy, SovereignWebsite/Site__Agent__Decisions site/policy/abp.json (decisions.2; writes site/**, docs/** and README.md on dev only); cl-6.decisions' own area is site/factory/dinis-cruz/account-f/ and site/keys/cl-6.decisions.json: the pending role must not be wider than those"
+ },
+ "pending_decisions": {
+  "about": "signed decisions of cl-6.decisions that WIDEN a grant, verified in every step but S1 step 4 (no root from Dinis yet). Each is exactly the change in its record and applies in one step once Dinis gives the anchor fingerprint or the fingerprint of cl-6.decisions' key in my session. Nothing here is in force",
+  "at": "2026-11-26T16:32Z",
+  "items": [
+   {
+    "record": "2026-11-26__abp-p11-c",
+    "commit_of_record": "5b991d5",
+    "item": "P11 c",
+    "change": {
+     "role": "cl-6.dev",
+     "op": "add to writes (website only)",
+     "values": [
+      "data/by-place/*.json",
+      "data/by-place/now/*.json"
+     ]
+    },
+    "conditions": [
+     "not data/by-place/** and not data/schemas/**",
+     "the pin stays protected (applied in v1.4.1)",
+     "dev writes these only by running newsroom/tools/sync-places.mjs; the commit holds only what it wrote and place-sources.json, and says so (the hook cannot see this: my hourly review re-verifies every data/by-place file against place-sources.json; a mismatch is a breach and stops the sync)",
+     "withdrawn when the sync moves to CI (cl-6.infra)"
+    ],
+    "reviewed_by": "cl-6.security@dinis (agree with conditions)",
+    "expires": "2026-11-30T23:59:59Z"
+   },
+   {
+    "record": "2026-11-26__abp-p11-h",
+    "commit_of_record": "5b991d5",
+    "item": "P11 h",
+    "change": {
+     "role": "cl-6.journalist",
+     "op": "add to writes (website only)",
+     "values": [
+      "content/about/**"
+     ]
+    },
+    "conditions": [
+     "the text fixes: the operator sentence says it of the agents on Dinis's accounts or names both operators; the security-review sentence only if the release gate enforces it, otherwise it says it is the practice and that the policies are in observe mode",
+     "the landing commit changes only content/about/index.md, carries the reviewed text with both fixes, is signed by cl-6.journalist with its trailer, and is reviewed by cl-6.security@PrompTugal.dinis before release",
+     "no other content path"
+    ],
+    "reviewed_by": "cl-6.security@dinis (agree with conditions)",
+    "expires": "2026-11-30T23:59:59Z"
+   }
+  ]
  }
 }
