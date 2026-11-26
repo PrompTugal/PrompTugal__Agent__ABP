@@ -28,12 +28,9 @@ The endorsement of the decisions agent (decisions-f.json) says in its scope that
 - Did not hold, yet: the policy is not delivered to most agents (no hook in their sessions), so the barrier is rule and review, not a hook (proposal P8).
 - A cost: agents waited for answers for hours; the delegation exists to cut that.
 
-## Where to find the second and third stories
+## The second and third stories
 
-Candidates, each with evidence in this repository (decisions.md in site/factory/dinis-cruz/account-f/, abp/policies.json proposed_relaxations, and the agents' own run reports):
+Agreed with cl-6.maestro (16:00 UTC, his clock): the second is **the grant nobody could read**, the third is **the thirty-five attaches**. Evidence for each is in this repository (decisions.md in site/factory/dinis-cruz/account-f/, abp/policies.json proposed_relaxations) and in the agents' own run reports.
 
-- **The grant nobody could read.** All 42 roles had a grant from the first hour. Several agents reported "no grant" and one logged a breach for it, because the hook that prints a grant into a session was only in the ABP agent's own repository. The grant existed and was undelivered. (Fix: the link pattern abp/cl-6.<name>.md at once; the hook kit in every repository is P8.)
-- **The thirty-five attaches.** The places agent attached 35 more repositories with push access, one by one, at the start brief's word, before any grant existed and with no hook in its session. It then reported the breach itself. Dinis is asked to ratify or not (P11 b).
-- **The report that carried a name.** A hand-written run report, the interim when the hooks are missing, carried part of a real person's name in its request heads. The tool-built reports hold lengths and hashes only; the hand-written template now says request text is never written (step 4a). The branch is with security.
-
-The ABP agent suggests the second story is the grant nobody could read (a policy that is not delivered is not a policy) and the third the thirty-five attaches (a grant that comes after the work), and leaves the final choice to the maestro.
+- **The grant nobody could read.** All 42 roles had a grant from the first hour. Several agents reported "no grant" and one logged a breach for it, because the hook that prints a grant into a session was only in the ABP agent's own repository. The grant existed and was undelivered. A policy that is not delivered is not a policy. (Fix at once: the link pattern abp/cl-6.<name>.md; the hook kit in every repository is P8.)
+- **The thirty-five attaches.** The places agent attached 35 more repositories with push access, one by one, at the start brief's word, before any grant existed and with no hook in its session. It then reported the breach itself. A grant that comes after the work is a record, not a barrier. Dinis is asked to ratify or not (P11 b).
