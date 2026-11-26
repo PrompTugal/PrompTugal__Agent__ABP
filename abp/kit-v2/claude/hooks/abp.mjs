@@ -65,6 +65,32 @@ function segs(c) {
     cur += ch }
   return [...out, cur].map(s => s.trim().replace(/^(\w+=\S*\s+|sudo\s+|env\s+(?=\w))+/, '')).filter(Boolean)
 }
+function checkProtected(who, P, mode, ref, dst) {   // v2.1: a protected path may change only in a commit whose abp/pins.json is signed by cl-6.abp, names this repository, has a higher sequence than the HEAD and the remote branch, and covers every protected file of the tree
+  const gb = (a, o = {}) => { try { return execFileSync('git', a, { cwd: ROOT, stdio: 'pipe', timeout: 5000, ...o }) } catch { return null } }, gl = a => (gb(a, { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
+  const isP = x => guarded(who, path.resolve(ROOT, x), P)
+  let files, blob, treeFiles, base = 0
+  const seqOf = buf => { try { return JSON.parse(buf).seq || 0 } catch { return 0 } }
+  const tg = (P.git || {}).push_branch || 'dev'
+  if (mode === 'commit') {
+    const wt = gl(['diff', '--name-only']).filter(isP); if (wt.length) return deny('R6', `git commit: ${wt[0]} differs in the working tree from the index: stage it with git add so that the signed pins can be checked, or restore it (cl-6.security V1)`, 'tamper')
+    files = gl(['diff', '--cached', '--name-only']); blob = x => gb(['show', ':' + x]); treeFiles = gl(['ls-files', '--', '.claude', 'abp'])
+    base = Math.max(seqOf(gb(['show', 'HEAD:abp/pins.json'])), seqOf(gb(['show', 'refs/remotes/origin/' + tg + ':abp/pins.json'])))
+  } else {
+    files = gl(['log', ref, '--not', '--remotes', '--name-only', '--format=']); blob = x => gb(['show', ref + ':' + x]); treeFiles = gl(['ls-tree', '-r', '--name-only', ref, '--', '.claude', 'abp'])
+    base = seqOf(gb(['show', 'refs/remotes/origin/' + (dst || tg) + ':abp/pins.json']))
+  }
+  const hits = [...new Set(files)].map(x => [x, isP(x)]).filter(([, d]) => d); if (!hits.length) return null
+  let pins = null, why = 'no abp/pins.json with a signature in the commit'
+  try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); const pj = JSON.parse(raw); why = ''
+    const remote = (gb(['config', '--get', 'remote.origin.url'], { encoding: 'utf8' }) || '').trim()
+    if (pj.repository !== normRepo(remote)) why = `the pins are for ${String(pj.repository).slice(0, 50)}, not this repository`
+    else if (!(Number.isInteger(pj.seq) && pj.seq > base)) why = `the sequence ${pj.seq} does not rise above ${base} (HEAD or the remote branch): a rollback`
+    else pins = pj } } catch (e) { why = 'the pins signature did not verify' }
+  const need = new Set([...hits.map(([x]) => x), ...treeFiles.filter(isP)])
+  const unc = pins ? [...need].filter(x => !(x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))) : [...need]
+  if (unc.length) return deny('R6', `git ${mode}: the change touches protected paths (${hits[0][0]}): ${hits[0][1].reason}; they change only in a commit whose abp/pins.json is signed by cl-6.abp for this repository, with a higher sequence, covering every protected file (${why || 'not covered: ' + unc.slice(0, 4).join(', ')})`, 'tamper')
+  return null
+}
 function checkBash(who, cmd, cwd, P) {
   const g = grantOf(who, P), G = P.git || {}, suf = P.identity?.label_suffix || ''
   let here = cwd ? real(cwd) : ROOT
@@ -84,25 +110,12 @@ function checkBash(who, cmd, cwd, P) {
     const FIND_W = verb === 'find' && args.some(a => /^-(delete|exec|execdir|ok|okdir|fprint0?|fprintf|fls)$/.test(a)), seg2 = (verb === 'git' ? seg.replace(/(-m|--message)(=|\s+)("[^"]*"|'[^']*')/g, '') : seg).replace(/["']/g, '')   // v2 (H2): quotes inside a word are removed before matching
     if (!READV.test(verb) && !(verb === 'git' && GITREAD.test(sub || '')) && !(verb === 'find' && !FIND_W) && /(^|[\s\/'"=:])\.claude(\/|\s|$|['"])|HOLD\.md|\.git\/config|\.abp\/(keys|log|salt)/.test(seg2) && !(KEYS && !hasLabel() && /\.abp\/keys/.test(seg2)))
       return deny('R6', `${verb}: names a protected place (.claude, HOLD.md, .git/config, ~/.abp), and it is not a read`, 'tamper')   // v2 (G2, G3): tar, unzip, patch, git checkout and the rest, whatever the verb
-    if (verb === 'git' && (sub === 'commit' || sub === 'push')) {   // v2 (G3): what is about to be committed or pushed may not touch a protected path
-      const gl = (...a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 5000 }).split('\n').filter(Boolean) } catch { return [] } }, files = new Set()
-      if (sub === 'commit') { gl('diff', '--cached', '--name-only').forEach(x => files.add(x)); if (args.some(a => /^-[a-z]*a|^--all$/.test(a) && !/^--/.test(a) || a === '--all')) gl('diff', '--name-only').forEach(x => files.add(x)) }
-      else gl('log', 'HEAD', '--not', '--remotes', '--name-only', '--format=').forEach(x => files.add(x))
-      const hits = [...files].map(x => [x, guarded(who, path.resolve(ROOT, x), P)]).filter(([, d]) => d)
-      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) for THIS repository, with a higher sequence, covering every protected file of the tree
-        const gb = (args2, opt = {}) => { try { return execFileSync('git', args2, { cwd: ROOT, stdio: 'pipe', timeout: 5000, ...opt }) } catch { return null } }
-        const blob = x => gb(sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x])
-        const treeFiles = (gb(sub === 'commit' ? ['ls-files', '--', '.claude', 'abp'] : ['ls-tree', '-r', '--name-only', 'HEAD', '--', '.claude', 'abp'], { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
-        let pins = null, why = 'no abp/pins.json with a signature in the commit'
-        try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw); why = ''
-          const remote = (gb(['config', '--get', 'remote.origin.url'], { encoding: 'utf8' }) || '').trim()
-          if (pins.repository !== normRepo(remote)) { const rp = pins.repository; pins = null; why = `the pins are for ${String(rp).slice(0, 50)}, not this repository` }
-          else { const prev = gb(['show', 'HEAD:abp/pins.json']); let ps = 0; try { ps = JSON.parse(prev).seq || 0 } catch {}
-            const changedPins = !prev || !blob('abp/pins.json').equals(prev)
-            if (changedPins && !(Number.isInteger(pins.seq) && pins.seq > ps)) { pins = null; why = `the sequence ${pins.seq} does not rise above ${ps}` } } } } catch (e) { pins = null; why = 'the pins signature did not verify' }
-        const need = new Set([...hits.map(([x]) => x), ...treeFiles.filter(x => guarded(who, path.resolve(ROOT, x), P))])   // every protected file of the tree, not only the changed ones
-        const unc = pins ? [...need].filter(x => !(x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))) : [...need]
-        if (unc.length) return deny('R6', `git ${sub}: the change touches protected paths (${hits[0][0]}): ${hits[0][1].reason}; they change only in a commit whose abp/pins.json is signed by cl-6.abp for this repository, with a higher sequence, covering every protected file (${why || 'not covered: ' + unc.slice(0, 4).join(', ')})`, 'tamper') } }
+    if (verb === 'git' && /^(commit-tree|mktree|read-tree|update-index|write-tree|fast-import|replace)$/.test(sub || '') || (verb === 'git' && sub === 'hash-object' && args.some(x => /^-[a-z]*w/.test(x))))
+      return deny('R6', `git ${sub}: plumbing that builds a commit or a tree outside git commit (cl-6.security V3, belt and braces)`, 'tamper')
+    if (verb === 'git' && sub === 'commit') { const d = checkProtected(who, P, 'commit', 'HEAD', null); if (d) return d }
+    if (verb === 'git' && sub === 'push') {   // v2.1 (V3): the local side of every refspec, or the current branch when none is given
+      const nr = rest.filter(x => !/^(-|\d*[<>&])/.test(x)).slice(1), cur = (() => { try { return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 3000 }).trim() } catch { return 'HEAD' } })()
+      for (const r of (nr.length ? nr : [cur])) { const m = /^\+?([^:]*):?(.*)$/.exec(r), src = m[1] || cur, dst = (m[2] || src).replace(/^refs\/heads\//, ''); const d = checkProtected(who, P, 'push', src, dst); if (d) return d } }
     if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
       const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
     if (!who.role && /^(push|commit)$/.test(sub)) return anon()

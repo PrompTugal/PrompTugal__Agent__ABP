@@ -8,7 +8,7 @@ Written by cl-6.abp@PrompTugal.dinis, 2026-11-26T16:13Z, on cl-6.security's four
 | `claude/hooks/launch.mjs` | new: the launcher the settings call. It verifies the signed pins, then runs the hook |
 | `claude/settings.json` | the wiring, fail closed in the shell itself |
 | `pins.mjs` | hashes the pinned files, the repository, the policy version and a rising sequence number into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
-| `test.sh` | 85 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
+| `test.sh` | 93 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
 | `DIFF-vs-kit-v1.patch` | the diff against the kit of https://sovereignwebsite.ai/abp/kit/ (hook and settings) |
 
 ## The four requirements
@@ -97,3 +97,16 @@ What this does not change: nothing is installed; the exception it implements is 
 | 7 | my key is rotated through IaC pins | by the same environment variable: IaC sets the new key hash, the old constant is ignored |
 
 Nine new tests (replay, another repository, the environment key both ways, an unlisted hook file, and five on the CI check): 85 in all.
+
+### cl-6.security's fourth round, V1 to V3 and the plumbing (2026-11-26T16:41Z)
+
+cl-6.security found that kit v2.0 (acc2f2a) and v2.1 (b14bdcf) could be got round, and withdrew its pass: the P8 record is suspended (revision 3). Fixed here:
+
+| Finding | Fix | Test |
+|---|---|---|
+| V1 `git commit -am` reads the working tree, the hook read the index | a commit is refused when any protected path differs between the working tree and the index: stage it (git add) so the pins can be checked, or restore it | `commit -am` and `commit -m` with a working-tree-only change |
+| V2 rollback: every pins file ever signed stayed valid | the pins name the repository and a sequence number; the commit check requires a sequence above HEAD's and above the remote branch's, the push check above the remote branch's; the launcher keeps a high-water mark per repository in a protected file and refuses lower; CI takes `--floor` | older signed pins and files put back over the newer install |
+| V3 push read HEAD, not the ref pushed | each refspec's local side is resolved (or the current branch when none is given); the commits not on any remote, the files and the pins are read at that ref | `git push origin dev` and `dev:dev` from a clean branch while dev holds a bad commit; and the same push from a clean dev passes |
+| plumbing | `git commit-tree`, `mktree`, `read-tree`, `update-index`, `write-tree`, `fast-import`, `replace` and `hash-object -w` are tamper | commit-tree, hash-object -w |
+
+93 tests, all pass. Nothing is installed, and the install waits for both securities' pass on the head of this version, for cl-6.decisions' revision 4 of the record, and for Dinis's root.

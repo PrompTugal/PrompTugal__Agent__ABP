@@ -115,6 +115,29 @@ pin b; r=$(ABP_PIN_KEY_SHA256=$fpb run "$W"); allow "v2.1: ...and pins signed by
 pin a
 touch $T/.claude/hooks/extra.mjs
 denyk "v2.1: a hook file on disk that the pins do not list does not load" "not pinned" "$(run "$W")"; rm $T/.claude/hooks/extra.mjs
+echo "--- v2.1 security round 4: V1 (commit -a), V2 (rollback), V3 (push from another branch), plumbing"
+T3=$(mktemp -d); mkdir -p $T3/.claude/hooks $T3/abp; cp $T/.claude/hooks/*.mjs $T3/.claude/hooks/; cp $T/.claude/settings.json $T3/.claude/; cp $pol $T3/abp/policies.json
+pin3(){ node $here/pins.mjs $T3 >/dev/null; rm -f $T3/abp/pins.json.sig; ssh-keygen -Y sign -q -f $T/k/${1:-a} -n abp-pins $T3/abp/pins.json >/dev/null 2>&1; }
+git init -q --bare $T3.git; (cd $T3 && git init -q -b dev . && git remote add origin $T3.git); pin3 a
+c3(){ (cd $T3 && git add -A -f && git -c user.name=t -c user.email=t@t commit -q -m "$1"); }
+c3 install1; (cd $T3 && git push -q origin dev); cp $T3/abp/pins.json $T3/p1.json; cp $T3/abp/pins.json.sig $T3/p1.sig; cp $T3/abp/policies.json $T3/pol1
+node -e 'const f=process.argv[1],P=JSON.parse(require("fs").readFileSync(f));P.updated="second install";require("fs").writeFileSync(f,JSON.stringify(P,null,1)+"\n")' $T3/abp/policies.json; pin3 a; c3 install2; (cd $T3 && git push -q origin dev)
+hook3(){ echo "$1" | CLAUDE_PROJECT_DIR=$T3 node $T3/.claude/hooks/abp.mjs pre-tool; }   # the hook alone: the launcher is tested above
+b3(){ hook3 '{"tool_name":"Bash","tool_input":{"command":'"$(node -p 'JSON.stringify(process.argv[1])' "$1")"'},"cwd":"'$T3'"}'; }
+echo '{"hooks":{}}' > $T3/.claude/settings.json
+deny  "V1: git commit -am with a protected change in the working tree only (the index still equals the signed pins)" "$(b3 'git commit -am x')"
+deny  "V1: a plain git commit with the same working-tree change" "$(b3 'git commit -m x')"
+(cd $T3 && git checkout -q -- .claude/settings.json)
+cp $T3/pol1 $T3/abp/policies.json; cp $T3/p1.json $T3/abp/pins.json; cp $T3/p1.sig $T3/abp/pins.json.sig; (cd $T3 && git add -A -f)
+denyk "V2: older signed pins and files put back over the newer install are refused (a rollback)" "ABP R6" "$(b3 'git commit -m rollback')"; (cd $T3 && git reset -q --hard origin/dev)
+echo '{"hooks":{}}' > $T3/.claude/settings.json; (cd $T3 && git add -A -f && git -c user.name=t -c user.email=t@t commit -q -m bad && git checkout -q -b clean origin/dev)
+denyk "V3: git push origin dev from a clean branch pushes the bad dev, and is refused" "ABP R6" "$(b3 'git push origin dev')"
+denyk "V3: git push origin dev:dev from a clean branch" "ABP R6" "$(b3 'git push origin dev:dev')"
+(cd $T3 && git checkout -q dev && git reset -q --hard origin/dev)
+allow "V3: git push origin dev from a clean dev passes (nothing protected changed)" "$(b3 'git push origin dev')"
+deny  "plumbing: git commit-tree" "$(b3 'git commit-tree HEAD^{tree} -p HEAD -m x')"
+deny  "plumbing: git hash-object -w" "$(b3 'git hash-object -w README')"
+rm -rf $T3 $T3.git
 echo "--- F7 and G4 and G5 secrets"
 deny  "F7: awk on a private key" "$(bash_ 'awk 1 ~/.ssh/id_ed25519')"
 deny  "F7: sed on a private key" "$(bash_ 'sed -n p ~/.ssh/id_rsa')"
@@ -160,4 +183,5 @@ denyk "a signature in another namespace does not load (F6)" "fail closed" "$(run
 pin a
 r=$(echo "$W" | env -i PATH=/nonexistent CLAUDE_PROJECT_DIR=$T /bin/bash -c "$(node -p 'require(process.argv[1]).hooks.PreToolUse[0].hooks[0].command' $T/.claude/settings.json)" 2>/dev/null)
 deny  "no node at all: the shell prints the deny" "$r"
+[[ -n "${ABP_TEST_DEBUG:-}" ]] && grep -h hook-error $T/log/*.jsonl 2>/dev/null | tail -3 | cut -c1-400
 echo "passed $pass, failed $fail"
