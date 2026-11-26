@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.7.4 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.7.5 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "1228092fc27dd521",
+ "policy_sha256_16": "02ef0a251c7a5263",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:49Z",
+ "updated": "2026-11-26T16:50Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -230,6 +230,10 @@
   {
    "at": "2026-11-26T16:49Z",
    "event": "cl-6.security PASS for kit v2.1 at dffb673; network design agreed version with security (c7123d2)"
+  },
+  {
+   "at": "2026-11-26T16:50Z",
+   "event": "security: P8 pass carries to fda0cbe; data.london environment changes for Dinis; conductor reset (new session id); policy v1.7.5"
   }
  ],
  "waiting_on": [

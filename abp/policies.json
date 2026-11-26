@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.4",
+ "version": "1.7.5",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1474,7 +1474,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:49Z",
+ "updated": "2026-11-26T16:50Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1717,7 +1717,7 @@
   "conductors": [
    {
     "conductor": "cl-6.conductor@PrompTugal.dinis",
-    "session": "session_016CrbJKttr9TiHHDsuGnmF1",
+    "session": "session_016CrbJMiN8eUtML9vvvGCVt",
     "created": [
      "cl-6.abp",
      "cl-6.journalist",
@@ -1725,7 +1725,7 @@
      "cl-6.security",
      "cl-6.correspondent"
     ],
-    "note": "its role: thinks, plans, routes; proposes sessions to cl-6.maestro"
+    "note": "its role: thinks, plans, routes; proposes sessions to cl-6.maestro RESET 26 Nov 16:38 UTC by cl-6.maestro: this is the live session; the old one (session_016CrbJKttr9TiHHDsuGnmF1) is archived; it is attached to its home only"
    },
    {
     "conductor": "cl-6.maestro@dinis (new)",
@@ -2001,7 +2001,12 @@
       "GET",
       "HEAD"
      ],
-     "log": "network-log.jsonl in its area"
+     "log": "network-log.jsonl in its area",
+     "environment_changes_for_dinis": [
+      "allow_package_managers: false (a package registry is a send channel and install scripts run code; the collector needs only GET of six public hosts)",
+      "allow_mcp_servers: false unless a granted connector needs it (it has none)"
+     ],
+     "note": "cl-6.security read the environment read-only (16:49 UTC): its allowed_hosts are exactly the six; the TfL API is api.tfl.gov.uk, which is NOT in the list: if it is needed it is a new host and needs a new review (cl-6.security, cl-6.rights); rights confirms each source's terms before its first read"
     },
     "never": "starts a session, creates or changes a scheduled task, attaches a repository (no add_repo), uses a connector, requests a host outside the six (a host in the environment and not in this list, or the reverse, is a finding), follows a redirect to another host, sends (POST and the like: R7), logs in, passes a bot challenge or a paywall, accepts terms (R13), uses a source whose terms are not on the register (R15 of the PrompTugal policy) or whose licence is unclear (R12), uses a shortener, an archive-save or a fetch-for-me relay, runs a search engine, installs a package, writes outside site/factory/dinis-cruz/account-f/london/ in the shared repository (the common home area also covers cl-6.data's own area there: the split is the review's, not the hook's, until common writes are scoped per role), prints or commits a key or a token, names a private person",
     "first_prompt_must_state": "its grant: only the six hosts, only GET and HEAD, every request logged in network-log.jsonl, no session, no scheduled task, no add_repo"
