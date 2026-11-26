@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.videos@PrompTugal.dinis"
-policy: abp/policies.json v1.6.5 (sha256:0a904beba5866c65)
+policy: abp/policies.json v1.6.6 (sha256:a1f4450f460c4150)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.videos@PrompTugal.dinis
@@ -9,7 +9,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 ## Mandate (the grant)
 
-- **Focus:** the videos section.
+- **Focus:** the videos section; its subject widens to explainer videos only: no new tool, host, connector, repository or budget (record 2026-11-26__social-start, commit d14b5df).
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.videos.json`, `runs/cl-6.videos/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

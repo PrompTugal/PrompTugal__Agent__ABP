@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.5",
+ "version": "1.6.6",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -673,7 +673,7 @@
    "model": "sonnet"
   },
   "cl-6.videos": {
-   "focus": "the videos section",
+   "focus": "the videos section; its subject widens to explainer videos only: no new tool, host, connector, repository or budget (record 2026-11-26__social-start, commit d14b5df)",
    "writes": [
     "src/**",
     "data/**",
@@ -1389,7 +1389,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:32Z",
+ "updated": "2026-11-26T16:35Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1484,6 +1484,16 @@
    "commit_of_record": "8ecec85",
    "applied": [],
    "held": "the pull-form install of kit v2 at acc2f2a. Verified: signature, commit signature, the reissued endorsement (decisions.b's signature, scope (3) relaxations proposed by cl-6.abp, in date, revoked empty). Not applied: (1) the one exception to the .claude/** and abp/** protection for a commit signed by my key is a widening and needs S1 step 4 (Dinis's anchor line); (2) it needs a kit change (the commit and push check must let that one commit through) which cl-6.security must re-review. I can build the install pack and the change meanwhile; nothing is installed"
+  },
+  {
+   "record": "2026-11-26__social-start",
+   "at": "2026-11-26T16:35Z",
+   "commit_of_record": "d14b5df",
+   "applied": [
+    "roles.cl-6.videos.focus: explainer videos (text only: no grant changed)",
+    "draft_roles.cl-6.social: drafted, not active, sent to cl-6.security@dinis as the record asks before the session starts"
+   ],
+   "held": "cl-6.social becomes an active role in one step when security agrees and Dinis gives the root (S1 step 4); the session start, the repository (IaC #30) and the wakes are cl-6.maestro's and Dinis's"
   }
  ],
  "findings": [
@@ -1774,5 +1784,21 @@
     "expires": "2026-11-30T23:59:59Z"
    }
   ]
+ },
+ "draft_roles": {
+  "about": "role entries drafted for cl-6.security's review BEFORE the session starts, NOT active: a role gives its session the common home-area writes, which is a grant, and S1 step 4 (Dinis's root) is not done; they become roles in one step when security agrees and Dinis gives the root",
+  "at": "2026-11-26T16:35Z",
+  "roles": {
+   "cl-6.social": {
+    "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange",
+    "writes": [],
+    "subagents": false,
+    "repos": [
+     "PrompTugal/PrompTugal__Agent__Social"
+    ],
+    "never": "uses any connector (an Instagram or LinkedIn account is a connector, Dinis's alone), posts, comments or sends a message to any outside service (R7), logs in to any site, starts a session, creates or changes a scheduled task, uses a sub-agent, attaches a repository (no add_repo), holds or uses a credential (it does not render through OpenRouter and is not put on an environment holding OPEN_ROUTER_KEY), writes outside its own home, writes board/keys.json other than its own public key alone in its first commit, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; music, fonts and images are checked by cl-6.rights and the script and the cut by cl-6.security before Dinis sees them",
+    "first_prompt_must_state": "its grant (abp/cl-6.social.md once active): its own home only; no connector; no post, comment or message to any outside service; no session, no scheduled task, no sub-agent; no login to any site; its own key published alone in its first commit"
+   }
+  }
  }
 }
