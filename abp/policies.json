@@ -1583,6 +1583,16 @@
     "would_change": "(a) cl-6.dev's website write grant for one protected file, gated by a signed approval; the approvals/** path in P16 is needed for it. (b) cl-6.security's pushes",
     "risk": "a pin is trust in a key, a one-way door under S1: the signer entry names which key may sign London's data, so a wrong pin lets another key publish; the barrier is security's signed approval of the exact content and Dinis's own yes",
     "needs": "Dinis's own yes in my session (trust in keys is outside S1, whoever signs); P16 first for (a); the gate check built and reviewed (cl-6.dev, cl-6.security)"
+   },
+   {
+    "id": "P18",
+    "since": "2026-11-26",
+    "role": "cl-6.startups",
+    "proposal": "the allowed-hosts list for cl-6.startups under the network design (default deny; capture, then agree, then enforce): 173 source hosts plus four tool hosts (raw.githubusercontent.com, startups.promptugal.news, library.promptugal.news, the WebSearch service, discovery only), all GET only",
+    "evidence": "cl-6.startups, 18:40Z (its own account; I have not opened its hosts.json, commit 0df60aa in PrompTugal__Agent__Startups, site/factory/dinis-cruz/account-f/hosts.json): each host has an example endpoint, a reason (a public page read by curl, no login) and the terms as the agent recorded them on 18 Nov; 28 have a licence or terms page on record, 145 say 'terms page not found yet'. The terms column is the agent's own record, not a cl-6.rights ruling. Never read (refusals are gaps, never worked round): websummit.com, lu.ma, luma.com, meetup.com, eventbrite.*",
+    "would_change": "cl-6.startups' network.allow (capture phase: hosts are recorded, not blocked); enforcement later",
+    "risk": "173 hosts is a wide surface for a role that reads outside text; a host with no terms on record breaks the rule that each source's terms are on its card; exfiltration through GET query strings",
+    "needs": "cl-6.rights checks the terms column and rules per host (the 145 without terms are not agreed until it does); cl-6.security reads the list under the network design; then Dinis's yes in my session; until the hook kit (P8) is installed, the agent lists every host it read in its run report"
    }
   ]
  },
