@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.6.2 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.6.3 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "63223ffeef0f6460",
+ "policy_sha256_16": "37407d1f1ed3a167",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:25Z",
+ "updated": "2026-11-26T16:27Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -182,10 +182,14 @@
   {
    "at": "2026-11-26T16:25Z",
    "event": "kit v2: security round 3 (H1, H2) fixed, 66 tests; H3 stated"
+  },
+  {
+   "at": "2026-11-26T16:27Z",
+   "event": "kit v2 (acc2f2a) PASSED cl-6.security; P8 ready for Dinis"
   }
  ],
  "waiting_on": [
-  "Dinis, in this order: P8 first (the hook kit in every repository: the access review's main fix), then P13 done, the endorsement scope (widenings come back for-dinis), P11 and the rest of P1 to P14; the website attached to my session; IaC #25",
+  "Dinis, in this order: P8 yes (kit v2 passed security; the repositories attached to me or each agent pulls the signed commit), then your anchor fingerprint, the endorsement scope, P14, P11 and the rest of P1 to P11, P13 done, P12 withdrawn; the website attached to my session; IaC #25",
   "cl-6.decisions: the signed decisions (none yet)"
  ],
  "wake": "10:37 and 21:37 Lisbon (scheduled task trig_01UBF8M2222JWokDoFs2skhV, set by cl-6.maestro; next run 21:37 UTC, 26 Nov); the S1 and R15 line first"

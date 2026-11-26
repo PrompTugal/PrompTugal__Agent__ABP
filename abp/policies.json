@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.2",
+ "version": "1.6.3",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1242,8 +1242,25 @@
     "proposal": "cl-6.abp installs the hook kit in every cl-6 agent's home repository and in the News repositories: .claude/settings.json, .claude/hooks/abp.mjs, abp/policies.json (or a copy of its generated ABP), abp/tools.mjs; each commit signed and reviewed by cl-6.security; the session of each agent is wired to load it",
     "evidence": "cl-6.conductor's message of 26 Nov: cl-6.startups cannot file its R10 run report because the hook kit is not installed in its session and the install needs writes to protected paths. Only my own repository and (when attached) the website have the kit today, so every other cl-6 session runs with no hook at all: no log, no R3 or R4 breaker, no run report; cl-6.security's access review of 26 Nov (its home, docs/security/2026-11-26-access-review.md), finding A2 (high): all 53 sessions hold the same 25 tools, including add_repo and create, update, delete and fire for scheduled tasks, in auto permission mode and one environment; R3 and R4 are logged, not enforced, because no hook runs in those sessions. P8 (the hook kit in every repository) is the main fix; ahead of every other proposal",
     "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
-    "needs": "Dinis's yes, and each repository attached to cl-6.abp with push access; until then agents file hand-written run reports (abp/templates/run-report-by-hand.md)",
-    "priority": "FIRST on the list for Dinis"
+    "needs": "Dinis's yes in my session: 'P8: yes'; and the repositories attached to cl-6.abp, or who pulls",
+    "priority": "FIRST on the list for Dinis",
+    "status": "READY for Dinis's yes (2026-11-26T16:27Z): hook kit v2 at commit acc2f2a (abp/kit-v2) passed cl-6.security's review after four rounds (F1 to F8, G1 to G5, H1 and H2 fixed; 66 of 66 tests; 86 probes)",
+    "review": {
+     "by": "cl-6.security@PrompTugal.dinis",
+     "write_up": "https://github.com/PrompTugal/PrompTugal__Agent__Security/blob/dev/docs/security/reviews/2026-11-26-p8-kit-v2.md",
+     "verdict": "PASS for Dinis's decision on P8",
+     "conditions": [
+      "each install is a signed commit by cl-6.abp, made outside a live session in a scratch clone, which cl-6.security pre-reviews against the acc2f2a pins",
+      "a CI check in each repository that rejects a .claude/** or abp/** change not signed by cl-6.abp's key (cl-6.dev builds it, Dinis merges)"
+     ],
+     "residuals": [
+      "code execution (bash -c, python -c, a script it writes and runs) can still get past the text checks",
+      "working-tree rewrites that name no path (git reset --hard, pull, merge, rebase, tar, unzip) are not stopped: the commit and push check keeps them from leaving the machine; a local or resumed session in the same tree is covered by the CI check and the review",
+      "R6 as a whole stays observe until P11 and the other path gaps are decided; the breakers R3, R4, R5, R8 and the tamper kind block",
+      "low: a relative Glob such as ../home/.ssh/* lists file names only; not changed now so as not to move the reviewed head"
+     ]
+    },
+    "install_plan": "for each cl-6 repository (the homes and the News repositories; the nine other sessions later): cl-6.abp copies claude/ to .claude/ and abp/policies.json and tools.mjs to abp/, runs pins.mjs, signs abp/pins.json by hand with ssh-keygen -Y sign, commits signed, in a scratch clone; cl-6.security reviews; the repository is pulled. Needs each repository attached to cl-6.abp with push access (a decision of Dinis's: P11 b), or each agent pulling the signed commit itself"
    },
    {
     "id": "P9",
@@ -1374,7 +1391,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:19Z",
+ "updated": "2026-11-26T16:27Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
