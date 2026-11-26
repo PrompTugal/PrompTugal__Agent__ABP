@@ -12,14 +12,66 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "wave 0: policy v1.0.0 (observe; breakers R3 and R4 on) written for cl-6.abp, conductor, journalist, dev, security, correspondent; waiting on Dinis",
+ "state": "policy v1.1.0 (observe; breakers R3 and R4 on) covers all 42 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "3f9af3ca53da71f6",
- "covered": ["cl-6.abp", "cl-6.conductor", "cl-6.journalist", "cl-6.dev", "cl-6.security", "cl-6.correspondent"],
- "not_yet_covered": "the other 35 sessions of 2026-11-26-sessions.json (wave 2 onwards); none may start before its entry exists",
- "updated": "2026-11-26T01:34Z",
- "timeline": [
-  {"at": "2026-11-26T01:34Z", "event": "key made (P-256 signing, RSA-4096 encryption), public half at site/keys/cl-6.abp.json; policy v1.0.0 for six agents"}
+ "policy_sha256_16": "5c96a017f357477f",
+ "covered": [
+  "cl-6.abp",
+  "cl-6.conductor",
+  "cl-6.journalist",
+  "cl-6.dev",
+  "cl-6.security",
+  "cl-6.correspondent",
+  "cl-6.data",
+  "cl-6.weather",
+  "cl-6.travel",
+  "cl-6.civic",
+  "cl-6.startups",
+  "cl-6.library",
+  "cl-6.signals",
+  "cl-6.cyber",
+  "cl-6.events",
+  "cl-6.live",
+  "cl-6.videos",
+  "cl-6.bulletins",
+  "cl-6.fringe",
+  "cl-6.swarm",
+  "cl-6.places",
+  "cl-6.designer",
+  "cl-6.accountant",
+  "cl-6.ontologist",
+  "cl-6.observability",
+  "cl-6.devops",
+  "cl-6.sherpa",
+  "cl-6.synthetic",
+  "cl-6.rights",
+  "cl-6.translator",
+  "cl-6.telemetry",
+  "cl-6.historian",
+  "cl-6.researcher",
+  "cl-6.outreach",
+  "cl-6.backup",
+  "cl-6.investors",
+  "cl-6.customers",
+  "cl-6.reviewer",
+  "cl-6.curator",
+  "cl-6.checker",
+  "cl-6.programme",
+  "cl-6.analyst"
  ],
- "waiting_on": ["Dinis: the questions in the first reply (see decisions.md)"]
+ "updated": "2026-11-26T02:37Z",
+ "timeline": [
+  {
+   "at": "2026-11-26T01:34Z",
+   "event": "key made (P-256 signing, RSA-4096 encryption), public half at site/keys/cl-6.abp.json; policy v1.0.0 for six agents"
+  },
+  {
+   "at": "2026-11-26T02:37Z",
+   "event": "policy v1.1.0: wave 2 to 4 roles added for the 41 sessions, at the conductor's message that every wave is running"
+  }
+ ],
+ "waiting_on": [
+  "cl-6.conductor, for Dinis: how sessions are identified (ABP_ROLE or ~/.abp/keys label); the hold file name; the conductor's model; cl-6.telemetry has no role in CLAUDE.md; the desk names of the twins (assumed desks/<name>/); section repo layouts assumed from the factory (src, data, content, scripts)",
+  "the website attached to this session, to put the roles into board/abp/ through release.sh"
+ ]
 }

@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.0.0",
+ "version": "1.1.0",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -426,16 +426,642 @@
     "PrompTugal/PrompTugal__News__Website"
    ],
    "model": "sonnet"
+  },
+  "cl-6.data": {
+   "focus": "the collectors and the raw public data of every PrompTugal site (data.promptugal.news): one collector per source, no model, polite reads, each source's terms on its card",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md",
+    "sources/**",
+    "collect/**"
+   ],
+   "subagents": false,
+   "never": "collects from a source whose terms are not on its card or that is on the register of sources not to be accessed; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Data",
+    "PrompTugal/PrompTugal__News__Data"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.weather": {
+   "focus": "the weather section (weather.promptugal.news): IPMA warnings and forecasts, fire risk, sea state and UV, place by place; a service for reading, not a warning service",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Weather",
+    "PrompTugal/PrompTugal__News__Weather"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.travel": {
+   "focus": "the travel section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Travel",
+    "PrompTugal/PrompTugal__News__Travel"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.civic": {
+   "focus": "the civic section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Civic",
+    "PrompTugal/PrompTugal__News__Civic"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.startups": {
+   "focus": "the startups section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Startups",
+    "PrompTugal/PrompTugal__News__Startups"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.library": {
+   "focus": "the library section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Library",
+    "PrompTugal/PrompTugal__News__Library"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.signals": {
+   "focus": "the signals section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Signals",
+    "PrompTugal/PrompTugal__News__Signals"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.cyber": {
+   "focus": "the cyber section: aggregates only, only sources whose terms allow commercial reuse until Dinis decides on the rest",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "reuses a source whose terms do not allow commercial reuse; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Cyber",
+    "PrompTugal/PrompTugal__News__Cyber"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.events": {
+   "focus": "the events section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "reads websummit.com, lu.ma, luma.com, meetup.com or eventbrite (the read-deny hosts of the PrompTugal policy); writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Events",
+    "PrompTugal/PrompTugal__News__Events"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.live": {
+   "focus": "the live section (live.promptugal.news): official cameras only, embeds only, attributed",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "records a camera, uses a camera that is not official, or hosts a stream (embeds only); writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Live",
+    "PrompTugal/PrompTugal__News__Live"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.videos": {
+   "focus": "the videos section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Videos",
+    "PrompTugal/PrompTugal__News__Videos"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.bulletins": {
+   "focus": "the bulletins section: text first, every line sourced",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "spends more than 5 USD a day, or uses an audio key that did not arrive through the secure form; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Bulletins",
+    "PrompTugal/PrompTugal__News__Bulletins"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.fringe": {
+   "focus": "the fringe section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Fringe",
+    "PrompTugal/PrompTugal__News__Fringe"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.swarm": {
+   "focus": "the swarm section",
+   "writes": [
+    "src/**",
+    "data/**",
+    "content/**",
+    "scripts/**",
+    "REALITY.md",
+    "BRIEF.md"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Swarm",
+    "PrompTugal/PrompTugal__News__Swarm"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.places": {
+   "focus": "the Algarve place lens first (data/by-place/algarve.json), then the other places in turn, each writing only its own home and its own data/by-place file; public sources only, each item with its URL and the date read",
+   "writes": [
+    "data/by-place/*.json",
+    "data/by-place/*.json.sig",
+    "content/articles/*.md",
+    "articles/*.md.sig",
+    "board/runs/cl-6.places/**",
+    "board/team/cl-6.places/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes another place's file, writes code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Place__Algarve",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.designer": {
+   "focus": "design/ and the brand v2.0: layouts, the logo, the editors' business cards",
+   "writes": [
+    "design/**",
+    "content/newsroom/design/**",
+    "board/runs/cl-6.designer/**",
+    "board/team/cl-6.designer/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "changes the brand without Dinis's yes (design/brand/** is protected), or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Designer",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.accountant": {
+   "focus": "budgets of tokens and runs: per agent per day, per pass, per loop; reads what each run spent; says when a pass or a loop reaches its budget",
+   "writes": [
+    "board/budgets.json",
+    "board/spec-budgets-schema.md",
+    "board/runs/cl-6.accountant/**",
+    "board/team/cl-6.accountant/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "stops or starts a session or a scheduled task (it tells cl-6.conductor), or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Accountant",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.ontologist": {
+   "focus": "data/ schemas and the derivation, the knowledge graph (companies, people, events, past events, topics, places)",
+   "writes": [
+    "data/**",
+    "newsroom/build/lib/derive.mjs",
+    "newsroom/build/lib/data.mjs",
+    "newsroom/build/lib/datacheck.mjs",
+    "board/runs/cl-6.ontologist/**",
+    "board/team/cl-6.ontologist/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "hand-edits a derived file, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Ontologist",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.observability": {
+   "focus": "who reads what and what the agents do: page views and reads to an encrypted vault, the drain, the reports",
+   "writes": [
+    "newsroom/observability/**",
+    "assets/obs/**",
+    "newsroom/tools/obs/**",
+    "newsroom/tools/agent-log.mjs",
+    "content/newsroom/observability/**",
+    "content/newsroom/observability.md",
+    "board/runs/cl-6.observability/**",
+    "board/team/cl-6.observability/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "records anything that identifies a reader, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Observability",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.devops": {
+   "focus": "the health, quality and performance of CI, the release and tag scripts and every tool in newsroom/tools/",
+   "writes": [
+    ".github/workflows/*.yml",
+    "newsroom/build/tag_release.sh",
+    "newsroom/tools/release.sh",
+    "board/runs/cl-6.devops/**",
+    "board/team/cl-6.devops/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "disables a check, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__DevOps",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.sherpa": {
+   "focus": "the reader's guide and voice: the usability and experience of every page, as the person who arrives cold",
+   "writes": [
+    "design/shots/sherpa/**",
+    "board/runs/cl-6.sherpa/**",
+    "board/team/cl-6.sherpa/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Sherpa",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.synthetic": {
+   "focus": "synthetic readers (personas) who read the site as they would and report what works, what confuses and what loses them",
+   "writes": [
+    "desks/synthetic/**",
+    "content/newsroom/synthetic.md",
+    "board/runs/cl-6.synthetic/**",
+    "board/team/cl-6.synthetic/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Synthetic",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.rights": {
+   "focus": "the licensing side-car across the PrompTugal sites: licences, terms of use, attribution, commercial use and privacy rights; daily checks that every value served carries its licence and provenance",
+   "writes": [
+    "board/rights/**",
+    "content/newsroom/rights.md",
+    "content/newsroom/rights/**",
+    "data/rights/**",
+    "board/runs/cl-6.rights/**",
+    "board/team/cl-6.rights/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "gives legal advice, accepts terms for anyone, writes another agent's content or any site repository, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Rights",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.translator": {
+   "focus": "the content in the 21 cultures with a translation memory, never translating the same text twice; one translator sub-agent per culture inside its own run",
+   "writes": [
+    "data/i18n/tm/**",
+    "data/i18n/glossary.json",
+    "data/i18n/README.md",
+    "board/runs/cl-6.translator/**",
+    "board/team/cl-6.translator/**",
+    "board/keys.json"
+   ],
+   "subagents": true,
+   "never": "hand-writes the queue (derived), translates what the glossary keeps in English, changes the English source, or writes build code",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Translator",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.telemetry": {
+   "focus": "no role is written for it in the website's CLAUDE.md team table: its home area and its run reports only, until cl-6.conductor writes the role",
+   "writes": [
+    "board/runs/cl-6.telemetry/**",
+    "board/team/cl-6.telemetry/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Telemetry",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.historian": {
+   "focus": "the history of PrompTugal.news and of Dinis's earlier work, from the record; lessons briefed to the other agents",
+   "writes": [
+    "content/newsroom/notes/**",
+    "board/runs/cl-6.historian/**",
+    "board/team/cl-6.historian/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "invents a fact, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Historian",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.researcher": {
+   "focus": "public research on a mandate per task (the Portugal ecosystem and Algarve Evolution, then people with public professional facts and freely licensed photos, then past summits)",
+   "writes": [
+    "desks/researcher/**",
+    "data/organisations/*/organisation.json",
+    "board/runs/cl-6.researcher/**",
+    "board/team/cl-6.researcher/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "uses a source behind a login, gives a private individual's personal contact, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Researcher",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.outreach": {
+   "focus": "drafts to companies as PrompTugal's editors, each leading with that company's page",
+   "writes": [
+    "desks/outreach/**",
+    "board/runs/cl-6.outreach/**",
+    "board/team/cl-6.outreach/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "sends an email or posts (a person does), or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Outreach",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.backup": {
+   "focus": "regular backups of the repository and every vault, and the recovery plan with cl-6.security: its home area and run reports only until Dinis approves a plan and a destination",
+   "writes": [
+    "board/runs/cl-6.backup/**",
+    "board/team/cl-6.backup/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "deletes anything, holds or moves a private key or vault key outside the plan Dinis approves, or sends a backup to a destination he has not named",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Backup",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.investors": {
+   "focus": "PrompTugal.news as an investable business: its own investor story, separate from the Web Summit team's investors; its own folders only until the conductor says retire or keep",
+   "writes": [
+    "board/runs/cl-6.investors/**",
+    "board/team/cl-6.investors/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Investors",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.customers": {
+   "focus": "Dinis's briefs on readers, customers and products, kept in board/team/cl-6.customers/ and routed to cl-6.conductor; it reads and waits until a brief arrives",
+   "writes": [
+    "board/runs/cl-6.customers/**",
+    "board/team/cl-6.customers/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "builds or publishes anything, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Customers",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.reviewer": {
+   "focus": "twin of reviewer@PrompTugal.vicky: reviews, and keeps the front page's lead.standfirst, lead.developments, lead.programme, lead.last_checked and lead.live",
+   "writes": [
+    "desks/correspondent/front-page.json",
+    "content/articles/**",
+    "articles/**",
+    "board/runs/cl-6.reviewer/**",
+    "board/team/cl-6.reviewer/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "changes any other key of front-page.json (the hook cannot check keys: the hourly review does), or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Reviewer",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.curator": {
+   "focus": "twin of curator@PrompTugal.vicky: its own desk",
+   "writes": [
+    "desks/curator/**",
+    "board/runs/cl-6.curator/**",
+    "board/team/cl-6.curator/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Curator",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.checker": {
+   "focus": "twin of checker@PrompTugal.vicky: its own desk",
+   "writes": [
+    "desks/checker/**",
+    "board/runs/cl-6.checker/**",
+    "board/team/cl-6.checker/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Checker",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.programme": {
+   "focus": "twin of programme@PrompTugal.vicky: its own desk",
+   "writes": [
+    "desks/programme/**",
+    "board/runs/cl-6.programme/**",
+    "board/team/cl-6.programme/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Programme",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
+  },
+  "cl-6.analyst": {
+   "focus": "twin of analyst@PrompTugal.vicky: its own desk",
+   "writes": [
+    "desks/analyst/**",
+    "board/runs/cl-6.analyst/**",
+    "board/team/cl-6.analyst/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Analyst",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet"
   }
  },
  "workers": {
-  "about": "a dotted name under a cl-6 role (cl-6.dev.search) is not a cl-6 role and has no entry: it has no grant until cl-6.abp writes one. Twins (same name, different account) are separate agents with their own entries."
+  "about": "a dotted name under a cl-6 role (cl-6.dev.search) is not a cl-6 role and has no entry: it has no grant until cl-6.abp writes one. Twins (same name, different account) are separate agents with their own entries. Wave 2 to 4 roles added in 1.1.0 from the sessions list and the website's CLAUDE.md team table; a role marked with no writes has its home area and run reports only."
  },
  "proposed_relaxations": {
   "about": "proposed by cl-6.abp with the evidence, never applied: Dinis decides",
   "items": []
  },
- "updated": "2026-11-26T01:34Z",
+ "updated": "2026-11-26T02:37Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
