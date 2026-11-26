@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T11:20Z",
+ "updated": "2026-11-26T11:25Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -120,6 +120,10 @@
   {
    "at": "2026-11-26T11:20Z",
    "event": "P11 rewritten as one proposal (items a to e); template path fixed (runs/cl-6.<name>/)"
+  },
+  {
+   "at": "2026-11-26T11:25Z",
+   "event": "P11 items f and g for cl-6.places (path gaps; sub-agent conflict)"
   }
  ],
  "waiting_on": [

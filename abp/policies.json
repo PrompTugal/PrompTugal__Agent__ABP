@@ -1181,7 +1181,7 @@
    {
     "id": "P11",
     "since": "2026-11-26",
-    "role": "every cl-6 role that reported a gap after reading its ABP (dev, weather, bulletins, customers, designer, rights, backup, events, library, researcher, ontologist, accountant)",
+    "role": "every cl-6 role that reported a gap after reading its ABP (dev, weather, bulletins, customers, designer, rights, backup, events, library, researcher, ontologist, accountant), cl-6.places",
     "proposal": "ONE answer for the grants that the setup brief of Dinis's start (done before the grants existed) needed. Items a to e; Dinis can say yes to all, or name the items",
     "evidence": "cl-6.conductor's messages of 26 Nov relaying the reporters, and the run reports of startups, devops and cyber; several agents now refuse routed work for want of a grant; I have not seen the setup brief",
     "items": {
@@ -1208,6 +1208,18 @@
      "e": {
       "ask": "cl-6.events and cl-6.library join P9 (team/keys.json, pages.yml, one branch, one PR)",
       "note": "done in P9: its role list now names them"
+     },
+     "f": {
+      "ask": "cl-6.places: history/** in all 36 Place homes, and data/by-place/now/*.json in the 18 Algarve homes",
+      "finding": "v1.2.0 grants cl-6.places data/by-place/*.json and its .sig only; the path data/by-place/now/*.json is one level deeper and not covered (a * does not cross a /). Only the Algarve home is attached to the places session; the other 35 homes are not reachable by it until each is attached, which is also a repositories question, not only a path one",
+      "risk": "low per path; 36 homes written by one session is the breadth that matters: the hourly review checks each commit against the place it names",
+      "how": "grant data/by-place/now/*.json by name, not data/by-place/**; history/** per P5"
+     },
+     "g": {
+      "ask": "cl-6.places: which should change, the wake prompt (each place as a sub-agent) or the grant (no sub-agents)?",
+      "finding": "v1.2.0 grants cl-6.places no sub-agents, as for most roles (P2 is the general proposal); it follows the grant and runs the places serially, correctly",
+      "my_recommendation": "keep the grant and change the wake prompt to serial, until the hook is installed (P8): a sub-agent's calls may not be seen by a hook in the parent's session, I have not confirmed it. If Dinis wants sub-agents for the places, grant it to cl-6.places alone (subagents: true), not to all 42 roles; I do that in one line",
+      "needs": "Dinis's choice"
      }
     },
     "needs": "Dinis's yes, in this session, per item or for all; until then each stays outside its grant, logged and counted as a breach by the agent's own account"
