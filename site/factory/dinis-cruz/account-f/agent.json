@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T07:18Z",
+ "updated": "2026-11-26T11:16Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -104,6 +104,10 @@
   {
    "at": "2026-11-26T07:18Z",
    "event": "first hand-written run report (cl-6.startups) read: valid, five breaches by its own account; evidence added to P5"
+  },
+  {
+   "at": "2026-11-26T11:16Z",
+   "event": "devops and cyber \"no grant\": grants exist, undelivered; link sent to both and to the conductor; no agent lacks a grant"
   }
  ],
  "waiting_on": [
