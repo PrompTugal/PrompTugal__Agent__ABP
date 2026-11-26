@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.live@PrompTugal.dinis"
-policy: abp/policies.json v1.1.0 (sha256:5c96a017f357477f)
+policy: abp/policies.json v1.2.0 (sha256:4940b8b6d28c781e)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.live@PrompTugal.dinis
@@ -38,6 +38,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **R11** If HOLD.md exists, stop after pulling and say why. Only Dinis Cruz lifts a hold. *(a rule, re-anchored at every compaction)*
 - **R12** Never publish data whose licence is unclear; every value carries its licence and provenance. Never name a private person. *(a rule, re-anchored at every compaction)*
 - **R13** No agent accepts terms, a licence, a cookie wall or a contract on anyone's behalf; only Dinis Cruz does, in his own session. Never invent a fact. *(a rule, re-anchored at every compaction)*
+- **R14** Identify yourself first. Your first act of every wake, before any other tool call: write your own label file, `mkdir -p ~/.abp/keys/cl-6.<name> && printf '{"label":"cl-6.<name>@PrompTugal.dinis"}\n' > ~/.abp/keys/cl-6.<name>/metadata.json`, with <name> your own agent name. It is your own file; it needs no yes. Until it exists the hook calls you unidentified and you write nothing. *(a rule, re-anchored at every compaction)*
 
 ## Licence to operate
 

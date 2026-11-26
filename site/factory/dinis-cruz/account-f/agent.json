@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.1.0 (observe; breakers R3 and R4 on) covers all 42 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.2.0 (observe; breakers R3 and R4 on) covers all 42 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "5c96a017f357477f",
+ "policy_sha256_16": "4940b8b6d28c781e",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T02:37Z",
+ "updated": "2026-11-26T02:39Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -68,10 +68,13 @@
   {
    "at": "2026-11-26T02:37Z",
    "event": "policy v1.1.0: wave 2 to 4 roles added for the 41 sessions, at the conductor's message that every wave is running"
+  },
+  {
+   "at": "2026-11-26T02:39Z",
+   "event": "policy v1.2.0: R14 (each session writes its own ~/.abp/keys label as its first act of every wake); cl-6.telemetry role from the telemetry.b guidance; proposals P1 (transcripts for telemetry) and P2 (sub-agents for all) await Dinis"
   }
  ],
  "waiting_on": [
-  "cl-6.conductor, for Dinis: how sessions are identified (ABP_ROLE or ~/.abp/keys label); the hold file name; the conductor's model; cl-6.telemetry has no role in CLAUDE.md; the desk names of the twins (assumed desks/<name>/); section repo layouts assumed from the factory (src, data, content, scripts)",
-  "the website attached to this session, to put the roles into board/abp/ through release.sh"
+  "Dinis, via cl-6.conductor: proposals P1 and P2 (abp/policies.json proposed_relaxations); the website attached to this session for board/abp/; the conductor's model; the hold file name"
  ]
 }
