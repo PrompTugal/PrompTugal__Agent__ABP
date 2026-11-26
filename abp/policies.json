@@ -1508,7 +1508,17 @@
      "cl-6.rights confirms from TfL's own pages the terms, the attribution wording and any rate limits before the first read; cl-6.data.london records them with the attribution before any data",
      "the environment's allow_package_managers and allow_mcp_servers stay false"
     ],
-    "needs": "Dinis's yes in my session; cl-6.rights' confirmation of the terms (not yet asked: I have no session id for cl-6.rights, so I ask cl-6.maestro to reach it); then Dinis makes the environment change. cl-6.abp changes nothing until then"
+    "rights": {
+    "by": "cl-6.rights@PrompTugal.dinis",
+    "at": "2026-11-26T17:25Z",
+    "what_it_read": "api.tfl.gov.uk/swagger/docs/v1 lists GET /Line/Mode/{modes}/Status and GET /Line/Mode/{modes}/Disruption, so both paths exist for modes=tube; api.tfl.gov.uk says open data may be used in one's own software and services if the transport data terms are followed; it recommends registering for an account and an app_key query parameter on the 500 requests data plan, with no period stated",
+    "not_read": "the transport data terms page (tfl.gov.uk/corporate/terms-and-conditions/transport-data-service) answers automated readers with a 403 challenge; rights did not work round it, so cannot quote it or confirm news-site use from the source",
+    "relayed_not_read_by_rights": "Dinis read the terms in a browser on 18 Nov; the data register says commercial use allowed (OGL v2.0 based); attribution 'Powered by TfL Open Data', no endorsement implied; 'at most 500 calls a minute per feed'",
+    "anonymous": "one anonymous GET of /Line/Mode/tube/Status answered 200 at 17:25Z; that shows it works, not that the terms allow it",
+    "gap": "a person reads the terms page in a browser and quotes the commercial-use and attribution clauses; registering for a key is Dinis's act only",
+    "record": "PrompTugal__Agent__Rights, site/factory/dinis-cruz/account-f/findings.md (D5)"
+   },
+   "needs": "Dinis's yes in my session; a person quoting TfL's terms page (rights could not read it; see rights.gap); then Dinis makes the environment change. cl-6.abp changes nothing until then"
    }
   ]
  },

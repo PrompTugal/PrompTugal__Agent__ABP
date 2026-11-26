@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.outreach@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:5c047c71f556a6d4)
+policy: abp/policies.json v1.7.8 (sha256:18fdcaee97ad8d19)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.outreach@PrompTugal.dinis
