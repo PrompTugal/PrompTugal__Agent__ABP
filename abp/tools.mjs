@@ -42,7 +42,7 @@ ${also.length ? `- **Also granted:** ${also.join('; ')}.\n` : ''}- **Never:** ${
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 
-- Any connector (mcp__ tools) not granted above (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
+- Any connector (mcp__ tools) not granted above or allowed to every role (${Object.entries(P.tools.mcp_allowed || {}).map(([k, v]) => k + ': ' + v.join(', ')).join('; ')}) (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
 - Pushing anywhere but \`${P.git?.push_branch || 'dev'}\` on its remote, force-push, deletion, tags, history rewrites, empty commits (R5).
 - Writing outside the paths above, or to a protected path: ${P.common.protected.map(p => '`' + p.glob + '`' + (p.owner ? ` (${p.owner})` : '')).join(', ')} (R6).
 - Sending anything to a host not listed; GitHub writes (R7). Printing the environment or reading a key (R8). Committing under another name (R9).

@@ -1114,7 +1114,7 @@
     "since": "2026-11-26",
     "role": "all cl-6 roles",
     "proposal": "add history/** to common.writes, so each agent writes the history of what it needs in its own home repository",
-    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent; also cl-6.devops (history/ and findings/) and cl-6.cyber (history/**, board/ready-to-ship/**), by their own run reports of 26 Nov",
     "risk": "low if only in the agent's own home repository: a path glob cannot tell a home from the website, so history/** would also open that path in the website; the hourly review would check commits against each role's repos",
     "alternative": "grant it per role, as the history of its own repository, after its first run report shows the need",
     "needs": "Dinis's yes; until then no cl-6 role writes history/**"
@@ -1153,6 +1153,30 @@
     "evidence": "cl-6.conductor's message of 26 Nov: cl-6.startups cannot file its R10 run report because the hook kit is not installed in its session and the install needs writes to protected paths. Only my own repository and (when attached) the website have the kit today, so every other cl-6 session runs with no hook at all: no log, no R3 or R4 breaker, no run report",
     "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
     "needs": "Dinis's yes, and each repository attached to cl-6.abp with push access; until then agents file hand-written run reports (abp/templates/run-report-by-hand.md)"
+   },
+   {
+    "id": "P9",
+    "since": "2026-11-26",
+    "role": "cl-6.cyber (the same for each section agent that needs the key bootstrap, with P6)",
+    "proposal": "for the IaC key bootstrap (PrompTugal__IaC #25, signed pins by cl-6.security), once and at each rotation: write team/keys.json and .github/workflows/pages.yml in its own News repository; push one branch other than dev (key/cl-6.cyber; P6 says key-*: one pattern to settle); open one pull request, merged by the IaC App only on security's signed approval; and in its home history/** (P5) and board/ready-to-ship/**",
+    "evidence": "cl-6.cyber to cl-6.abp, 26 Nov, with its brief at PrompTugal__Agent__Cyber board/ready-to-ship/README.md (not read by me); it does none of it until granted and #25 is merged",
+    "would_change": [
+     "R5 and R7 as in P6",
+     "R6: .github/workflows/pages.yml is a workflow file: a gate or deploy change, which section agents are not granted (only cl-6.devops and cl-6.dev write workflows)",
+     "hook: branch pattern exemption as in P6"
+    ],
+    "risk": "a section agent that can change its own deploy workflow and its own keys can change what is published and who may sign it; the barrier is security's signed approval and the App's merge, which the hook cannot see",
+    "alternative": "cl-6.devops or cl-6.dev makes the workflow change in the section repository after security's approval; the section agent writes only team/keys.json",
+    "needs": "Dinis's yes with P6; until then cyber holds"
+   },
+   {
+    "id": "P10",
+    "since": "2026-11-26",
+    "role": "cl-6.devops",
+    "proposal": "add history/** and findings/** to cl-6.devops' home writes (history/** is P5 for all roles); a way to read GitHub Actions runs and job logs read-only",
+    "evidence": "cl-6.devops to cl-6.abp, 26 Nov, its corrected run report PrompTugal__Agent__DevOps runs/cl-6.devops/2026-11-26T11-15-12Z.json (commit 0be93b2). Note: policy v1.2.0 already allows the GitHub read tools to every role (tools.mcp_allowed.github: get_, list_, search_, pull_request_read, issue_read, actions_get, actions_list), so the second ask is already met in the policy; the generated ABP text did not say so (fixed in this commit); only the session's own repository access limits what it reads",
+    "risk": "findings/** is a new path name: what it holds is not known to me",
+    "needs": "Dinis's yes for findings/** (and P5 for history/**); nothing for the read tools"
    }
   ]
  },

@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.signals@PrompTugal.dinis"
-policy: abp/policies.json v1.2.0 (sha256:87b1760db7fb4d5f)
+policy: abp/policies.json v1.2.0 (sha256:3a108f4bb7de821f)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.signals@PrompTugal.dinis
@@ -18,7 +18,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 
-- Any connector (mcp__ tools) not granted above (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
+- Any connector (mcp__ tools) not granted above or allowed to every role (github: get_, list_, search_, pull_request_read, issue_read, actions_get, actions_list; claude-code-remote: read_documentation, get_environment, register_repo_root, send_message) (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
 - Pushing anywhere but `dev` on its remote, force-push, deletion, tags, history rewrites, empty commits (R5).
 - Writing outside the paths above, or to a protected path: `.claude/**` (cl-6.abp), `abp/*` (cl-6.abp), `board/abp/**` (cl-6.abp), `HOLD.md` (cl-6.security), `board/HOLD.md` (cl-6.security), `newsroom/build/version.txt`, `newsroom/versions.json`, `design/brand/**`, `~/.claude/settings*.json`, `.git/config`, `**/.claude/settings*.json` (cl-6.abp) (R6).
 - Sending anything to a host not listed; GitHub writes (R7). Printing the environment or reading a key (R8). Committing under another name (R9).
