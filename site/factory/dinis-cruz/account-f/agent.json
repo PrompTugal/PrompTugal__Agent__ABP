@@ -1,0 +1,25 @@
+{
+ "name": "cl-6.abp@PrompTugal.dinis",
+ "owner": "dinis-cruz",
+ "account": "account-f",
+ "account_id": "cl-6",
+ "role": "The Agent Behaviour Policy agent of PrompTugal.news: one policy per cl-6 agent from one policy file, the hooks that enforce them, run reports, an hourly review that tightens, proposals to Dinis; never relaxes a policy itself",
+ "session": "https://claude.ai/code/session_016CrbJK3xXBhUMA6rucuPPd",
+ "started_by": "cl-6.conductor@PrompTugal.dinis, at Dinis's word (26 Nov 2026): yes, start cl-6.abp now",
+ "home": "PrompTugal/PrompTugal__Agent__ABP",
+ "work": "PrompTugal/PrompTugal__News__Website (board/abp/, board/runs/, .claude/ only, through newsroom/tools/release.sh; not attached yet)",
+ "key": "site/keys/cl-6.abp.json",
+ "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
+ "encryption_fingerprint": "sha256:1195defad153bb1b",
+ "model": "sonnet",
+ "state": "wave 0: policy v1.0.0 (observe; breakers R3 and R4 on) written for cl-6.abp, conductor, journalist, dev, security, correspondent; waiting on Dinis",
+ "policy": "abp/policies.json",
+ "policy_sha256_16": "3f9af3ca53da71f6",
+ "covered": ["cl-6.abp", "cl-6.conductor", "cl-6.journalist", "cl-6.dev", "cl-6.security", "cl-6.correspondent"],
+ "not_yet_covered": "the other 35 sessions of 2026-11-26-sessions.json (wave 2 onwards); none may start before its entry exists",
+ "updated": "2026-11-26T01:34Z",
+ "timeline": [
+  {"at": "2026-11-26T01:34Z", "event": "key made (P-256 signing, RSA-4096 encryption), public half at site/keys/cl-6.abp.json; policy v1.0.0 for six agents"}
+ ],
+ "waiting_on": ["Dinis: the questions in the first reply (see decisions.md)"]
+}
