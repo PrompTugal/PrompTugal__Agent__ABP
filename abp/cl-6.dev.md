@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.dev@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:9eb488da317aa402)
+policy: abp/policies.json v1.7.8 (sha256:c1bbe05767f9d28d)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.dev@PrompTugal.dinis
@@ -14,6 +14,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
+- **One-off write (2026-11-26__abp-london-registry revision 3 (commit 596932a, SovereignWebsite/Site__Agent__Decisions); Dinis Cruz, 26 Nov 2026 17:54:57Z, typed in cl-6.decisions' session (session_016CrbJMwTgwKXwaYUTEopQk), event_uuid e1018993-d7f9-4f16-85ab-eb852d599c85: "yes to cl-6.dev adding London to data/by-place/places.json"):** in `PrompTugal/PrompTugal__News__Website`, `data/by-place/places.json`: one hand-written commit adding london (id london, kind city, parent united-kingdom, path europe/london/, agent cl-6.place.london@PrompTugal.dinis, group Europe), and a non-linked united-kingdom parent only if the code needs it; nothing else in that file or in the same commit. Conditions: one commit, signed with cl-6.dev's own key, citing the record id; cl-6.security@PrompTugal.dinis reviews the exact diff before the push and post-reviews the release; no data path is granted: London's data reaches the site only through the sync, after a separate pin in place-signers.json (P17, a separate change); values from the London home are rendered through plain() and safeUrl(); London's sources (TfL included) need cl-6.rights' terms before their values show on a metered page; a code change to accept an outside parent is cl-6.dev's normal code path, reviewed by security, not a grant. Expires 2026-11-30T23:59:59Z.
 - **Also granted:** sub-agents inside its own run.
 - **Never:** changes content or disables a check to make the gate pass, reviews what it wrote without security, or edits the hooks, the policy or the version files.
 
