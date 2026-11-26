@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.6.9 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.7.0 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "d8fa103d4173a8c9",
+ "policy_sha256_16": "d395dec989bed571",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T16:43Z",
+ "updated": "2026-11-26T16:45Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -214,6 +214,10 @@
   {
    "at": "2026-11-26T16:43Z",
    "event": "social draft tightened (security review), kit round 5 (C1, settings.local.json), 99 tests"
+  },
+  {
+   "at": "2026-11-26T16:45Z",
+   "event": "network ABP design (abp/network/DESIGN.md) and a Network section in every ABP; sent to security, accountant, telemetry"
   }
  ],
  "waiting_on": [

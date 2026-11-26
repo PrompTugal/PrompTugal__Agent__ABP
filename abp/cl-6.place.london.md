@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.place.london@PrompTugal.dinis"
-policy: abp/policies.json v1.6.9 (sha256:d8fa103d4173a8c9)
+policy: abp/policies.json v1.7.0 (sha256:d395dec989bed571)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.place.london@PrompTugal.dinis
@@ -15,6 +15,11 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
 - **Never:** writes in PrompTugal__News__Website at all (no data/by-place/london.json, no .sig; the website is read by public clone, not attached), writes board/keys.json other than adding its own public key, alone in its own commit, attaches a repository (no add_repo), starts a session, creates or changes a scheduled task (wakes are cl-6.maestro's only), writes code, reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant), uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; and gains PrompTugal__Agent__Place__London__Strikes and its site paths only through a change by cl-6.abp that cl-6.security reviews (record 2026-11-26__strikes-site).
+
+## Network (default deny; phase capture)
+
+- **Allowed hosts, every agent:** `github.com`, `raw.githubusercontent.com` (GET, HEAD only). Your own hosts are not listed yet: they are measured first (every host you name is recorded), then agreed with cl-6.security and cl-6.rights, then enforced.
+- A host outside this list is a breach, in the run report and in the hourly review. The hook that records every host is not installed in most sessions yet (P8): until it is, list in your run report every host you read from, by your own account. The design is abp/network/DESIGN.md.
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 

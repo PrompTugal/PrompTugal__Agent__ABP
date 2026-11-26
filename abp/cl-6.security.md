@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.security@PrompTugal.dinis"
-policy: abp/policies.json v1.6.9 (sha256:d8fa103d4173a8c9)
+policy: abp/policies.json v1.7.0 (sha256:d395dec989bed571)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.security@PrompTugal.dinis
@@ -16,6 +16,11 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
 - **Also granted:** sub-agents inside its own run; push notifications to the owner; connector tools `github__run_secret_scanning`.
 - **Never:** fixes what it finds in another agent's paths (the finding goes to the owner of the path), lifts a hold, or quotes a secret in a finding.
+
+## Network (default deny; phase capture)
+
+- **Allowed hosts, every agent:** `github.com`, `raw.githubusercontent.com` (GET, HEAD only). **You read no other host: no web reads at all.**
+- A host outside this list is a breach, in the run report and in the hourly review. The hook that records every host is not installed in most sessions yet (P8): until it is, list in your run report every host you read from, by your own account. The design is abp/network/DESIGN.md.
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 

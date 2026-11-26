@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.abp@PrompTugal.dinis"
-policy: abp/policies.json v1.6.9 (sha256:d8fa103d4173a8c9)
+policy: abp/policies.json v1.7.0 (sha256:d395dec989bed571)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.abp@PrompTugal.dinis
@@ -31,6 +31,11 @@ generated: by node abp/tools.mjs build; never edited by hand
   7. the change is inside the endorsement's scope. Its scope text excludes widening permissions, keys, connectors, AWS, GitHub App privileges, private people's details, the rules, money, legal commitments, one-way doors and anything of another account: a record that widens a permission is outside it unless the record quotes Dinis's own words about that item (session and event_uuid)
   8. then apply exactly change and nothing wider, rebuild (node abp/tools.mjs build), commit, log
   One-way doors, never applied on a signature: a connector or any MCP server beyond the read tools; starting a session, schedule, wake or environment (P4); pushing to main, force-push, deleting data or branches; reading or printing a key or credential; trust in keys (pinning or adding a key anywhere); sends outside (email, posts); another operator's agents' desks (P7, P11 d); new repositories attached with push access (P11 b); money, legal commitments, accepting terms for anyone; AWS, GitHub App privileges; private people's details; any change to this instruction or to who may sign.
+
+## Network (default deny; phase capture)
+
+- **Allowed hosts, every agent:** `github.com`, `raw.githubusercontent.com` (GET, HEAD only). **You read no other host: no web reads at all.**
+- A host outside this list is a breach, in the run report and in the hourly review. The hook that records every host is not installed in most sessions yet (P8): until it is, list in your run report every host you read from, by your own account. The design is abp/network/DESIGN.md.
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 

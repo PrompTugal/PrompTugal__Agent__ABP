@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.infra@PrompTugal.dinis"
-policy: abp/policies.json v1.6.9 (sha256:d8fa103d4173a8c9)
+policy: abp/policies.json v1.7.0 (sha256:d395dec989bed571)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.infra@PrompTugal.dinis
@@ -15,6 +15,11 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
 - **Never:** dispatches, approves or runs an apply workflow, changes AWS or GitHub App privileges (one-way doors), reads or prints a key, a token or a credential, attaches a repository, starts a session or a scheduled task, uses a connector, writes in a repository other than its two; and, until Dinis decides P14, pushes anywhere but dev or opens a pull request.
+
+## Network (default deny; phase capture)
+
+- **Allowed hosts, every agent:** `github.com`, `raw.githubusercontent.com` (GET, HEAD only). Your own hosts are not listed yet: they are measured first (every host you name is recorded), then agreed with cl-6.security and cl-6.rights, then enforced.
+- A host outside this list is a breach, in the run report and in the hourly review. The hook that records every host is not installed in most sessions yet (P8): until it is, list in your run report every host you read from, by your own account. The design is abp/network/DESIGN.md.
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 

@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.9",
+ "version": "1.7.0",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1407,7 +1407,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:43Z",
+ "updated": "2026-11-26T16:45Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1913,5 +1913,33 @@
    }
   },
   "review": "cl-6.security@PrompTugal.dinis, 26 Nov 16:40 UTC: tight on access; agree once four changes are made: (1) no website file at all; (2) drafts/** as its explicit place; (3) no synthetic likeness, no capture of a real interface with another person's data, no downloaded and reused media, every draft labelled AI-drafted; (4) nothing from another account's lanes, no prompt or message text from any session. All four made in v1.6.9; the root remains Dinis's"
+ },
+ "network": {
+  "about": "proposal in abp/network/DESIGN.md, for cl-6.security, cl-6.accountant and cl-6.telemetry to agree: not enforced by any hook yet (hook kit v2.2 will read it). Default deny. phase 'capture' = every host is recorded, nothing new is blocked; then 'measure'; then 'enforce' per agent as its list is agreed",
+  "default": "deny",
+  "phase": "capture",
+  "since": "2026-11-26T16:45Z",
+  "common": {
+   "hosts": [
+    "github.com",
+    "raw.githubusercontent.com"
+   ],
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "note": "git through the session proxy (R5 still applies); public reads, GET only"
+  },
+  "no_web_reads": [
+   "cl-6.maestro",
+   "cl-6.conductor",
+   "cl-6.social",
+   "cl-6.abp",
+   "cl-6.accountant",
+   "cl-6.decisions",
+   "cl-6.security"
+  ],
+  "no_web_reads_note": "Dinis, 26 Nov, as cl-6.maestro relays it: that kind of access never from a maestro repository, at most from a London data agent. These roles read only the common hosts (for the public repositories they review)",
+  "roles_note": "each role's own hosts go in roles.<name>.network.hosts with the reason and the rights record, only after the measure phase; today none is listed: the data agents' lists are to be measured, not guessed"
  }
 }
