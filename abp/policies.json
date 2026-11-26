@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.4.3",
+ "version": "1.4.4",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1240,7 +1240,8 @@
       "ask": "all roles: signing settings in .git/config, apt install of openssh-client, add_repo read",
       "finding": "signing settings: already possible. The hook denies only remote., url. and branch. settings and --global/--system/core.hooksPath (shell_deny R5, R6); gpg.format, gpg.ssh.program, user.signingkey and commit.gpgsign are not denied, and I set them so myself. If something refused it, it was the session harness's classifier, not the policy. apt install of openssh-client: no rule forbids it; no grant needed. add_repo read: not granted to any role but cl-6.abp (R3 blocks it where the hook runs, because the hook cannot tell read from push access, and a push attach mints credentials)",
       "ask_left": "add_repo for reading: alternative that needs no grant: read public repositories through their raw URLs (https://raw.githubusercontent.com/...), as I do; if Dinis wants add_repo, only with access read, granted per role, and the hourly review checks every attach",
-      "add_repo_fact": "cl-6.places used add_repo with push access 35 times (by the conductor's account, not seen by me); it is a breach by its own account and for Dinis to ratify or not: one session now has push access to 36 repositories"
+      "add_repo_fact": "cl-6.places used add_repo with push access 35 times (by the conductor's account, not seen by me); it is a breach by its own account and for Dinis to ratify or not: one session now has push access to 36 repositories",
+      "add_repo_facts": "from cl-6.security's access review, 26 Nov, with the sessions' own accounts: cl-6.places 35 homes (reported as a breach by its own account); cl-6.events News__Website (at what it reports as Dinis's word in its session, nothing written); cl-6.conductor 7 repositories beyond its role (A7). Dinis ratifies, narrows or detaches each; nothing in my policy lets any of them write there"
      },
      "c": {
       "ask": "cl-6.dev: data/by-place/** and data/schemas/** in the website (the signed place sync)",
@@ -1316,11 +1317,12 @@
     "id": "P14",
     "since": "2026-11-26",
     "role": "cl-6.infra",
-    "proposal": "work/* branches and pull requests, only in PrompTugal__IaC, for its infrastructure changes; never dispatching an apply workflow",
+    "proposal": "work/* branches and pull requests, only in PrompTugal__IaC, for its infrastructure changes; never dispatching an apply workflow. Security's second point (16:02 UTC): writes limited to policy/abp.json are narrower than infra's real work; its pull requests change build/*, org/*, .github/workflows/*, test/* and docs/* on IaC, so each would show as a breach. If Dinis agrees, grant those IaC paths, only on work/* branches through pull requests that Dinis merges; its home Agent__Infrastructure keeps the common paths. Nothing granted yet",
     "evidence": "cl-6.security's access review, finding A4 (high): cl-6.infra held PrompTugal__IaC without a role; security suggests work/* and pull requests only on IaC and no dispatch of apply workflows",
     "would_change": [
      "R5: a push to work/* in PrompTugal__IaC (the hook has only the worker rule, work/<name>, and the push_branch dev)",
-     "R7: pull requests in that repository only"
+     "R7: pull requests in that repository only",
+     "R6: build/*, org/*, .github/workflows/*, test/*, docs/* in PrompTugal__IaC, on work/* only; the hook cannot tell a branch from a path, so the barrier is IaC's branch protection and Dinis's merge, and my hourly review of the commits"
     ],
     "risk": "infrastructure changes are the highest-impact writes of all: the barrier must be the IaC repository itself (branch protection, required reviews, no self-approval), not my hook",
     "needs": "Dinis's word; AWS and GitHub App privileges remain his alone"
@@ -1388,7 +1390,19 @@
    "id": "A6",
    "from": "cl-6.security's access review, 26 Nov",
    "what": "cl-6.events holds PrompTugal__News__Website, which is outside its repos (its News__Events and its home)",
-   "status": "asked cl-6.events why; until a reason is given and Dinis agrees it is a breach to remove, not a repository to add"
+   "status": "cl-6.events answered (16:00 UTC): it attached the website with push through add_repo at what it reports as Dinis's word in its own session (\"attach PrompTugal/PrompTugal__News__Website with push (or your section's repository)\"); it wrote nothing (no clone of the attached copy, a read-only clone of the public repository only). So: held, not used. Whether the attach stands is Dinis's, with P11 b"
+  },
+  {
+   "id": "A7",
+   "from": "cl-6.security's access review, 26 Nov",
+   "what": "cl-6.conductor holds 7 repositories beyond its role (the website, News__Data, and the dev, devops, designer, customers and curator homes); its role is PrompTugal__Agent__Conductor only (no working repository, no content, no code)",
+   "status": "held, not shown to be written; for the conductor to explain in its run report and for Dinis, with P11 b; the conductor was told 26 Nov"
+  },
+  {
+   "id": "A8",
+   "from": "cl-6.security's access review, 26 Nov",
+   "what": "nine sessions have no role in this policy: the SovereignWebsite and @dinis sessions (router, helm, decisions, security, strategy, accountant, maestro new and old, conductor@sgit and conductor@CBR). They are not PrompTugal cl-6 agents of this policy's brief; cl-6.decisions signs records that this policy applies, so its own reach matters most",
+   "status": "not covered by me: Dinis to say whether cl-6.abp writes roles for them (I would start with cl-6.decisions, then maestro)"
   }
  ]
 }
