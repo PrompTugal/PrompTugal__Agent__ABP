@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.4.4",
+ "version": "1.4.5",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1329,7 +1329,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:01Z",
+ "updated": "2026-11-26T16:02Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1396,7 +1396,7 @@
    "id": "A7",
    "from": "cl-6.security's access review, 26 Nov",
    "what": "cl-6.conductor holds 7 repositories beyond its role (the website, News__Data, and the dev, devops, designer, customers and curator homes); its role is PrompTugal__Agent__Conductor only (no working repository, no content, no code)",
-   "status": "held, not shown to be written; for the conductor to explain in its run report and for Dinis, with P11 b; the conductor was told 26 Nov"
+   "status": "cl-6.conductor answered (16:02 UTC) and filed a run report (PrompTugal__Agent__Conductor runs/cl-6.conductor, commit 75f9f4b): the 7 repositories were attached at its session's creation; it made 24 commits to the website from 22:51Z on 25 Nov to 01:24Z on 26 Nov, before policy v1.2.0, none since, and none to News__Data or the five homes; four breaches listed by its own account; it writes only in its home from now and has proposed to Dinis that a new conductor session attached only to its home take over. I have not read the report or the 24 commits; the attaches stay for Dinis (P11 b)"
   },
   {
    "id": "A8",
