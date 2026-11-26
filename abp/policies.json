@@ -1232,6 +1232,20 @@
      }
     },
     "needs": "Dinis's yes, in this session, per item or for all; until then each stays outside its grant, logged and counted as a breach by the agent's own account"
+   },
+   {
+    "id": "P12",
+    "since": "2026-11-26",
+    "role": "cl-6.places",
+    "proposal": "a 37th home, PrompTugal/PrompTugal__Agent__Place__London (infra creates it): add it to cl-6.places' repos, and allow its one add_repo attach (access push) for that repository only; the write paths are the same as the other homes' and are already in the grant (data/by-place/*.json and its .sig, content/articles/*.md, articles/*.md.sig, plus history/** only if P5 is granted)",
+    "evidence": "cl-6.conductor's message of 26 Nov, 15:49 UTC, quoting Dinis, about 15:50 UTC: \"yes we need that place (for London)\". A relayed word, not seen by me in this session; I have not checked that the repository exists",
+    "why_a_proposal": "a repository added to a role's repos is a widening of where it may push (the hourly review checks commits against repos), and add_repo is in no role's grant but mine; I do not widen on a relayed word",
+    "would_change": [
+     "cl-6.places.repos gains PrompTugal/PrompTugal__Agent__Place__London",
+     "one add_repo (push) for that repository, recorded as at Dinis's word if he confirms, and as a breach by its own account if not"
+    ],
+    "needs": "Dinis's one line in my session: \"cl-6.places gets the London home\"; then I make both changes in one commit and cl-6.places attaches it",
+    "note": "the attach by places before then is a breach by its own account until he confirms; I have asked it to wait"
    }
   ]
  },
