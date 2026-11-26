@@ -1544,6 +1544,16 @@
     "record": "PrompTugal__Agent__Rights, site/factory/dinis-cruz/account-f/findings.md (D5)"
    },
    "needs": "Dinis's yes in my session; a person quoting TfL's terms page (rights could not read it; see rights.gap); then Dinis makes the environment change. cl-6.abp changes nothing until then"
+   },
+   {
+    "id": "P16",
+    "since": "2026-11-26",
+    "role": "cl-6.security",
+    "proposal": "add approvals/** to cl-6.security's writes in its home (PrompTugal/PrompTugal__Agent__Security)",
+    "evidence": "cl-6.security@PrompTugal.dinis, 17:41Z (its own account, not checked by me): PrompTugal__IaC #25 policy/key-bootstrap.json, merged by Dinis, reads its signed approvals at approvals/key-bootstrap/<repo>/<pr>.json, approvals/gate/<repo>/<sha>.json and approvals/pins/<repo>.json, each with a .sig; its writes grant does not list approvals/**, so each approval is an out-of-grant write",
+    "would_change": "R6 for cl-6.security: three sub-paths of one directory in its own home, for signed approvals only",
+    "risk": "low: its own home, and the paths are the ones the merged IaC policy names; a wrong approval is a signed file that cl-6.security answers for and the App reads, so the approval format and signature must stay as #25 defines",
+    "needs": "Dinis's yes in my session (a widening of a write grant is outside S1); until then cl-6.security logs each approval as an R6 observation in its run report"
    }
   ]
  },

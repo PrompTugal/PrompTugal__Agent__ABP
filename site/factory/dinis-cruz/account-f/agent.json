@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.7 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "b1f49befa59ed0e6",
+ "policy_sha256_16": "a42fe35447a0853c",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-26T17:37Z",
+ "updated": "2026-11-26T17:40Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -274,6 +274,10 @@
   {
    "at": "2026-11-26T17:37Z",
    "event": "Dinis in my session: yes to P9 and P8: yes. P9 applied for cl-6.data only (key_branch, record rev 2 verified); P8 recorded yes, install conditions stand, pin variable awaited"
+  },
+  {
+   "at": "2026-11-26T17:40Z",
+   "event": "P16 written for Dinis: approvals/** in cl-6.security's writes (a widening, its own request); not applied; cl-6.data pushed key/cl-6.data (its report)"
   }
  ],
  "waiting_on": [

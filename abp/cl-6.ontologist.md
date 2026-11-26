@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.ontologist@PrompTugal.dinis"
-policy: abp/policies.json v1.7.8 (sha256:b1f49befa59ed0e6)
+policy: abp/policies.json v1.7.8 (sha256:a42fe35447a0853c)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.ontologist@PrompTugal.dinis
