@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T02:42Z",
+ "updated": "2026-11-26T06:12Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -80,9 +80,13 @@
   {
    "at": "2026-11-26T02:42Z",
    "event": "hook prints the R14 line to an unidentified session at start and on each prompt; the hook differs from the kit in three lines"
+  },
+  {
+   "at": "2026-11-26T06:12Z",
+   "event": "conductor asked to widen R4 and its grant (sessions); not applied, proposal P4 for Dinis"
   }
  ],
  "waiting_on": [
-  "Dinis, via cl-6.conductor (his escalation list): proposals P1 and P2; the website attached to this session for board/abp/; the hold file name"
+  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P4; the website attached to this session for board/abp/; the hold file name"
  ]
 }

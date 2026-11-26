@@ -1099,6 +1099,15 @@
     "evidence": "run report abp/runs/cl-6.abp/2026-11-26T01-34-06Z.json: commit 2a66008 wrote README.md, outside the grant (R6, observed, not blocked); it is the home repository's front page",
     "risk": "low: a text file in its own home repository",
     "needs": "Dinis's yes; until then cl-6.abp writes no README.md"
+   },
+   {
+    "id": "P4",
+    "since": "2026-11-26",
+    "role": "cl-6.conductor (and R4 for all)",
+    "proposal": "R4 to say: cl-6.conductor starts the PrompTugal sessions and their wakes at Dinis's word; cl-6.maestro starts account-level or sensitive ones; and grant cl-6.conductor the session and trigger tools (create_session, create_trigger, update_trigger, fire_trigger)",
+    "evidence": "cl-6.conductor's message of 26 Nov, relaying Dinis through cl-6.maestro (~01:30 UTC) and its own session; a relay, not Dinis's word in this session. The sessions list says the conductor proposes and cl-6.maestro starts, and the conductor's own brief to me said the same",
+    "risk": "a conductor that can start sessions can start sessions beyond a task, and R4 is a breaker now blocking exactly this; it would need its own breaker exemption and a per-wake limit",
+    "needs": "Dinis's yes in this session; until then R4 and the conductor's grant stand as in v1.2.0"
    }
   ]
  },
