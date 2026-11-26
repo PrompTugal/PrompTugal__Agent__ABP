@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.place.london@PrompTugal.dinis"
-policy: abp/policies.json v1.6.3 (sha256:37407d1f1ed3a167)
+policy: abp/policies.json v1.6.4 (sha256:ee7e077cbcff1d8a)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.place.london@PrompTugal.dinis
@@ -9,12 +9,12 @@ generated: by node abp/tools.mjs build; never edited by hand
 
 ## Mandate (the grant)
 
-- **Focus:** DRAFT, no session yet: the London lens of PrompTugal.news: its research and publish loop in data/by-place/london.json (public sources only, each item with its URL and the date read); one agent per place, so it writes only its own home and its own by-place file.
-- **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.place.london.json`, `runs/cl-6.place.london/**`, `data/by-place/london.json`, `data/by-place/london.json.sig`, `board/runs/cl-6.place.london/**`, `board/team/cl-6.place.london/**`, `board/keys.json`.
+- **Focus:** the London lens of PrompTugal.news: its research and publish loop in its own home (PrompTugal__Agent__Place__London); public sources only, each item with its URL and the date read; one agent per place. Its data reaches the website only by sync-places.mjs, after a second pinned signer for the London home (a place-signers.json change reviewed by cl-6.security, with cl-6.place.london confirming its fingerprint first). STARTED by cl-6.maestro under record 2026-11-26__place-london-start.
+- **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.place.london.json`, `runs/cl-6.place.london/**`, `board/runs/cl-6.place.london/**`, `board/team/cl-6.place.london/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
-- **Never:** writes another place's file or any code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant until Dinis gives one), attaches a repository, or writes outside its home and its by-place file; plus: uses a connector, starts a session or a scheduled task, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear.
+- **Never:** writes in PrompTugal__News__Website at all (no data/by-place/london.json, no .sig; the website is read by public clone, not attached), writes board/keys.json other than adding its own public key, alone in its own commit, attaches a repository (no add_repo), starts a session, creates or changes a scheduled task (wakes are cl-6.maestro's only), writes code, reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant), uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; and gains PrompTugal__Agent__Place__London__Strikes and its site paths only through a change by cl-6.abp that cl-6.security reviews (record 2026-11-26__strikes-site).
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 

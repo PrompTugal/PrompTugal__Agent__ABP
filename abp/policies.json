@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.3",
+ "version": "1.6.4",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1125,21 +1125,19 @@
    "model": "sonnet"
   },
   "cl-6.place.london": {
-   "focus": "DRAFT, no session yet: the London lens of PrompTugal.news: its research and publish loop in data/by-place/london.json (public sources only, each item with its URL and the date read); one agent per place, so it writes only its own home and its own by-place file",
+   "focus": "the London lens of PrompTugal.news: its research and publish loop in its own home (PrompTugal__Agent__Place__London); public sources only, each item with its URL and the date read; one agent per place. Its data reaches the website only by sync-places.mjs, after a second pinned signer for the London home (a place-signers.json change reviewed by cl-6.security, with cl-6.place.london confirming its fingerprint first). STARTED by cl-6.maestro under record 2026-11-26__place-london-start",
    "writes": [
-    "data/by-place/london.json",
-    "data/by-place/london.json.sig",
     "board/runs/cl-6.place.london/**",
     "board/team/cl-6.place.london/**",
     "board/keys.json"
    ],
    "subagents": false,
-   "never": "writes another place's file or any code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant until Dinis gives one), attaches a repository, or writes outside its home and its by-place file; plus: uses a connector, starts a session or a scheduled task, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "never": "writes in PrompTugal__News__Website at all (no data/by-place/london.json, no .sig; the website is read by public clone, not attached), writes board/keys.json other than adding its own public key, alone in its own commit, attaches a repository (no add_repo), starts a session, creates or changes a scheduled task (wakes are cl-6.maestro's only), writes code, reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant), uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; and gains PrompTugal__Agent__Place__London__Strikes and its site paths only through a change by cl-6.abp that cl-6.security reviews (record 2026-11-26__strikes-site)",
    "repos": [
-    "PrompTugal/PrompTugal__Agent__Place__London",
-    "PrompTugal/PrompTugal__News__Website"
+    "PrompTugal/PrompTugal__Agent__Place__London"
    ],
-   "model": "sonnet (not set by me: maestro's)"
+   "model": "sonnet (not set by me: maestro's)",
+   "first_prompt_must_state": "its grant (abp/cl-6.place.london.md): no add_repo, no create_session, no scheduled task; it makes its own key and publishes it alone in its first commit"
   },
   "cl-6.infra": {
    "focus": "the GitHub and AWS side of the cl-6 agents: PrompTugal__IaC (policy/abp.json is its GitHub and AWS policy) and its own home; the paths are those I know (home area and policy/abp.json): everything else in IaC is to be named by cl-6.infra in its run report and proposed",
@@ -1391,7 +1389,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:27Z",
+ "updated": "2026-11-26T16:31Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {
@@ -1460,6 +1458,32 @@
    ],
    "why": "signature, key, endorsement, commit signature and expiry verified (S1 steps 1 to 3, 5, 6); step 4 (anchor chain) still partial; the roles are grants (a widening: outside the endorsement's own scope unless Dinis's own words are checked, which I cannot do: list_events is not in my grant); the security review in the record is only 'asked after signing'. The maps grant nothing.",
    "update": "2026-11-26T16:15Z: cl-6.decisions says the record is at revision 2 (commit debe66b, re-signed) with cl-6.security@dinis's signed review (agree; block-2026-11-26-02, commit 4bbe95e in Site__Agent__Security) and its transcript check of Dinis's words (event 42ba693a). Not re-verified by me yet: I verify revision 2 at promotion. Still held for: the roles are a widening (home-area writes), and my chain check to Dinis's anchor is partial"
+  },
+  {
+   "record": "2026-11-26__place-london-start",
+   "at": "2026-11-26T16:31Z",
+   "commit_of_record": "8ecec85",
+   "applied": [
+    "roles.cl-6.place.london narrowed: no write to data/by-place/london.json or its .sig (website), repos = Place__London only, never list extended; board/keys.json stays (own key only, alone in its commit)"
+   ],
+   "by": "a narrowing: cl-6.abp's own remit, and the record names it; verified: signature, commit signature, reissued endorsement signature (decisions.b), scope (2)/(3), in date, revoked empty",
+   "not_applied": [
+    "the session start, the wakes: cl-6.maestro's (R4)"
+   ]
+  },
+  {
+   "record": "2026-11-26__strikes-site",
+   "at": "2026-11-26T16:31Z",
+   "commit_of_record": "8ecec85",
+   "applied": [],
+   "held": "London gains PrompTugal__Agent__Place__London__Strikes and its site paths only through a cl-6.abp change that cl-6.security reviews, after IaC #28 and #29 and the repository exists: a widening, with S1 step 4 partial; nothing is granted now (it writes nothing there)"
+  },
+  {
+   "record": "2026-11-26__abp-p8",
+   "at": "2026-11-26T16:31Z",
+   "commit_of_record": "8ecec85",
+   "applied": [],
+   "held": "the pull-form install of kit v2 at acc2f2a. Verified: signature, commit signature, the reissued endorsement (decisions.b's signature, scope (3) relaxations proposed by cl-6.abp, in date, revoked empty). Not applied: (1) the one exception to the .claude/** and abp/** protection for a commit signed by my key is a widening and needs S1 step 4 (Dinis's anchor line); (2) it needs a kit change (the commit and push check must let that one commit through) which cl-6.security must re-review. I can build the install pack and the change meanwhile; nothing is installed"
   }
  ],
  "findings": [
