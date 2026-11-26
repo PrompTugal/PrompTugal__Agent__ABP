@@ -1133,6 +1133,17 @@
     ],
     "risk": "a PR path for gate or key changes in a repository the section agent also writes: security's approval and the App's merge are the barrier, not the hook; the hook cannot see who approved; the hourly review must check every merged key-* PR against security's approval",
     "needs": "Dinis's yes in this session, with his merge of #25 (the conductor asks for P4, P5 and P6 in one line); until then R5 and R7 stand and the section agents hold"
+   },
+   {
+    "id": "P7",
+    "since": "2026-11-26",
+    "role": "cl-6.analyst, cl-6.reviewer, cl-6.checker (and cl-6.curator, cl-6.programme if they share a desk)",
+    "proposal": "grant each twin the real desk of its Vicky twin in the website: desks/analyst-vicky/**, desks/reviewer-vicky/**, desks/checker-vicky/** (and the others named when checked); for cl-6.reviewer also design/infographics/out/** (covers)",
+    "evidence": "cl-6.conductor's message of 26 Nov. I checked: desks/analyst-vicky/README.md and desks/reviewer-vicky/README.md exist on the website's dev (HTTP 200); I did not check the other desks, nor design/infographics/out/. My earlier mapping desks/<name>/ was an assumption and stays in v1.2.0",
+    "why_not_a_fix": "it is not a correction of a path: the new paths are another operator's agents' desks (reviewer@PrompTugal.vicky and the others), written today by Vicky's agents under the website policy (external.writes desks/**). A twin writing there writes another agent's content, which is Dinis's decision (and Vicky's), not mine",
+    "risk": "two agents on one desk: overwrites and unclear authorship of what is published; the hook cannot tell the twins apart on a shared path, so only the commit trailers (Agent:) and the hourly review can",
+    "alternative": "the twins keep their own desks (desks/<name>-dinis/) and cl-6.reviewer's covers path alone is granted",
+    "needs": "Dinis's yes; until then A5 stays stuck"
    }
   ]
  },
