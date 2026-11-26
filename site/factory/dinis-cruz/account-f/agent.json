@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T02:39Z",
+ "updated": "2026-11-26T02:40Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -72,9 +72,13 @@
   {
    "at": "2026-11-26T02:39Z",
    "event": "policy v1.2.0: R14 (each session writes its own ~/.abp/keys label as its first act of every wake); cl-6.telemetry role from the telemetry.b guidance; proposals P1 (transcripts for telemetry) and P2 (sub-agents for all) await Dinis"
+  },
+  {
+   "at": "2026-11-26T02:40Z",
+   "event": "cl-6.conductor says its model is opus and the list entry is wrong; following agent.json (a relay, not Dinis; the policy does not set models)"
   }
  ],
  "waiting_on": [
-  "Dinis, via cl-6.conductor: proposals P1 and P2 (abp/policies.json proposed_relaxations); the website attached to this session for board/abp/; the conductor's model; the hold file name"
+  "Dinis, via cl-6.conductor (his escalation list): proposals P1 and P2; the website attached to this session for board/abp/; the hold file name"
  ]
 }
