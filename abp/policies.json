@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.5",
+ "version": "1.7.6",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1316,7 +1316,7 @@
     "risk": "cl-6.abp would push to about 40 more repositories; a copy of the policy in each repository can drift from this one (needs a sync check in my hourly review); the hook is a guardrail, not a boundary",
     "needs": "Dinis's yes in my session: 'P8: yes'; and the repositories attached to cl-6.abp, or who pulls",
     "priority": "FIRST on the list for Dinis",
-    "status": "security PASS at dffb673 (policy v1.7.1), written 2026-11-26T16:49Z: cl-6.security@PrompTugal.dinis passed kit v2.1 after five rounds (hook code unchanged since d2d94bc; 100 tests then, 102 now). Record 2026-11-26__abp-p8 stays SUSPENDED (revision 3) until both securities' passes are named in revision 4 by cl-6.decisions. Still to come before any install: Dinis's yes and root (S1 step 4), cl-6.dev wiring the CI check, ABP_PIN_KEY_SHA256 set, and each install commit pre-reviewed by cl-6.security against dffb673's hashes (the policy copy to install is the version cl-6.security pre-reviews: v1.7.3 changed policy data only since dffb673, no hook code)",
+    "status": "security PASS at dffb673 (policy v1.7.1), written 2026-11-26T16:49Z: cl-6.security@PrompTugal.dinis passed kit v2.1 after five rounds (hook code unchanged since d2d94bc; 100 tests then, 102 now). Record 2026-11-26__abp-p8 stays SUSPENDED (revision 3) until both securities' passes are named in revision 4 by cl-6.decisions. Still to come before any install: Dinis's yes and root (S1 step 4), cl-6.dev wiring the CI check, ABP_PIN_KEY_SHA256 set, and each install commit pre-reviewed by cl-6.security against dffb673's hashes (the policy copy to install is the version cl-6.security pre-reviews: v1.7.3 changed policy data only since dffb673, no hook code) | 16:51 UTC cl-6.security@dinis: no pass at dffb673 (B1 fetch moves remote refs, B2 check ran in the wrong repository); fixed in kit-v2.2, 109 tests; needs a new review of the new head",
     "review": {
      "by": "cl-6.security@PrompTugal.dinis",
      "write_up": "https://github.com/PrompTugal/PrompTugal__Agent__Security/blob/dev/docs/security/reviews/2026-11-26-p8-kit-v2.md",
@@ -1474,7 +1474,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:50Z",
+ "updated": "2026-11-26T16:52Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {

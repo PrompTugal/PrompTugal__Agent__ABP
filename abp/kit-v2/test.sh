@@ -194,6 +194,16 @@ denyk "pins signed by another key do not load (F5: the full key hash)" "fail clo
 pin a wrong-namespace
 denyk "a signature in another namespace does not load (F6)" "fail closed" "$(run "$W")"
 pin a
+echo "--- v2.2 B1, B2"
+deny  "B1: git fetch . dev:refs/remotes/origin/x is refused" "$(bash_ 'git fetch . dev:refs/remotes/origin/x')"
+deny  "B1: git fetch from a local path is refused" "$(bash_ 'git fetch /tmp/other dev')"
+deny  "B1: git fetch origin into a local branch is refused" "$(bash_ 'git fetch origin dev:refs/heads/zz')"
+allow "B1: a plain git fetch origin is allowed" "$(bash_ 'git fetch origin')"
+S=$(mktemp -d); (cd $S && git init -q -b dev . && git remote add origin https://github.com/PrompTugal/testrepo && mkdir -p .claude && echo x > .claude/settings.json && git add . ) 2>/dev/null
+denyk "B2: a commit in a second clone with a protected change and no pins is refused" "protected paths" "$(bash_ "cd $S && git -c user.name=t -c user.email=t@t commit -m x")"
+denyk "B2: git -C a second clone commit is refused" "protected paths" "$(bash_ "git -C $S -c user.name=t -c user.email=t@t commit -m x")"
+denyk "B2: a commit after a cd that cannot be resolved is refused" "unknown" "$(bash_ 'cd $SOMEWHERE && git commit -m x')"
+rm -rf $S
 r=$(echo "$W" | env -i PATH=/nonexistent CLAUDE_PROJECT_DIR=$T /bin/bash -c "$(node -p 'require(process.argv[1]).hooks.PreToolUse[0].hooks[0].command' $T/.claude/settings.json)" 2>/dev/null)
 deny  "no node at all: the shell prints the deny" "$r"
 [[ -n "${ABP_TEST_DEBUG:-}" ]] && grep -h hook-error $T/log/*.jsonl 2>/dev/null | tail -3 | cut -c1-400

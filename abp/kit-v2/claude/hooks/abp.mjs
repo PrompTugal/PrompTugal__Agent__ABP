@@ -65,8 +65,10 @@ function segs(c) {
     cur += ch }
   return [...out, cur].map(s => s.trim().replace(/^(\w+=\S*\s+|sudo\s+|env\s+(?=\w))+/, '')).filter(Boolean)
 }
-function checkProtected(who, P, mode, ref, dst) {   // v2.1: a protected path may change only in a commit whose abp/pins.json is signed by cl-6.abp, names this repository, has a higher sequence than the HEAD and the remote branch, and covers every protected file of the tree
-  const gb = (a, o = {}) => { try { return execFileSync('git', a, { cwd: ROOT, stdio: 'pipe', timeout: 5000, ...o }) } catch { return null } }, gl = a => (gb(a, { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
+function checkProtected(who, P, mode, ref, dst, dir) {   // v2.1: a protected path may change only in a commit whose abp/pins.json is signed by cl-6.abp, names this repository, has a higher sequence than the HEAD and the remote branch, and covers every protected file of the tree
+  const top = !dir ? null : (() => { try { return execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: dir, encoding: 'utf8', stdio: 'pipe', timeout: 3000 }).trim() } catch { return null } })()   // v2.2 (B2): the repository the command acts on, not ROOT
+  if (!top) return deny('R6', `git ${mode}: the directory the command runs in is unknown or not a repository, so the protected-path check cannot run (cl-6.security B2)`, 'tamper')
+  const gb = (a, o = {}) => { try { return execFileSync('git', a, { cwd: top, stdio: 'pipe', timeout: 5000, ...o }) } catch { return null } }, gl = a => (gb(a, { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
   const isP = x => guarded(who, path.resolve(ROOT, x), P)
   let files, blob, treeFiles, base = 0
   const seqOf = buf => { try { return JSON.parse(buf).seq || 0 } catch { return 0 } }
@@ -91,6 +93,7 @@ function checkProtected(who, P, mode, ref, dst) {   // v2.1: a protected path ma
   if (unc.length) return deny('R6', `git ${mode}: the change touches protected paths (${hits[0][0]}): ${hits[0][1].reason}; they change only in a commit whose abp/pins.json is signed by cl-6.abp for this repository, with a higher sequence, covering every protected file (${why || 'not covered: ' + unc.slice(0, 4).join(', ')})`, 'tamper')
   return null
 }
+const gitDir = (here, args, seg) => { const i = args.indexOf('-C'); return i >= 0 ? path.resolve(here || ROOT, tilde(args[i + 1] || '')) : here }   // v2.2 (B2): null when the cwd could not be resolved
 function checkBash(who, cmd, cwd, P) {
   const g = grantOf(who, P), G = P.git || {}, suf = P.identity?.label_suffix || ''
   let here = cwd ? real(cwd) : ROOT
@@ -112,10 +115,12 @@ function checkBash(who, cmd, cwd, P) {
       return deny('R6', `${verb}: names a protected place (.claude, HOLD.md, .git/config, ~/.abp), and it is not a read`, 'tamper')   // v2 (G2, G3): tar, unzip, patch, git checkout and the rest, whatever the verb
     if (verb === 'git' && /^(commit-tree|mktree|read-tree|update-index|write-tree|fast-import|replace)$/.test(sub || '') || (verb === 'git' && sub === 'hash-object' && args.some(x => /^-[a-z]*w/.test(x))))
       return deny('R6', `git ${sub}: plumbing that builds a commit or a tree outside git commit (cl-6.security V3, belt and braces)`, 'tamper')
-    if (verb === 'git' && sub === 'commit') { const d = checkProtected(who, P, 'commit', 'HEAD', null); if (d) return d }
+    if (verb === 'git' && sub === 'commit') { const d = checkProtected(who, P, 'commit', 'HEAD', null, gitDir(here, args, seg)); if (d) return d }
     if (verb === 'git' && sub === 'push') {   // v2.1 (V3): the local side of every refspec, or the current branch when none is given
-      const nr = rest.filter(x => !/^(-|\d*[<>&])/.test(x)).slice(1), cur = (() => { try { return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 3000 }).trim() } catch { return 'HEAD' } })()
-      for (const r of (nr.length ? nr : [cur])) { const m = /^\+?([^:]*):?(.*)$/.exec(r), src = m[1] || cur, dst = (m[2] || src).replace(/^refs\/heads\//, ''); const d = checkProtected(who, P, 'push', src, dst); if (d) return d } }
+      const nr = rest.filter(x => !/^(-|\d*[<>&])/.test(x)).slice(1), cur = (() => { try { return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { cwd: gitDir(here, args, seg) || ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 3000 }).trim() } catch { return 'HEAD' } })()
+      for (const r of (nr.length ? nr : [cur])) { const m = /^\+?([^:]*):?(.*)$/.exec(r), src = m[1] || cur, dst = (m[2] || src).replace(/^refs\/heads\//, ''); const d = checkProtected(who, P, 'push', src, dst, gitDir(here, args, seg)); if (d) return d } }
+    if (verb === 'git' && sub === 'fetch' && (rest.some(x => /^\+?[^-][^\s]*:\S*refs\/(remotes|heads|tags)\//.test(x) || /^\+?[^-:]*:[^-\s]+$/.test(x)) || rest.filter(x => !x.startsWith('-'))[0] === '.' || /^(\.\.?\/|\/|file:|~)/.test(rest.filter(x => !x.startsWith('-'))[0] || '')))
+      return deny('R6', 'git fetch into a local ref, or from a local path: it can move the remote-tracking refs that the push check relies on (cl-6.security B1)', 'tamper')
     if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
       const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
     if (!who.role && /^(push|commit)$/.test(sub)) return anon()
