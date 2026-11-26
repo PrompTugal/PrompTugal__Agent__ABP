@@ -1114,7 +1114,7 @@
     "since": "2026-11-26",
     "role": "all cl-6 roles",
     "proposal": "add history/** to common.writes, so each agent writes the history of what it needs in its own home repository",
-    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent; also cl-6.devops (history/ and findings/) and cl-6.cyber (history/**, board/ready-to-ship/**), by their own run reports of 26 Nov; also asked via the conductor by cl-6.weather, cl-6.bulletins, cl-6.customers and cl-6.designer (their ABP readings)",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent; also cl-6.devops (history/ and findings/) and cl-6.cyber (history/**, board/ready-to-ship/**), by their own run reports of 26 Nov; also asked via the conductor by cl-6.weather, cl-6.bulletins, cl-6.customers and cl-6.designer (their ABP readings); also cl-6.synthetic (via the conductor)",
     "risk": "low if only in the agent's own home repository: a path glob cannot tell a home from the website, so history/** would also open that path in the website; the hourly review would check commits against each role's repos",
     "alternative": "grant it per role, as the history of its own repository, after its first run report shows the need",
     "needs": "Dinis's yes; until then no cl-6 role writes history/**"
@@ -1193,7 +1193,8 @@
      "b": {
       "ask": "all roles: signing settings in .git/config, apt install of openssh-client, add_repo read",
       "finding": "signing settings: already possible. The hook denies only remote., url. and branch. settings and --global/--system/core.hooksPath (shell_deny R5, R6); gpg.format, gpg.ssh.program, user.signingkey and commit.gpgsign are not denied, and I set them so myself. If something refused it, it was the session harness's classifier, not the policy. apt install of openssh-client: no rule forbids it; no grant needed. add_repo read: not granted to any role but cl-6.abp (R3 blocks it where the hook runs, because the hook cannot tell read from push access, and a push attach mints credentials)",
-      "ask_left": "add_repo for reading: alternative that needs no grant: read public repositories through their raw URLs (https://raw.githubusercontent.com/...), as I do; if Dinis wants add_repo, only with access read, granted per role, and the hourly review checks every attach"
+      "ask_left": "add_repo for reading: alternative that needs no grant: read public repositories through their raw URLs (https://raw.githubusercontent.com/...), as I do; if Dinis wants add_repo, only with access read, granted per role, and the hourly review checks every attach",
+      "add_repo_fact": "cl-6.places used add_repo with push access 35 times (by the conductor's account, not seen by me); it is a breach by its own account and for Dinis to ratify or not: one session now has push access to 36 repositories"
      },
      "c": {
       "ask": "cl-6.dev: data/by-place/** and data/schemas/** in the website (the signed place sync)",
@@ -1211,7 +1212,7 @@
      },
      "f": {
       "ask": "cl-6.places: history/** in all 36 Place homes, and data/by-place/now/*.json in the 18 Algarve homes",
-      "finding": "v1.2.0 grants cl-6.places data/by-place/*.json and its .sig only; the path data/by-place/now/*.json is one level deeper and not covered (a * does not cross a /). Only the Algarve home is attached to the places session; the other 35 homes are not reachable by it until each is attached, which is also a repositories question, not only a path one",
+      "finding": "update 2026-11-26: the conductor says cl-6.places attached the other 35 Place homes itself with add_repo (access push), one by one, at the start brief's word, and pushed to dev through the session's proxy; its session now holds 36 repositories. So the attach question is already settled in fact, outside the policy: add_repo is granted to cl-6.abp only, and the hook that would block it (R3) is not in that session. v1.2.0 grants cl-6.places data/by-place/*.json and its .sig only; the path data/by-place/now/*.json is one level deeper and not covered (a * does not cross a /). Only the Algarve home is attached to the places session; the other 35 homes are not reachable by it until each is attached, which is also a repositories question, not only a path one",
       "risk": "low per path; 36 homes written by one session is the breadth that matters: the hourly review checks each commit against the place it names",
       "how": "grant data/by-place/now/*.json by name, not data/by-place/**; history/** per P5"
      },

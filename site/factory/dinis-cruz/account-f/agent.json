@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T11:25Z",
+ "updated": "2026-11-26T11:28Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -124,6 +124,10 @@
   {
    "at": "2026-11-26T11:25Z",
    "event": "P11 items f and g for cl-6.places (path gaps; sub-agent conflict)"
+  },
+  {
+   "at": "2026-11-26T11:28Z",
+   "event": "places attached 35 repositories with add_repo (push) at the start brief word: recorded in P11 for Dinis; synthetic added to P5"
   }
  ],
  "waiting_on": [
