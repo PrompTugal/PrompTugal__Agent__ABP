@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
  "encryption_fingerprint": "sha256:1195defad153bb1b",
  "model": "sonnet",
- "state": "policy v1.3.0 (observe; breakers R3 and R4 on) covers all 43 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
+ "state": "policy v1.4.0 (observe; breakers R3 and R4 on) covers all 43 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "89bdf218c7fcbf08",
+ "policy_sha256_16": "b428112961a17622",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -60,7 +60,7 @@
   "cl-6.analyst",
   "cl-6.place.london"
  ],
- "updated": "2026-11-26T15:53Z",
+ "updated": "2026-11-26T15:55Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -141,9 +141,14 @@
   {
    "at": "2026-11-26T15:53Z",
    "event": "v1.3.0: P12 withdrawn; role cl-6.place.london drafted for the London agent; places' never list excludes London"
+  },
+  {
+   "at": "2026-11-26T15:55Z",
+   "event": "Dinis's own line adopted: S1 (apply what cl-6.decisions signs, except one-way doors) in core policy v1.4.0, R15 for all; endorsement scope excludes widenings: narrower wins; incident write-up for the maestro"
   }
  ],
  "waiting_on": [
-  "Dinis, via cl-6.conductor (his escalation list): proposals P1 to P11; the website attached to this session for board/abp/; the hold file name"
+  "Dinis: the endorsement of cl-6.decisions excludes widening permissions, so most of P1 to P11 come back as for-dinis: widen its scope, or say yes to named items here; the website attached to my session; IaC #25",
+  "cl-6.decisions: the signed decisions (none yet)"
  ]
 }

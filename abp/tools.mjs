@@ -40,7 +40,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Pushes to:** \`${P.git?.push_branch || 'dev'}\` on \`${P.git?.remote || 'origin'}\`${P.git?.remote_url ? ` (\`${P.git.remote_url}\`)` : ''} only${g.push_remotes.length ? ', also to ' + code(g.push_remotes) : ''}; a dotted worker of this role pushes \`work/<name>\` and its work is reviewed.
 ${also.length ? `- **Also granted:** ${also.join('; ')}.\n` : ''}- **Never:** ${r.never}.
 
-## Outside the mandate (logged; blocked when the rule's breaker is on)
+${(() => { const st = (r.standing || []).map(id => (P.standing_instructions || []).find(s => s.id === id)).filter(Boolean).map(s => `- **${s.id}** (${s.at}; ${s.from}): "${s.words}"\n  ${s.rule}\n  Verify, in this order, before applying anything:\n${s.verify.map((v, i) => `  ${i + 1}. ${v}`).join('\n')}\n  One-way doors, never applied on a signature: ${s.one_way_doors.join('; ')}.`).join('\n'); return st ? `## Standing instructions from the owner (re-anchored at every start and compaction)\n\n${st}\n\n` : '' })()}## Outside the mandate (logged; blocked when the rule's breaker is on)
 
 - Any connector (mcp__ tools) not granted above or allowed to every role (${Object.entries(P.tools.mcp_allowed || {}).map(([k, v]) => k + ': ' + v.join(', ')).join('; ')}) (R3); new sessions, schedules, wake-ups, environments, workflows (R4).
 - Pushing anywhere but \`${P.git?.push_branch || 'dev'}\` on its remote, force-push, deletion, tags, history rewrites, empty commits (R5).
