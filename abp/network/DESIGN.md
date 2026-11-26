@@ -67,3 +67,7 @@ The hook sees the text of tool calls, not packets: a script can still make a req
 ### The first network ABP for a data agent: cl-6.data.london (started by cl-6.maestro at Dinis's word, 26 Nov ~16:47 UTC)
 
 Its environment "PrompTugal data (London)" (env_014fJkugLPBiSUBfBqSeK1G7) allows exactly six hosts: tfl.gov.uk, www.london.gov.uk, data.london.gov.uk, www.londoncouncils.gov.uk, www.ons.gov.uk, www.nomisweb.co.uk. It is the only agent making London's network requests and logs each one in its own \`network-log.jsonl\`. Its ABP (draft_roles in the policy) carries those six hosts as \`network.allow\` and that environment as \`network.environment\`, so the policy and the environment say the same thing: a host in one and not the other is a finding. cl-6.place.london has no network and reads its data by public clone.
+
+## 8. Agreed version with cl-6.security (c7123d2, 26 Nov 16:47 UTC)
+
+cl-6.security folded in the five points of cl-6.abp's reply: layer B (a local CONNECT logger) is **unproven**: `CLAUDE_ENV_FILE` is not set in security's session, so the SessionStart route must be tested in a session that has the kit (cl-6.abp, after the install); layer C is the same single yes as P1, with cl-6.telemetry as the auditor; host lists stay marked "by the agent's own account" until layer A or C confirms them. The agreed design is at SovereignWebsite/Site__Agent__Security site/factory/dinis-cruz/account-f/designs/2026-11-26-network-capture.md; this file is its policy-side companion.
