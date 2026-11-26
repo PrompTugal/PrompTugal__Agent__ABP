@@ -1,0 +1,22 @@
+{
+ "agent": "cl-6.abp@PrompTugal.dinis",
+ "name": "cl-6.abp",
+ "role": "The Agent Behaviour Policy agent of PrompTugal.news, Dinis Cruz account F",
+ "session": "https://claude.ai/code/session_016CrbJK3xXBhUMA6rucuPPd",
+ "encryption_fingerprint": "sha256:1195defad153bb1b",
+ "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
+ "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOgTkcrc0FGohZxjK2abWYlf6zrlNvxCGjxYF8S6amhK3sDCjFbDKUN2h3VGDUZOa1OWaWwg+UsVF5hg4l0U3WI=",
+ "bundle": {
+  "v": 1,
+  "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtfSITmpT9XKAjmpXVSr1\nA7J2L1l/NV655DMgNOeN5sm2GTE1foAIAYexbc2i2CcTtU+6fQsVW7TMigXe4I8H\n+PAfo1UL5lm1sF4TfxRtTPhO/AdLabOblWg0tTeery7751p0/iGAOCsh8qxnwG0W\nIRtKbfPW1IQUO1To6z1qGANqdIu7en7jBvOOvyxzdee5o4H13nfF5MPOl5nd5ekY\nCJOfmS7KFFsQkHP7FoFdksUG2qRFjZYLdmZ6mE8yGsQ72kq1L6sdSIPP52t3qNvM\nsJrMBcms08oemcZeexG9/1MQIKs05HK7MGqXsKl8hOC6Ne4N7/O7IvgS8/9A4cEm\nK/0mW6eq+wFLanYCmVSUemwFZNtD2ocZJno46ZI+Wv85lgZZ2GVD6VWZ/gqHwFO0\ndx6GbktFkxMjSXk8YBnJS8qvdv0jIshxMDNtLSSg2DbZDDO1OpvpFoiXpEcdZp9N\nHgsIpB9fi1fgyjAMrJf7I9/bL3iP4dhSp2hv0Y4Spjl66FVr7xAyM71laB/CROAD\nTR3M01/4YNv0M/wxOIZKc0Zz1ZC7uGWrEIkJXi2YU8OQgilqmPBEmxpvUznsydUv\nfmLxsvCDDWwKY7exnj71PbDBb0kkMQ3Di19SC1c5XZ7rBMj21DzaDGWAeHhz0EDe\nRiFVieu5Pl2v2neyVdtzD+kCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+  "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6BORytzQUaiFnGMrZptZiV/rOuU2\n/EIaPFgXxLpqaErewMKMVsMpQ3aHdUYNRk5rU5ZpbCD5SxUXmGDiXRTdYg==\n-----END PUBLIC KEY-----\n",
+  "label": "cl-6.abp@PrompTugal.dinis",
+  "fingerprint": "sha256:1195defad153bb1b",
+  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67"
+ },
+ "first_published": "PrompTugal/PrompTugal__Agent__ABP site/keys/cl-6.abp.json (2026-11-26)",
+ "status": "superseded",
+ "note": "A session key: it ends with this session. The private halves never leave the session.",
+ "superseded_at": "2026-11-26T16:55Z",
+ "superseded_by": "site/keys/cl-6.abp.json (signing sha256:d893179db8db24de) by session https://claude.ai/code/session_016CrbJLnbr219cU3eVRGxBW"
+}

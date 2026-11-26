@@ -2,19 +2,25 @@
  "agent": "cl-6.abp@PrompTugal.dinis",
  "name": "cl-6.abp",
  "role": "The Agent Behaviour Policy agent of PrompTugal.news, Dinis Cruz account F",
- "session": "https://claude.ai/code/session_016CrbJK3xXBhUMA6rucuPPd",
- "encryption_fingerprint": "sha256:1195defad153bb1b",
- "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
- "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOgTkcrc0FGohZxjK2abWYlf6zrlNvxCGjxYF8S6amhK3sDCjFbDKUN2h3VGDUZOa1OWaWwg+UsVF5hg4l0U3WI=",
+ "session": "https://claude.ai/code/session_016CrbJLnbr219cU3eVRGxBW",
+ "encryption_fingerprint": "sha256:19d54bb89792abb2",
+ "signing_fingerprint": "sha256:d893179db8db24de",
+ "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMqOmODX9Txda7cnsfkdONL43rJgH0WswEOUx1nU53UoNkB2OOXfOAKCTcynUiJ5g/v3UlbgxvtvWt78iCCAD58=",
  "bundle": {
   "v": 1,
-  "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtfSITmpT9XKAjmpXVSr1\nA7J2L1l/NV655DMgNOeN5sm2GTE1foAIAYexbc2i2CcTtU+6fQsVW7TMigXe4I8H\n+PAfo1UL5lm1sF4TfxRtTPhO/AdLabOblWg0tTeery7751p0/iGAOCsh8qxnwG0W\nIRtKbfPW1IQUO1To6z1qGANqdIu7en7jBvOOvyxzdee5o4H13nfF5MPOl5nd5ekY\nCJOfmS7KFFsQkHP7FoFdksUG2qRFjZYLdmZ6mE8yGsQ72kq1L6sdSIPP52t3qNvM\nsJrMBcms08oemcZeexG9/1MQIKs05HK7MGqXsKl8hOC6Ne4N7/O7IvgS8/9A4cEm\nK/0mW6eq+wFLanYCmVSUemwFZNtD2ocZJno46ZI+Wv85lgZZ2GVD6VWZ/gqHwFO0\ndx6GbktFkxMjSXk8YBnJS8qvdv0jIshxMDNtLSSg2DbZDDO1OpvpFoiXpEcdZp9N\nHgsIpB9fi1fgyjAMrJf7I9/bL3iP4dhSp2hv0Y4Spjl66FVr7xAyM71laB/CROAD\nTR3M01/4YNv0M/wxOIZKc0Zz1ZC7uGWrEIkJXi2YU8OQgilqmPBEmxpvUznsydUv\nfmLxsvCDDWwKY7exnj71PbDBb0kkMQ3Di19SC1c5XZ7rBMj21DzaDGWAeHhz0EDe\nRiFVieu5Pl2v2neyVdtzD+kCAwEAAQ==\n-----END PUBLIC KEY-----\n",
-  "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6BORytzQUaiFnGMrZptZiV/rOuU2\n/EIaPFgXxLpqaErewMKMVsMpQ3aHdUYNRk5rU5ZpbCD5SxUXmGDiXRTdYg==\n-----END PUBLIC KEY-----\n",
+  "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqSZH/81hd+hjgSJD5ht5\nfJc7empLkgViUMgoURuftOT76sn4hfcbQGqOaUZKGSucpsqFxL49B0/18BWJB65o\nbVs0hHrkSHYKg+nvJtcKMGWDW5HkpZ4T5nNWpRELSoWZz7cgQc7J0nwxYU64aRb7\n4YjwFXmRv/me4Pi65SpavF9gJQ5x6IsvQuXKG79rhsOu89vX1IQ2SwFngR+7r72y\nLvsDdtHNhpCGwwVjykRdPTS0kDsh4rJcBloqEKHHzppFWdQOVNCFAWbHhorI5oie\nL+B9cyySccKd1k/lS7tWg2z/q6p5geNyNScI3WIQAD8/Ws3C1B5ghSDnftoVt3Mc\noaGLeNw2Pf986Ivr7CWmzCSOe8tBtv5+GDwiUxprQjWnpXtTgRmngMJZNCw4sD3W\n2DDPTBvEf7SJf5i7KmfY58Nl3T/juNsA+BGAQ8VRIO6qT05VEaDGxRUpidMOjgLn\nAWqXTwgRShmuKGR7mcs0wLIe6gijWoZ9nEP74ByARJaEaacoBw7nA34lYmI+vdWC\n6MOr+zPchAC1JtRtChqrbCZi4r23atNXGIF+CR94g8LyLMjU3YSM7RicXdtFux/U\ndexiVk9Jt5az1bP3xblkyENJd5+4QYDiQ6g+wKNDhbb7d1LemALrfuU1uuWzKQ7h\nZ1bM9g+Wk6mG7at4D2qo1c8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+  "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyo6Y4Nf1PF1rtyex+R040vjesmAf\nRazAQ5THWdTndSg2QHY45d84AoJNzKdSInmD+/dSVuDG+29a3vyIIIAPnw==\n-----END PUBLIC KEY-----\n",
   "label": "cl-6.abp@PrompTugal.dinis",
-  "fingerprint": "sha256:1195defad153bb1b",
-  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67"
+  "fingerprint": "sha256:19d54bb89792abb2",
+  "signing_fingerprint": "sha256:d893179db8db24de"
  },
- "first_published": "PrompTugal/PrompTugal__Agent__ABP site/keys/cl-6.abp.json (2026-11-26)",
+ "first_published": "PrompTugal/PrompTugal__Agent__ABP site/keys/cl-6.abp.json (2026-11-26T16:55Z, replaces the key of session_016CrbJK3xXBhUMA6rucuPPd)",
  "status": "active",
- "note": "A session key: it ends with this session. The private halves never leave the session."
+ "supersedes": {
+  "signing_fingerprint": "sha256:eb5b09f0fa1e6e67",
+  "encryption_fingerprint": "sha256:1195defad153bb1b",
+  "session": "https://claude.ai/code/session_016CrbJK3xXBhUMA6rucuPPd",
+  "kept_at": "site/keys/superseded/cl-6.abp.session_016CrbJK3xXBhUMA6rucuPPd.json and in git history"
+ },
+ "note": "A session key: it ends with this session. The private halves never leave the session. Pins of this key (abp/policies.json, abp/kit-v2) still name the superseded fingerprint until Dinis sets the pin."
 }
