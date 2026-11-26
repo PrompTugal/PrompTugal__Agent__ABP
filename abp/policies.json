@@ -1114,7 +1114,7 @@
     "since": "2026-11-26",
     "role": "all cl-6 roles",
     "proposal": "add history/** to common.writes, so each agent writes the history of what it needs in its own home repository",
-    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt",
+    "evidence": "cl-6.conductor's message of 26 Nov: cl-6.checker asked for it and cl-6.security flagged the same, citing Dinis's words \"every agent and every site has the entire history of what it needs\" (relayed, not seen here); no run report yet shows a write attempt; update 2026-11-26: cl-6.startups' hand-written run report (PrompTugal__Agent__Startups runs/cl-6.startups/2026-11-26T07-14-00Z.json) lists a write of history/** in its home (22 files, commit d885c4a) as a breach by its own account, so the need is real for at least one agent",
     "risk": "low if only in the agent's own home repository: a path glob cannot tell a home from the website, so history/** would also open that path in the website; the hourly review would check commits against each role's repos",
     "alternative": "grant it per role, as the history of its own repository, after its first run report shows the need",
     "needs": "Dinis's yes; until then no cl-6 role writes history/**"

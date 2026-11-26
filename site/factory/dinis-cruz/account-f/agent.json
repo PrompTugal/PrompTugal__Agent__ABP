@@ -59,7 +59,7 @@
   "cl-6.programme",
   "cl-6.analyst"
  ],
- "updated": "2026-11-26T07:17Z",
+ "updated": "2026-11-26T07:18Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -100,6 +100,10 @@
   {
    "at": "2026-11-26T07:17Z",
    "event": "hand-written run report template for sessions without the hooks; proposal P8 (install the kit in every home and News repository)"
+  },
+  {
+   "at": "2026-11-26T07:18Z",
+   "event": "first hand-written run report (cl-6.startups) read: valid, five breaches by its own account; evidence added to P5"
   }
  ],
  "waiting_on": [
