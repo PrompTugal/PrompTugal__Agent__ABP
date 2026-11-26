@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.2.0",
+ "version": "1.3.0",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -698,7 +698,7 @@
     "board/keys.json"
    ],
    "subagents": false,
-   "never": "writes another place's file, writes code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "never": "writes another place's file, writes code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; writes anything for London (data/by-place/london.json or its home): London has its own agent (Dinis, relayed 26 Nov about 16:05 UTC). The hook cannot exclude one file from data/by-place/*.json: the hourly review checks it",
    "repos": [
     "PrompTugal/PrompTugal__Agent__Place__Algarve",
     "PrompTugal/PrompTugal__News__Website"
@@ -1065,6 +1065,23 @@
     "PrompTugal/PrompTugal__News__Website"
    ],
    "model": "sonnet"
+  },
+  "cl-6.place.london": {
+   "focus": "DRAFT, no session yet: the London lens of PrompTugal.news: its research and publish loop in data/by-place/london.json (public sources only, each item with its URL and the date read); one agent per place, so it writes only its own home and its own by-place file",
+   "writes": [
+    "data/by-place/london.json",
+    "data/by-place/london.json.sig",
+    "board/runs/cl-6.place.london/**",
+    "board/team/cl-6.place.london/**",
+    "board/keys.json"
+   ],
+   "subagents": false,
+   "never": "writes another place's file or any code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, publishes an article (no content grant until Dinis gives one), attaches a repository, or writes outside its home and its by-place file; plus: uses a connector, starts a session or a scheduled task, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Place__London",
+    "PrompTugal/PrompTugal__News__Website"
+   ],
+   "model": "sonnet (not set by me: maestro's)"
   }
  },
  "workers": {
@@ -1245,7 +1262,8 @@
      "one add_repo (push) for that repository, recorded as at Dinis's word if he confirms, and as a breach by its own account if not"
     ],
     "needs": "Dinis's one line in my session: \"cl-6.places gets the London home\"; then I make both changes in one commit and cl-6.places attaches it",
-    "note": "the attach by places before then is a breach by its own account until he confirms; I have asked it to wait"
+    "note": "the attach by places before then is a breach by its own account until he confirms; I have asked it to wait",
+    "status": "withdrawn 2026-11-26 at the conductor's relay of Dinis (about 16:05 UTC): cl-6.places must not edit London; one agent per place. Nothing was applied."
    },
    {
     "id": "P13",
@@ -1265,7 +1283,7 @@
    }
   ]
  },
- "updated": "2026-11-26T02:39Z",
+ "updated": "2026-11-26T15:53Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {

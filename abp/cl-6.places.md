@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.places@PrompTugal.dinis"
-policy: abp/policies.json v1.2.0 (sha256:8f10a177c28cab5f)
+policy: abp/policies.json v1.3.0 (sha256:89bdf218c7fcbf08)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.places@PrompTugal.dinis
@@ -14,7 +14,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Writes (outside):** `/tmp/**`, `~/.abp/**`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
-- **Never:** writes another place's file, writes code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear.
+- **Never:** writes another place's file, writes code (it asks cl-6.dev), reads a source behind a login, a bot challenge or a paywall, or writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear; writes anything for London (data/by-place/london.json or its home): London has its own agent (Dinis, relayed 26 Nov about 16:05 UTC). The hook cannot exclude one file from data/by-place/*.json: the hourly review checks it.
 
 ## Outside the mandate (logged; blocked when the rule's breaker is on)
 
