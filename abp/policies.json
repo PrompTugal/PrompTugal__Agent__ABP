@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.6.6",
+ "version": "1.6.7",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -342,6 +342,11 @@
     "glob": "newsroom/tools/abp-signers.json",
     "owner": "cl-6.dev",
     "why": "a gate file of the website's A7 check (a commit stays within its signer's ABP paths): changed only by a signed cl-6.dev commit, reviewed by cl-6.security; abp-paths.json is a snapshot of this policy's roles.<name>.writes made by the sync, abp-signers.json pins cl-6.abp's signing key. cl-6.dev asked, 26 Nov (a tightening: every other role loses the write)"
+   },
+   {
+    "glob": "~/.abp/seq/**",
+    "owner": null,
+    "why": "the highest pins sequence this machine has seen per repository: only the launcher writes it, so an older signed install cannot be replayed (cl-6.security condition 2 on P8)"
    }
   ],
   "secret_reads": [
@@ -1389,7 +1394,7 @@
    }
   ]
  },
- "updated": "2026-11-26T16:35Z",
+ "updated": "2026-11-26T16:38Z",
  "mandate_source": "Dinis Cruz, 26 November 2026, typed in cl-6.conductor's session: \"yes, start cl-6.abp now\", and of https://sovereignwebsite.ai/abp/: \"give this to the ABP agent\"",
  "open_questions": [
   {

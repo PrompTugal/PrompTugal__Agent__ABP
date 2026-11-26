@@ -7,8 +7,8 @@ Written by cl-6.abp@PrompTugal.dinis, 2026-11-26T16:13Z, on cl-6.security's four
 | `claude/hooks/abp.mjs` | the kit's hook, 11 lines changed: no environment override of policy, log, keys or role outside tests (`ABP_TEST=1`); a breaker per kind of denial |
 | `claude/hooks/launch.mjs` | new: the launcher the settings call. It verifies the signed pins, then runs the hook |
 | `claude/settings.json` | the wiring, fail closed in the shell itself |
-| `pins.mjs` | hashes the four pinned files into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
-| `test.sh` | 74 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
+| `pins.mjs` | hashes the pinned files, the repository, the policy version and a rising sequence number into `abp/pins.json`; it names no key. cl-6.abp then signs by hand: `ssh-keygen -Y sign -f <its signing key> -n abp-pins abp/pins.json` (the one command that may name the key) |
+| `test.sh` | 85 tests in a throw-away install and HOME, with throw-away signing keys (it names no real key); run: `bash abp/kit-v2/test.sh` |
 | `DIFF-vs-kit-v1.patch` | the diff against the kit of https://sovereignwebsite.ai/abp/kit/ (hook and settings) |
 
 ## The four requirements
@@ -83,3 +83,17 @@ Built on the agreement of cl-6.decisions (and pending cl-6.security's review): a
 - Tests: six new ones (a signed install passes at commit and at push; old pins, pins signed by another key, an unlisted protected file and an unsigned push are refused; two of these judge the commit check itself, with a working tree that still matches the old pins). 74 in all.
 
 What this does not change: nothing is installed; the exception it implements is a widening of the protection, so it applies only after Dinis's root (S1 step 4) and cl-6.security's review of this revision.
+
+### Kit v2.1 and cl-6.security's seven conditions on record abp-p8 (revision 2, opinion eb92be5) (2026-11-26T16:38Z)
+
+| # | Condition | In the kit |
+|---|---|---|
+| 1 | the key is pinned outside the repository being checked | \`pinlib.keyHash()\`: a key in the environment variable \`ABP_PIN_KEY_SHA256\` (set by IaC for sessions, by an org variable for CI) wins over the constant in the repository; \`ci-check.mjs\` refuses to run without it. The constant is only the fallback. **Needs cl-6.infra to set the variable in the environment.** |
+| 2 | pins name the repository and version, with a rising sequence | \`pins.json\` v2 carries \`repository\`, \`version\`, \`seq\`. The launcher refuses pins for another repository and a sequence below the highest this machine has seen (\`~/.abp/seq/<repo>\`, protected); the commit check requires a higher sequence than HEAD's; CI takes \`--floor\`. A fresh container has seen none: CI's floor is the server side of this |
+| 3 | the pins cover every file under .claude/** and abp/** | the commit and push checks require every protected file of the tree (not only the changed ones) to be listed with a matching hash; the launcher also refuses a file under \`.claude/hooks/\` or a \`.claude/settings*.json\` that the pins do not list (a \`settings.local.json\` written by the harness would be refused: list it in the pins or do not have one) |
+| 4 | a CI required status as well as the hook | \`ci-check.mjs\`, offline, Node 18+, run on the checkout with the key from outside; exit 1 with the reason. cl-6.dev wires it (it needs this file and \`pinlib.mjs\` from a source other than the repository being checked) and Dinis merges |
+| 5 | install by pull, no push attach | as in the pull form above |
+| 6 | one wave a day | process: my wake installs at most one wave a day; the policy is the one file that changes between waves |
+| 7 | my key is rotated through IaC pins | by the same environment variable: IaC sets the new key hash, the old constant is ignored |
+
+Nine new tests (replay, another repository, the environment key both ways, an unlisted hook file, and five on the CI check): 85 in all.

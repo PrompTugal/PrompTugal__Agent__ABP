@@ -4,7 +4,7 @@
 // A guardrail and an audit log, NOT a security boundary: bash -c, python -c and the like get past it (INSTALL.md lists the real ones).
 import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import crypto from 'node:crypto'
 import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url'
-import { verifySshsig, sha as sha256 } from './pinlib.mjs'   // v2.1: the signed-install exception
+import { verifySshsig, sha as sha256, normRepo } from './pinlib.mjs'   // v2.1: the signed-install exception
 const SELF = fileURLToPath(import.meta.url), HOME = os.homedir()
 const real = q => { try { return fs.realpathSync.native(q) } catch { let d = path.dirname(q), tail = path.basename(q); for (let i = 0; i < 40; i++) { try { return path.join(fs.realpathSync.native(d), tail) } catch { tail = path.join(path.basename(d), tail); const n = path.dirname(d); if (n === d) break; d = n } } return q } }   // v2 (F2): the real path, symlinks resolved, even for a file that does not exist yet
 const TEST = process.env.ABP_TEST === '1'   // v2: no environment override of the policy, the log, the keys or the role outside tests
@@ -89,11 +89,20 @@ function checkBash(who, cmd, cwd, P) {
       if (sub === 'commit') { gl('diff', '--cached', '--name-only').forEach(x => files.add(x)); if (args.some(a => /^-[a-z]*a|^--all$/.test(a) && !/^--/.test(a) || a === '--all')) gl('diff', '--name-only').forEach(x => files.add(x)) }
       else gl('log', 'HEAD', '--not', '--remotes', '--name-only', '--format=').forEach(x => files.add(x))
       const hits = [...files].map(x => [x, guarded(who, path.resolve(ROOT, x), P)]).filter(([, d]) => d)
-      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) and whose hashes match every changed protected file: the signed install
-        const blob = x => { try { return execFileSync('git', sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x], { cwd: ROOT, stdio: 'pipe', timeout: 5000 }) } catch { return null } }
-        let pins = null; try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw) } } catch {}
-        const unc = hits.filter(([x]) => !(pins && (x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))))
-        if (unc.length) return deny('R6', `git ${sub}: the change touches ${unc.map(([x]) => x).join(', ')}: ${unc[0][1].reason}; a protected path changes only in a commit that carries abp/pins.json signed by cl-6.abp and matching it`, 'tamper') } }
+      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) for THIS repository, with a higher sequence, covering every protected file of the tree
+        const gb = (args2, opt = {}) => { try { return execFileSync('git', args2, { cwd: ROOT, stdio: 'pipe', timeout: 5000, ...opt }) } catch { return null } }
+        const blob = x => gb(sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x])
+        const treeFiles = (gb(sub === 'commit' ? ['ls-files', '--', '.claude', 'abp'] : ['ls-tree', '-r', '--name-only', 'HEAD', '--', '.claude', 'abp'], { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
+        let pins = null, why = 'no abp/pins.json with a signature in the commit'
+        try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw); why = ''
+          const remote = (gb(['config', '--get', 'remote.origin.url'], { encoding: 'utf8' }) || '').trim()
+          if (pins.repository !== normRepo(remote)) { const rp = pins.repository; pins = null; why = `the pins are for ${String(rp).slice(0, 50)}, not this repository` }
+          else { const prev = gb(['show', 'HEAD:abp/pins.json']); let ps = 0; try { ps = JSON.parse(prev).seq || 0 } catch {}
+            const changedPins = !prev || !blob('abp/pins.json').equals(prev)
+            if (changedPins && !(Number.isInteger(pins.seq) && pins.seq > ps)) { pins = null; why = `the sequence ${pins.seq} does not rise above ${ps}` } } } } catch (e) { pins = null; why = 'the pins signature did not verify' }
+        const need = new Set([...hits.map(([x]) => x), ...treeFiles.filter(x => guarded(who, path.resolve(ROOT, x), P))])   // every protected file of the tree, not only the changed ones
+        const unc = pins ? [...need].filter(x => !(x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))) : [...need]
+        if (unc.length) return deny('R6', `git ${sub}: the change touches protected paths (${hits[0][0]}): ${hits[0][1].reason}; they change only in a commit whose abp/pins.json is signed by cl-6.abp for this repository, with a higher sequence, covering every protected file (${why || 'not covered: ' + unc.slice(0, 4).join(', ')})`, 'tamper') } }
     if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
       const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
     if (!who.role && /^(push|commit)$/.test(sub)) return anon()

@@ -1,12 +1,12 @@
 diff --git aabp-hook.mjs b/claude/hooks/abp.mjs
-index 308656d..19a1151 100644
+index 308656d..fb8e9f1 100644
 --- aabp-hook.mjs
 +++ b/claude/hooks/abp.mjs
 @@ -4,21 +4,24 @@
  // A guardrail and an audit log, NOT a security boundary: bash -c, python -c and the like get past it (INSTALL.md lists the real ones).
  import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import crypto from 'node:crypto'
  import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url'
-+import { verifySshsig, sha as sha256 } from './pinlib.mjs'   // v2.1: the signed-install exception
++import { verifySshsig, sha as sha256, normRepo } from './pinlib.mjs'   // v2.1: the signed-install exception
  const SELF = fileURLToPath(import.meta.url), HOME = os.homedir()
 -export const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(SELF), '../..'), ABP = path.join(ROOT, 'abp')
 -export const LOG = process.env.ABP_LOG_DIR || path.join(HOME, '.abp/log')
@@ -53,7 +53,7 @@ index 308656d..19a1151 100644
  }
  export function checkWrite(who, abs, P) {
    const r = rel(abs), pr = guarded(who, abs, P)
-@@ -58,16 +67,39 @@ function segs(c) {
+@@ -58,16 +67,48 @@ function segs(c) {
  }
  function checkBash(who, cmd, cwd, P) {
    const g = grantOf(who, P), G = P.git || {}, suf = P.identity?.label_suffix || ''
@@ -81,11 +81,20 @@ index 308656d..19a1151 100644
 +      if (sub === 'commit') { gl('diff', '--cached', '--name-only').forEach(x => files.add(x)); if (args.some(a => /^-[a-z]*a|^--all$/.test(a) && !/^--/.test(a) || a === '--all')) gl('diff', '--name-only').forEach(x => files.add(x)) }
 +      else gl('log', 'HEAD', '--not', '--remotes', '--name-only', '--format=').forEach(x => files.add(x))
 +      const hits = [...files].map(x => [x, guarded(who, path.resolve(ROOT, x), P)]).filter(([, d]) => d)
-+      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) and whose hashes match every changed protected file: the signed install
-+        const blob = x => { try { return execFileSync('git', sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x], { cwd: ROOT, stdio: 'pipe', timeout: 5000 }) } catch { return null } }
-+        let pins = null; try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw) } } catch {}
-+        const unc = hits.filter(([x]) => !(pins && (x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))))
-+        if (unc.length) return deny('R6', `git ${sub}: the change touches ${unc.map(([x]) => x).join(', ')}: ${unc[0][1].reason}; a protected path changes only in a commit that carries abp/pins.json signed by cl-6.abp and matching it`, 'tamper') } }
++      if (hits.length) {   // v2.1: a protected path may change only in a commit that carries abp/pins.json signed by cl-6.abp (abp-pins) for THIS repository, with a higher sequence, covering every protected file of the tree
++        const gb = (args2, opt = {}) => { try { return execFileSync('git', args2, { cwd: ROOT, stdio: 'pipe', timeout: 5000, ...opt }) } catch { return null } }
++        const blob = x => gb(sub === 'commit' ? ['show', ':' + x] : ['show', 'HEAD:' + x])
++        const treeFiles = (gb(sub === 'commit' ? ['ls-files', '--', '.claude', 'abp'] : ['ls-tree', '-r', '--name-only', 'HEAD', '--', '.claude', 'abp'], { encoding: 'utf8' }) || '').split('\n').filter(Boolean)
++        let pins = null, why = 'no abp/pins.json with a signature in the commit'
++        try { const raw = blob('abp/pins.json'), sg = blob('abp/pins.json.sig'); if (raw && sg) { verifySshsig(sg.toString('utf8'), raw, 'abp-pins'); pins = JSON.parse(raw); why = ''
++          const remote = (gb(['config', '--get', 'remote.origin.url'], { encoding: 'utf8' }) || '').trim()
++          if (pins.repository !== normRepo(remote)) { const rp = pins.repository; pins = null; why = `the pins are for ${String(rp).slice(0, 50)}, not this repository` }
++          else { const prev = gb(['show', 'HEAD:abp/pins.json']); let ps = 0; try { ps = JSON.parse(prev).seq || 0 } catch {}
++            const changedPins = !prev || !blob('abp/pins.json').equals(prev)
++            if (changedPins && !(Number.isInteger(pins.seq) && pins.seq > ps)) { pins = null; why = `the sequence ${pins.seq} does not rise above ${ps}` } } } } catch (e) { pins = null; why = 'the pins signature did not verify' }
++        const need = new Set([...hits.map(([x]) => x), ...treeFiles.filter(x => guarded(who, path.resolve(ROOT, x), P))])   // every protected file of the tree, not only the changed ones
++        const unc = pins ? [...need].filter(x => !(x === 'abp/pins.json' || x === 'abp/pins.json.sig' || (pins.files?.[x] && blob(x) && sha256(blob(x)) === pins.files[x]))) : [...need]
++        if (unc.length) return deny('R6', `git ${sub}: the change touches protected paths (${hits[0][0]}): ${hits[0][1].reason}; they change only in a commit whose abp/pins.json is signed by cl-6.abp for this repository, with a higher sequence, covering every protected file (${why || 'not covered: ' + unc.slice(0, 4).join(', ')})`, 'tamper') } }
 +    if (verb === 'git' && args.includes('-C') && !/^(status|log|diff|show|ls-files|rev-parse|remote|config|branch|describe|blame|cat-file|grep|fetch)$/.test(sub || '')) {   // v2 (F4): git -C <dir> that changes files, in a protected place
 +      const gd = path.resolve(here || ROOT, tilde(args[args.indexOf('-C') + 1] || '')); const d = guarded(who, gd, P) || guarded(who, path.join(gd, 'x'), P); if (d) return d }
      if (!who.role && /^(push|commit)$/.test(sub)) return anon()
@@ -96,7 +105,7 @@ index 308656d..19a1151 100644
        const o = G.remote || 'origin', r = rm || gx('config', `branch.${b}.pushRemote`) || gx('config', 'remote.pushDefault') || gx('config', `branch.${b}.remote`) || o
        if (![o, G.remote_url, ...g.push_remotes].some(x => x && norm(x) === norm(r))) return deny('R5', `git push to ${r}: push to ${o} only`, 'git-push')
        if (norm(r) === norm(o) && G.remote_url && norm(gx('remote', 'get-url', '--push', o)) !== norm(G.remote_url)) return deny('R5', `${o}'s push URL is not ${G.remote_url}`, 'git-push')
-@@ -79,14 +111,22 @@ function checkBash(who, cmd, cwd, P) {
+@@ -79,14 +120,22 @@ function checkBash(who, cmd, cwd, P) {
        const sends = args.some(a => /^(-d|--data.*|-F|--form.*|-T|--upload-file|--json|--post-.*)$/.test(a)) || x >= 0 && !/^(GET|HEAD|OPTIONS)$/i.test(args[x + 1])
        if (sends && (!hosts.length || hosts.some(h => !g.send.includes(h)))) return deny('R7', `${verb} sends to ${hosts.join(', ') || 'an unnamed host'}, not in the grant`, 'send')
      }
@@ -123,7 +132,7 @@ index 308656d..19a1151 100644
  export function decide(inp, who, P) {
    const tool = inp.tool_name || '', ti = inp.tool_input || {}, g = grantOf(who, P), T = P.tools, f = ti.file_path || ti.notebook_path || ti.path, at = path.resolve(inp.cwd || ROOT, f || '.')
    if (tool.startsWith('mcp__')) {   // with R3's breaker on, every mcp__ denial blocks
-@@ -98,7 +138,8 @@ export function decide(inp, who, P) {
+@@ -98,7 +147,8 @@ export function decide(inp, who, P) {
    if (flag) return g[flag] ? allow(flag) : deny(flag === 'subagents' ? 'R4' : 'R7', `${tool} is not in ${who.agent || 'this session'}'s grant`, flag)
    if (!T.builtin_allowed.includes(tool)) return deny('R2', `${tool} is in no grant (deny by default)`, 'denied-tool')
    if (/^(Edit|MultiEdit|Write|NotebookEdit)$/.test(tool)) return f ? checkWrite(who, at, P) : who.role ? allow('write') : anon()
@@ -133,7 +142,7 @@ index 308656d..19a1151 100644
    return tool === 'Bash' ? checkBash(who, String(ti.command || ''), inp.cwd, P) : allow(/^(Read|Grep|Glob|LS)/.test(tool) ? 'read' : 'other')
  }
  const redact = s => String(s ?? '').slice(0, 400).replace(/-----BEGIN [^-]*-----[\s\S]*?(-----END [^-]*-----|$)|\b(sk-[\w-]{16,}|gh[pousr]_\w{20,}|github_pat_\w{20,}|AKIA[0-9A-Z]{16}|xox[abprs]-[\w-]{10,}|AIza[\w-]{35}|[0-9a-f]{32,})\b/gi, '[redacted]').replace(/[\w.%+-]+@[\w-]+(\.[\w-]+)*\.[a-z]{2,}\b/gi, '[address]').slice(0, 240)
-@@ -112,14 +153,15 @@ if (path.resolve(process.argv[1] || '') === SELF) try {
+@@ -112,14 +162,15 @@ if (path.resolve(process.argv[1] || '') === SELF) try {
      let b = ''; try { b = fs.readFileSync(path.join(ABP, `${who.role}.md`), 'utf8').replace(/^---[\s\S]*?\n---\n/, '') } catch {}
      b ||= P.core.map(c => `- **${c.id}** ${c.rule}`).join('\n')
      const on = Object.keys(P.breakers?.rules || {}).filter(r => P.breakers.rules[r].on), hold = P.hold_file && fs.existsSync(path.join(ROOT, P.hold_file))

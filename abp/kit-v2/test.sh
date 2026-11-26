@@ -4,10 +4,11 @@ set -uo pipefail; here=$(cd "$(dirname "$0")" && pwd); pol=$here/../policies.jso
 T=$(mktemp -d); H=$(mktemp -d); trap 'rm -rf "$T" "$H"' EXIT; mkdir -p $T/.claude/hooks $T/abp $T/src $H/home/.abp/keys/cl-6.dev $H/home/.abp/log $T/k
 ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/a >/dev/null; ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/b >/dev/null
 fpa=$(ssh-keygen -e -m PKCS8 -f $T/k/a.pub | openssl pkey -pubin -outform DER | sha256sum | cut -d' ' -f1)
+fpb=$(ssh-keygen -e -m PKCS8 -f $T/k/b.pub | openssl pkey -pubin -outform DER | sha256sum | cut -d' ' -f1)
 cp $here/claude/hooks/*.mjs $T/.claude/hooks/; cp $here/claude/settings.json $T/.claude/; cp $pol $T/abp/policies.json
 sed -i "s/export const PIN_KEY_SHA256 = '[0-9a-f]*'/export const PIN_KEY_SHA256 = '$fpa'/" $T/.claude/hooks/pinlib.mjs   # the test copy trusts the throw-away key A
 echo '{"label":"cl-6.dev@PrompTugal.dinis"}' > $H/home/.abp/keys/cl-6.dev/metadata.json
-(cd $T && git init -q -b dev . && git -c user.name=t -c user.email=t@t commit -q --allow-empty -m i) 2>/dev/null
+(cd $T && git init -q -b dev . && git remote add origin https://github.com/PrompTugal/testrepo && git -c user.name=t -c user.email=t@t commit -q --allow-empty -m i) 2>/dev/null
 pin(){ node $here/pins.mjs $T >/dev/null; rm -f $T/abp/pins.json.sig; ssh-keygen -Y sign -q -f $T/k/${1:-a} -n ${2:-abp-pins} $T/abp/pins.json >/dev/null 2>&1; mv $T/abp/pins.json.sig $T/abp/pins.json.sig 2>/dev/null; }
 pin a
 export HOME=$H/home CLAUDE_PROJECT_DIR=$T ABP_TEST=1 ABP_ROLE=cl-6.dev ABP_LOG_DIR=$T/log; pass=0; fail=0
@@ -71,7 +72,7 @@ pin2(){ node $here/pins.mjs $T2 >/dev/null; rm -f $T2/abp/pins.json.sig; ssh-key
 pin2 a; git init -q --bare $T2.git; (cd $T2 && git init -q -b dev . && git remote add origin $T2.git && git add -A && git -c user.name=t -c user.email=t@t commit -q -m base && git push -q origin dev) 2>/dev/null
 run2(){ CLAUDE_PROJECT_DIR=$T2 bash -c "echo '$1' | node $T2/.claude/hooks/launch.mjs pre-tool"; }
 bash2(){ run2 '{"tool_name":"Bash","tool_input":{"command":'"$(node -p 'JSON.stringify(process.argv[1])' "$1")"'},"cwd":"'$T2'"}'; }
-reset2(){ (cd $T2 && git reset -q --hard origin/dev && git clean -qfd) 2>/dev/null; }
+reset2(){ (cd $T2 && git reset -q --hard origin/dev && git clean -qfd) 2>/dev/null; rm -rf $H/home/.abp/seq; }   # a fresh container has seen no sequence yet
 echo '{"v":"new"}' > $T2/.claude/settings.json; pin2 a; (cd $T2 && git add -A)
 allow "v2.1: a commit that changes a protected file WITH matching signed pins passes" "$(bash2 'git commit -m install')"
 (cd $T2 && git -c user.name=t -c user.email=t@t commit -q -m install)
@@ -89,7 +90,31 @@ denyk "v2.1: a staged protected change that the committed pins do not cover is r
 echo '{"v":"new3"}' > $T2/.claude/settings.json; cp $T2/abp/pins.json $T2/pins.old; cp $T2/abp/pins.json.sig $T2/pins.old.sig; pin2 b; (cd $T2 && git add -A .claude abp); cp $T2/.claude/settings.json $T2/new3.json; (cd $T2 && git show HEAD:.claude/settings.json > .claude/settings.json && git show HEAD:abp/pins.json > abp/pins.json && git show HEAD:abp/pins.json.sig > abp/pins.json.sig)
 denyk "v2.1: staged pins signed by another key do not cover a staged change (R6)" "ABP R6" "$(bash2 'git commit -m x')"; reset2
 echo '{"v":"evil"}' > $T2/.claude/settings.json; (cd $T2 && git add -A && git -c user.name=t -c user.email=t@t commit -q -m unsigned)
-deny  "v2.1: the push of an unsigned protected change is refused" "$(bash2 'git push origin dev')"; rm -rf $T2 $T2.git
+deny  "v2.1: the push of an unsigned protected change is refused" "$(bash2 'git push origin dev')"
+# the CI check, on the signed install commit (T2 at origin/dev), with the key from outside the repository
+reset2; (cd $T2 && git pull -q origin dev) 2>/dev/null
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"OK"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check passes a signed install"; } || { fail=$((fail+1)); echo "FAIL CI check pass :: $r" | cut -c1-200; }
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 99 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses a sequence at or below the floor"; } || { fail=$((fail+1)); echo "FAIL CI floor :: $r" | cut -c1-200; }
+r=$(ABP_PIN_KEY_SHA256=$fpb node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"FAIL"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses pins signed by a key other than the one from outside"; } || { fail=$((fail+1)); echo "FAIL CI key :: $r" | cut -c1-200; }
+r=$(node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"not set"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses to run with no key from outside"; } || { fail=$((fail+1)); echo "FAIL CI nokey :: $r" | cut -c1-200; }
+echo '{"x":1}' > $T2/.claude/extra.json; (cd $T2 && git add -f .claude/extra.json)
+r=$(ABP_PIN_KEY_SHA256=$fpa node $here/ci-check.mjs $T2 --floor 0 2>&1); [[ "$r" == *"not covered"* ]] && { pass=$((pass+1)); echo "ok   v2.1: the CI check refuses a tracked file under .claude that the pins do not cover"; } || { fail=$((fail+1)); echo "FAIL CI cover :: $r" | cut -c1-200; }
+rm -rf $T2 $T2.git
+echo "--- v2.1 conditions: repository, rising sequence, key outside the repository, coverage, CI check"
+pin a; run "$W" >/dev/null; cp $T/abp/pins.json $T/pins.cur; cp $T/abp/pins.json.sig $T/pins.cur.sig
+pin a; run "$W" >/dev/null; cp $T/abp/pins.json $T/pins.new; cp $T/abp/pins.json.sig $T/pins.new.sig
+cp $T/pins.cur $T/abp/pins.json; cp $T/pins.cur.sig $T/abp/pins.json.sig
+denyk "v2.1: older signed pins (a lower sequence than already seen) do not load: no replay" "sequence" "$(run "$W")"
+cp $T/pins.new $T/abp/pins.json; cp $T/pins.new.sig $T/abp/pins.json.sig
+allow "v2.1: the newer signed pins load" "$(run "$W")"
+node $here/pins.mjs $T --repo PrompTugal/another-repo >/dev/null; rm -f $T/abp/pins.json.sig; ssh-keygen -Y sign -q -f $T/k/a -n abp-pins $T/abp/pins.json >/dev/null 2>&1
+denyk "v2.1: pins signed for another repository do not load" "another repository" "$(run "$W")"
+pin a
+r=$(ABP_PIN_KEY_SHA256=$fpb run "$W"); denyk "v2.1: a key set by the environment wins over the constant: pins signed by A do not load when the environment says B" "fail closed" "$r"
+pin b; r=$(ABP_PIN_KEY_SHA256=$fpb run "$W"); allow "v2.1: ...and pins signed by B load when the environment says B (a rotation through the environment)" "$r"
+pin a
+touch $T/.claude/hooks/extra.mjs
+denyk "v2.1: a hook file on disk that the pins do not list does not load" "not pinned" "$(run "$W")"; rm $T/.claude/hooks/extra.mjs
 echo "--- F7 and G4 and G5 secrets"
 deny  "F7: awk on a private key" "$(bash_ 'awk 1 ~/.ssh/id_ed25519')"
 deny  "F7: sed on a private key" "$(bash_ 'sed -n p ~/.ssh/id_rsa')"
@@ -126,7 +151,7 @@ cp $here/claude/hooks/abp.mjs $T/.claude/hooks/abp.mjs; pin a
 echo '{}' >> $T/abp/policies.json
 denyk "a changed policy does not load" "fail closed" "$(run "$W")"
 cp $pol $T/abp/policies.json; pin a
-sed -i 's/"v": 1/"v": 2/' $T/abp/pins.json
+sed -i 's/"seq": \([0-9]*\)/"seq": 99/' $T/abp/pins.json
 denyk "edited pins without a new signature do not load" "fail closed" "$(run "$W")"
 pin b
 denyk "pins signed by another key do not load (F5: the full key hash)" "fail closed" "$(run "$W")"
