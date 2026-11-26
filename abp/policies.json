@@ -1090,6 +1090,15 @@
     "evidence": "same guidance (point 4) for the B team; v1.2.0 grants them only to journalist, dev, security, correspondent, translator, telemetry",
     "risk": "a sub-agent never gets more than its parent's grant, but a hook sees the parent's session only",
     "needs": "Dinis's yes"
+   },
+   {
+    "id": "P3",
+    "since": "2026-11-26",
+    "role": "cl-6.abp",
+    "proposal": "add README.md to cl-6.abp's own writes (and to each agent's home repository grant)",
+    "evidence": "run report abp/runs/cl-6.abp/2026-11-26T01-34-06Z.json: commit 2a66008 wrote README.md, outside the grant (R6, observed, not blocked); it is the home repository's front page",
+    "risk": "low: a text file in its own home repository",
+    "needs": "Dinis's yes; until then cl-6.abp writes no README.md"
    }
   ]
  },
