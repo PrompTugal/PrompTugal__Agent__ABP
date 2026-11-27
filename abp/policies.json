@@ -1264,7 +1264,7 @@
     "board/keys.json"
    ],
    "repo_writes": {
-    "record": "2026-11-27__strikes-site-publish (commit 2ab463e, SovereignWebsite/Site__Agent__Decisions); reviewed and passed by cl-6.security@PrompTugal.dinis, 27 Nov 2026 01:3xZ (paths fixed by it)",
+    "record": "2026-11-27__strikes-site-publish (commit 2ab463e, SovereignWebsite/Site__Agent__Decisions); reviewed and passed by cl-6.security@PrompTugal.dinis, 27 Nov 2026, commits e4e7f01 (01:27Z, paths) and 23c2038 (01:28Z, pass on 37dc800) in PrompTugal__Agent__Security, read by me in its home",
     "authority": "Dinis Cruz: event 02726b85-5c12-48ea-929b-43e4e4a41972 (cl-6.conductor's session, 2026-11-27T01:24:54Z) and 19821c6f-3d14-4ce1-ad4a-a13a4191ef3c (2026-11-26T16:28:15Z)",
     "repository": "PrompTugal/PrompTugal__Agent__Place__London__Strikes",
     "branch": "dev only",
@@ -1683,11 +1683,11 @@
  "applied_decisions": [
   {
    "record": "2026-11-27__strikes-site-publish",
-   "at": "2026-11-27T01:35Z",
+   "at": "2026-11-27T01:28Z",
    "commit_of_record": "2ab463e",
    "item": "cl-6.place.london: writes in PrompTugal__Agent__Place__London__Strikes (dev only)",
    "change": "roles.cl-6.place.london.repos += the Strikes repository; roles.cl-6.place.london.repo_writes added with cl-6.security's exact paths; the Never line updated",
-   "how": "signature verified against the root key (sha256:2c3824641f5b8470); Dinis's own words quoted with session and event_uuid; cl-6.security passed this exact change with the paths made exact (27 Nov 01:3xZ, relayed by its message, not checked in its home); not checked: the record's commit signature, revoked.json",
+   "how": "signature verified against the root key (sha256:2c3824641f5b8470); Dinis's own words quoted with session and event_uuid; cl-6.security passed this exact change with the paths made exact (commits e4e7f01 and 23c2038 in its home, read there by me; its post-review 2e8bf0b asked these corrections); not checked: the record's commit signature, revoked.json",
    "limit": "the push attach to the session is NOT done and is Dinis's (one-way door): without it the grant is not usable; Pages is off in IaC until Dinis merges"
   },
   {
