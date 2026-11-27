@@ -1687,7 +1687,7 @@
    "commit_of_record": "2ab463e",
    "item": "cl-6.place.london: writes in PrompTugal__Agent__Place__London__Strikes (dev only)",
    "change": "roles.cl-6.place.london.repos += the Strikes repository; roles.cl-6.place.london.repo_writes added with cl-6.security's exact paths; the Never line updated",
-   "how": "signature verified against the root key (sha256:2c3824641f5b8470); Dinis's own words quoted with session and event_uuid; cl-6.security passed this exact change with the paths made exact (commits e4e7f01 and 23c2038 in its home, read there by me; its post-review 2e8bf0b asked these corrections); not checked: the record's commit signature, revoked.json",
+   "how": "signature verified against the root key (sha256:2c3824641f5b8470); Dinis's own words quoted with session and event_uuid; cl-6.security passed this exact change with the paths made exact (commits e4e7f01 and 23c2038 in its home, read there by me; its post-review 2e8bf0b asked these corrections); checks done 27 Nov (after the apply, as cl-6.security asked): the record commit 2ab463e signature verified by hand (ssh-keygen -Y check-novalidate, namespace git: Good, key SHA256:qoXyxlPU75iVBGLdjtOQFMQprsBUqvrKaZZagPUtE5Y = cl-6.decisions' key, trailers present) and by cl-6.security from its own clone; site/keys/endorsements/revoked.json at 2ab463e is empty",
    "limit": "the push attach to the session is NOT done and is Dinis's (one-way door): without it the grant is not usable; Pages is off in IaC until Dinis merges"
   },
   {
