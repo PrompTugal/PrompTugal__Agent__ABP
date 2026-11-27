@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.9 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "280b31cd6d8598a6",
+ "policy_sha256_16": "88b8f2a915e84bab",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -61,7 +61,7 @@
   "cl-6.place.london",
   "cl-6.infra"
  ],
- "updated": "2026-11-27T07:23Z",
+ "updated": "2026-11-27T07:30Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -346,6 +346,10 @@
   {
    "at": "2026-11-27T07:23Z",
    "event": "kit v2.3: the hook allows key/<own role> under R5 for a role with a key_branch (one condition in abp.mjs, 8 tests, 122 in all); new head for both securities; P9 key branches usable only after their passes and the install"
+  },
+  {
+   "at": "2026-11-27T07:30Z",
+   "event": "policy v1.7.11: root index.html and .nojekyll added to cl-6.place.london repo_writes after security pass"
   }
  ],
  "waiting_on": [
