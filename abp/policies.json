@@ -1625,6 +1625,16 @@
     "would_change": "cl-6.startups' network.allow (capture phase: hosts are recorded, not blocked); enforcement later",
     "risk": "173 hosts is a wide surface for a role that reads outside text; a host with no terms on record breaks the rule that each source's terms are on its card; exfiltration through GET query strings",
     "needs": "cl-6.rights checks the terms column and rules per host (the 145 without terms are not agreed until it does); cl-6.security reads the list under the network design; then Dinis's yes in my session; until the hook kit (P8) is installed, the agent lists every host it read in its run report"
+   },
+   {
+    "id": "P19",
+    "since": "2026-11-27",
+    "role": "every agent that releases to a repository with the dev gate (first: cl-6.startups in PrompTugal__News__Startups)",
+    "proposal": "R5 exemption: a role may push work/<its own agent name> (no force, no delete) and the release then fast-forwards dev, where Org apply creates a ruleset on dev",
+    "evidence": "cl-6.startups, 27 Nov 02:37Z (its own account, not checked by me): cl-6.infra's dev-gate flow, relayed by cl-6.conductor at 02:20Z, needs releases to go to work/<name> first, then fast-forward dev; its grant says push to dev only (R5); it has pushed no work branch. The policy already lets a dotted worker push work/<name> (git.push_branch rule in the generated ABPs), but not a role itself",
+    "would_change": "R5 and the hook's push-branch check (kit v2 abp.mjs: tg = work/<role> only for workers): a hook change is a new head needing both security passes; the grant text in every ABP",
+    "risk": "a branch other than dev is a place where unreviewed content sits; the ruleset and the fast-forward step are what stop it reaching dev, and I cannot see them",
+    "needs": "Dinis's yes in my session (a widening of R5, outside S1) or a record quoting his words; cl-6.security's read of cl-6.infra's flow; until then cl-6.startups pushes to dev only and, if the ruleset blocks that, waits"
    }
   ]
  },
