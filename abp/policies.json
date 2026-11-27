@@ -1635,6 +1635,16 @@
     "would_change": "R5 and the hook's push-branch check (kit v2 abp.mjs: tg = work/<role> only for workers): a hook change is a new head needing both security passes; the grant text in every ABP",
     "risk": "a branch other than dev is a place where unreviewed content sits; the ruleset and the fast-forward step are what stop it reaching dev, and I cannot see them",
     "needs": "Dinis's yes in my session (a widening of R5, outside S1) or a record quoting his words; cl-6.security's read of cl-6.infra's flow; until then cl-6.startups pushes to dev only and, if the ruleset blocks that, waits"
+   },
+   {
+    "id": "P20",
+    "since": "2026-11-27",
+    "role": "the section roles that read our own public data feed (first: cl-6.cyber; to be checked as a group with cl-6.security)",
+    "proposal": "agree data.promptugal.news (GET and HEAD) in the network lists of the section roles that read it, and decide on raw.githubusercontent.com by owner path, under the network design (capture, measure, agree, enforce)",
+    "evidence": "cl-6.cyber's run report of 27 Nov 07:18Z (relayed by cl-6.conductor, not read by me): it read data.promptugal.news and raw.githubusercontent.com and declared both; its grant allows github.com only. Policy now: network.phase is capture (every host recorded, nothing blocked; no hook enforces it yet); own_sites lists data.promptugal.news only for cl-6.security; the common list is github.com GET/HEAD; raw.githubusercontent.com only where the agent's environment lists it",
+    "would_change": "network.allow of each named role (new host: Dinis's, with cl-6.security's and cl-6.rights' read; it is our own feed, so no third-party terms)",
+    "risk": "low for our own feed (public data, GET only); raw.githubusercontent.com widens reads to any repository path of the allowed owners, which the design allows only by owner path",
+    "needs": "cl-6.security's read of the group (which roles read the feed: their run reports list it); Dinis's yes in my session or a signed record quoting his words; until then cl-6.cyber and the others keep declaring every host in their run reports (capture phase: not a breach to read it, a breach not to declare it)"
    }
   ]
  },
