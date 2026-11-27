@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** data/ schemas and the derivation, the knowledge graph (companies, people, events, past events, topics, places).
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Ontologist`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.ontologist.json`, `runs/cl-6.ontologist/**`, `data/**`, `newsroom/build/lib/derive.mjs`, `newsroom/build/lib/data.mjs`, `newsroom/build/lib/datacheck.mjs`, `board/runs/cl-6.ontologist/**`, `board/team/cl-6.ontologist/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

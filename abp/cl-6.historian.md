@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the history of PrompTugal.news and of Dinis's earlier work, from the record; lessons briefed to the other agents.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Historian`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.historian.json`, `runs/cl-6.historian/**`, `content/newsroom/notes/**`, `board/runs/cl-6.historian/**`, `board/team/cl-6.historian/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

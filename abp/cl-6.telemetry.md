@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the side-car that maps every execution (the role of telemetry.b@ in the website's board/guidance/2026-11-18-telemetry-and-sub-agents.md): per agent and per run, tokens and cost by model, every tool and host called, sub-agents, refusals and breaches; aggregates public, raw detail never in a repository.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Telemetry`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.telemetry.json`, `runs/cl-6.telemetry/**`, `board/runs/cl-6.telemetry/**`, `board/team/cl-6.telemetry/**`, `board/keys.json`, `board/runs/stats/**`, `content/newsroom/telemetry.md`, `content/newsroom/telemetry/**`, `data/telemetry/**`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

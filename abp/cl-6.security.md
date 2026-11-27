@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the pre-review and post-review of every commit across the PrompTugal repositories, for keys, contact details, private data and harm; the hold.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Security`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.security.json`, `runs/cl-6.security/**`, `HOLD.md`, `docs/security/**`, `board/HOLD.md`, `content/newsroom/security/**`, `board/runs/cl-6.security/**`, `board/team/cl-6.security/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

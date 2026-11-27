@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** public research on a mandate per task (the Portugal ecosystem and Algarve Evolution, then people with public professional facts and freely licensed photos, then past summits).
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Researcher`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.researcher.json`, `runs/cl-6.researcher/**`, `desks/researcher/**`, `data/organisations/*/organisation.json`, `board/runs/cl-6.researcher/**`, `board/team/cl-6.researcher/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

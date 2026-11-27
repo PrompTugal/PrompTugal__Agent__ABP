@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** twin of analyst@PrompTugal.vicky: its own desk.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Analyst`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.analyst.json`, `runs/cl-6.analyst/**`, `desks/analyst/**`, `board/runs/cl-6.analyst/**`, `board/team/cl-6.analyst/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

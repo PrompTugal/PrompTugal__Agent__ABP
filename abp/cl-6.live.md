@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the live section (live.promptugal.news): official cameras only, embeds only, attributed.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Live`, `PrompTugal/PrompTugal__News__Live`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.live.json`, `runs/cl-6.live/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

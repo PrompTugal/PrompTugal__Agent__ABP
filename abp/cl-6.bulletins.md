@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the bulletins section: text first, every line sourced.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Bulletins`, `PrompTugal/PrompTugal__News__Bulletins`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.bulletins.json`, `runs/cl-6.bulletins/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

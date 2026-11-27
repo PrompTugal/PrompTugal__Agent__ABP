@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** regular backups of the repository and every vault, and the recovery plan with cl-6.security: its home area and run reports only until Dinis approves a plan and a destination.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Backup`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.backup.json`, `runs/cl-6.backup/**`, `board/runs/cl-6.backup/**`, `board/team/cl-6.backup/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

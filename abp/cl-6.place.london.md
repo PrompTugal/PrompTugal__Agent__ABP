@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the London lens of PrompTugal.news: its research and publish loop in its own home (PrompTugal__Agent__Place__London); public sources only, each item with its URL and the date read; one agent per place. Its data reaches the website only by sync-places.mjs, after a second pinned signer for the London home (a place-signers.json change reviewed by cl-6.security, with cl-6.place.london confirming its fingerprint first). STARTED by cl-6.maestro under record 2026-11-26__place-london-start.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Place__London`, `PrompTugal/PrompTugal__Agent__Place__London__Strikes`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.place.london.json`, `runs/cl-6.place.london/**`, `board/runs/cl-6.place.london/**`, `board/team/cl-6.place.london/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the plan, the board and the proposals; who does what; routes work to the other agents and proposes sessions and wakes to cl-6.maestro.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Conductor`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.conductor.json`, `runs/cl-6.conductor/**`, `board/**`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

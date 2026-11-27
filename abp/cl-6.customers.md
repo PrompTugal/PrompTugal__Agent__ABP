@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** Dinis's briefs on readers, customers and products, kept in board/team/cl-6.customers/ and routed to cl-6.conductor; it reads and waits until a brief arrives.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Customers`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.customers.json`, `runs/cl-6.customers/**`, `board/runs/cl-6.customers/**`, `board/team/cl-6.customers/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

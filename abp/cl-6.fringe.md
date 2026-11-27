@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the fringe section.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Fringe`, `PrompTugal/PrompTugal__News__Fringe`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.fringe.json`, `runs/cl-6.fringe/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

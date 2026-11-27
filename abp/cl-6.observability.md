@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** who reads what and what the agents do: page views and reads to an encrypted vault, the drain, the reports.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Observability`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.observability.json`, `runs/cl-6.observability/**`, `newsroom/observability/**`, `assets/obs/**`, `newsroom/tools/obs/**`, `newsroom/tools/agent-log.mjs`, `content/newsroom/observability/**`, `content/newsroom/observability.md`, `board/runs/cl-6.observability/**`, `board/team/cl-6.observability/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

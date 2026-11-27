@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the Algarve place lens first (data/by-place/algarve.json), then the other places in turn, each writing only its own home and its own data/by-place file; public sources only, each item with its URL and the date read.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Place__Algarve`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.places.json`, `runs/cl-6.places/**`, `data/by-place/*.json`, `data/by-place/*.json.sig`, `content/articles/*.md`, `articles/*.md.sig`, `board/runs/cl-6.places/**`, `board/team/cl-6.places/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

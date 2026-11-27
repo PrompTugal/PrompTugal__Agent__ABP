@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the swarm section.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Swarm`, `PrompTugal/PrompTugal__News__Swarm`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.swarm.json`, `runs/cl-6.swarm/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

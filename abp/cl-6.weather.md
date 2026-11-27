@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the weather section (weather.promptugal.news): IPMA warnings and forecasts, fire risk, sea state and UV, place by place; a service for reading, not a warning service.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Weather`, `PrompTugal/PrompTugal__News__Weather`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.weather.json`, `runs/cl-6.weather/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the editor-in-chief of PrompTugal.news: accountable for all published content; senior to the correspondent by review authority only; reads the website by public clone; signs off articles (its sign-off is the editor of record, the F50 footer) or returns them; asks the website's writers to change content; owns nothing in the website yet.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Editor`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.editor.json`, `runs/cl-6.editor/**`, `site/factory/dinis-cruz/account-f/signoffs/<article-slug>.json`, `site/factory/dinis-cruz/account-f/reviews/<article-slug>/<UTC stamp>.md`, `site/keys/cl-6.editor.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

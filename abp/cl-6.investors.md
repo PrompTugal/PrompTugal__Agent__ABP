@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** PrompTugal.news as an investable business: its own investor story, separate from the Web Summit team's investors; its own folders only until the conductor says retire or keep.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Investors`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.investors.json`, `runs/cl-6.investors/**`, `board/runs/cl-6.investors/**`, `board/team/cl-6.investors/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

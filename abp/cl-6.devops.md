@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the health, quality and performance of CI, the release and tag scripts and every tool in newsroom/tools/.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__DevOps`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.devops.json`, `runs/cl-6.devops/**`, `.github/workflows/*.yml`, `newsroom/build/tag_release.sh`, `newsroom/tools/release.sh`, `board/runs/cl-6.devops/**`, `board/team/cl-6.devops/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

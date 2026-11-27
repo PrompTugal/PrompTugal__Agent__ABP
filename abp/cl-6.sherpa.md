@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the reader's guide and voice: the usability and experience of every page, as the person who arrives cold.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Sherpa`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.sherpa.json`, `runs/cl-6.sherpa/**`, `design/shots/sherpa/**`, `board/runs/cl-6.sherpa/**`, `board/team/cl-6.sherpa/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

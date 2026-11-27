@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the GitHub and AWS side of the cl-6 agents: PrompTugal__IaC (policy/abp.json is its GitHub and AWS policy) and its own home; the paths are those I know (home area and policy/abp.json): everything else in IaC is to be named by cl-6.infra in its run report and proposed.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Infrastructure`, `PrompTugal/PrompTugal__IaC`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.infra.json`, `runs/cl-6.infra/**`, `policy/abp.json`, `board/runs/cl-6.infra/**`, `board/team/cl-6.infra/**`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

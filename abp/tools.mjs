@@ -34,6 +34,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** ${r.focus}.
+- **Repositories:** ${code(r.repos || [])}.
 - **Writes (repository):** ${code(g.writes.map(w => w.replace(/\{role\}/g, role)))}.
 - **Writes (outside):** ${code(P.common.writes_outside_repo)} (scratch, the hook's log, memory).
 - **Sends to:** ${code(g.send)}.

@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** synthetic readers (personas) who read the site as they would and report what works, what confuses and what loses them.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Synthetic`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.synthetic.json`, `runs/cl-6.synthetic/**`, `desks/synthetic/**`, `content/newsroom/synthetic.md`, `board/runs/cl-6.synthetic/**`, `board/team/cl-6.synthetic/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

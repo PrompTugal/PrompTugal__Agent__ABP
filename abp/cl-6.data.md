@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the collectors and the raw public data of every PrompTugal site (data.promptugal.news): one collector per source, no model, polite reads, each source's terms on its card.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Data`, `PrompTugal/PrompTugal__News__Data`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.data.json`, `runs/cl-6.data/**`, `src/**`, `data/**`, `content/**`, `scripts/**`, `REALITY.md`, `BRIEF.md`, `sources/**`, `collect/**`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

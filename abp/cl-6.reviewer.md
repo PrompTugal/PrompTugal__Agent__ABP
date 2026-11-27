@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** twin of reviewer@PrompTugal.vicky: reviews, and keeps the front page's lead.standfirst, lead.developments, lead.programme, lead.last_checked and lead.live.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Reviewer`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.reviewer.json`, `runs/cl-6.reviewer/**`, `desks/correspondent/front-page.json`, `content/articles/**`, `articles/**`, `board/runs/cl-6.reviewer/**`, `board/team/cl-6.reviewer/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the build, the gate, the tests, the features and CI.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Dev`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.dev.json`, `runs/cl-6.dev/**`, `src/**`, `tests/**`, `scripts/**`, `newsroom/build/**`, `newsroom/tools/**`, `newsroom/tests/**`, `assets/**`, `.github/workflows/*.yml`, `data/site/**`, `board/runs/cl-6.dev/**`, `board/team/cl-6.dev/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

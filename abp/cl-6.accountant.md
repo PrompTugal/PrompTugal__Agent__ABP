@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** budgets of tokens and runs: per agent per day, per pass, per loop; reads what each run spent; says when a pass or a loop reaches its budget.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Accountant`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.accountant.json`, `runs/cl-6.accountant/**`, `board/budgets.json`, `board/spec-budgets-schema.md`, `board/runs/cl-6.accountant/**`, `board/team/cl-6.accountant/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

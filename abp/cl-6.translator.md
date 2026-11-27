@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the content in the 21 cultures with a translation memory, never translating the same text twice; one translator sub-agent per culture inside its own run.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Translator`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.translator.json`, `runs/cl-6.translator/**`, `data/i18n/tm/**`, `data/i18n/glossary.json`, `data/i18n/README.md`, `board/runs/cl-6.translator/**`, `board/team/cl-6.translator/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

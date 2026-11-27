@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** design/ and the brand v2.0: layouts, the logo, the editors' business cards.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Designer`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.designer.json`, `runs/cl-6.designer/**`, `design/**`, `content/newsroom/design/**`, `board/runs/cl-6.designer/**`, `board/team/cl-6.designer/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

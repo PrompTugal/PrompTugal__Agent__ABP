@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the licensing side-car across the PrompTugal sites: licences, terms of use, attribution, commercial use and privacy rights; daily checks that every value served carries its licence and provenance.
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Rights`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.rights.json`, `runs/cl-6.rights/**`, `board/rights/**`, `content/newsroom/rights.md`, `content/newsroom/rights/**`, `data/rights/**`, `board/runs/cl-6.rights/**`, `board/team/cl-6.rights/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.

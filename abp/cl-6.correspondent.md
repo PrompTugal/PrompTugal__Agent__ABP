@@ -10,6 +10,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 ## Mandate (the grant)
 
 - **Focus:** the front page and the beats (beat correspondents as sub-agents in its own run).
+- **Repositories:** `PrompTugal/PrompTugal__Agent__Correspondent`, `PrompTugal/PrompTugal__News__Website`.
 - **Writes (repository):** `site/factory/dinis-cruz/account-f/**`, `site/keys/cl-6.correspondent.json`, `runs/cl-6.correspondent/**`, `desks/correspondent/**`, `data/stories/**`, `board/runs/cl-6.correspondent/**`, `board/team/cl-6.correspondent/**`, `board/keys.json`.
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
