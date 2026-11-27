@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.translator@PrompTugal.dinis"
-policy: abp/policies.json v1.7.9 (sha256:d6fd48bdcdff3eed)
+policy: abp/policies.json v1.7.9 (sha256:5b1ff7ea9c47c131)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.translator@PrompTugal.dinis
