@@ -25,6 +25,17 @@ deny  "a shell write to .claude is blocked" "$(bash_ 'echo x > .claude/hooks/abp
 deny  "a write to abp/policies.json is blocked" "$(wr $T/abp/policies.json)"
 deny  "a push to main is blocked (R5)" "$(bash_ 'git push --force origin main')"
 allow "F8: git push origin HEAD on dev is allowed" "$(bash_ 'git push origin HEAD')"
+# v2.3: the P9 key branch, only for a role whose policy entry has one, only its own, never forced
+bashr(){ ABP_ROLE=$1 bash_ "$2"; }
+(cd $T && git checkout -q -b key/cl-6.cyber 2>/dev/null; git checkout -q -b key/cl-6.data 2>/dev/null; git checkout -q -b key/cl-6.cyber2 2>/dev/null; git checkout -q dev)
+allow "v2.3: cl-6.cyber may push key/cl-6.cyber" "$(bashr cl-6.cyber 'git push origin key/cl-6.cyber')"
+allow "v2.3: cl-6.cyber may push HEAD:key/cl-6.cyber from that branch" "$(cd $T && git checkout -q key/cl-6.cyber && ABP_ROLE=cl-6.cyber bash_ 'git push origin HEAD:key/cl-6.cyber'; git checkout -q dev)"
+deny  "v2.3: cl-6.cyber may not push another role's key branch" "$(bashr cl-6.cyber 'git push origin key/cl-6.data')"
+deny  "v2.3: cl-6.cyber may not push a key branch of a similar name" "$(bashr cl-6.cyber 'git push origin key/cl-6.cyber2')"
+deny  "v2.3: cl-6.cyber may not force the key branch" "$(bashr cl-6.cyber 'git push --force origin key/cl-6.cyber')"
+deny  "v2.3: cl-6.cyber may not push +key/cl-6.cyber" "$(bashr cl-6.cyber 'git push origin +key/cl-6.cyber')"
+deny  "v2.3: cl-6.cyber may not push key/cl-6.cyber and main together" "$(bashr cl-6.cyber 'git push origin key/cl-6.cyber main')"
+deny  "v2.3: cl-6.dev (no key_branch) may not push key/cl-6.dev" "$(bash_ 'git push origin key/cl-6.dev')"
 deny  "N1: dig is refused (DNS is a channel)" "$(bash_ 'dig example.org')"
 deny  "N1: curl -sL is refused (no redirects followed)" "$(bash_ 'curl -sL https://x.example/a')"
 deny  "low: git -c push.default=matching push is refused (push settings are the owner's)" "$(bash_ 'git -c push.default=matching push')"
