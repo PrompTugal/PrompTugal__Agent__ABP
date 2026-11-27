@@ -2396,6 +2396,25 @@
   "about": "role entries drafted for cl-6.security's review BEFORE the session starts, NOT active: a role gives its session the common home-area writes, which is a grant, and S1 step 4 (Dinis's root) is not done; they become roles in one step when security agrees and Dinis gives the root",
   "at": "2026-11-26T16:43Z",
   "roles": {
+   "cl-6.editor": {
+    "focus": "the editor-in-chief of PrompTugal.news: accountable for all published content; owns content/** in the website; senior to the correspondent by review authority (approves or returns drafts and articles; its sign-off is the editor of record, the F50 footer); the journalist keeps writing articles under its sign-off",
+    "writes": [
+     "content/**",
+     "board/runs/cl-6.editor/**",
+     "board/team/cl-6.editor/**",
+     "board/keys.json"
+    ],
+    "subagents": false,
+    "never": "writes desks/correspondent/** or any other agent's desk, writes code, the policy, the front page design, the pins or a workflow, publishes a claim without its source, names a private person, publishes data whose licence is unclear, releases through anything but newsroom/tools/release.sh (with cl-6.security's review as usual), writes board/keys.json other than its own public key alone in its own commit, uses a connector, starts a session or a scheduled task, prints or commits a key or a token",
+    "repos": [
+     "PrompTugal/PrompTugal__Agent__Editor",
+     "PrompTugal/PrompTugal__News__Website"
+    ],
+    "model": "opus (maestro's proposal, relayed by the conductor; the policy does not set models)",
+    "first_prompt_must_state": "its grant (abp/cl-6.editor.md): no add_repo, no create_session, no scheduled task; it makes its own key and publishes it alone in its first commit",
+    "drafted_on": "cl-6.conductor's recommendation (27 Nov 10:35Z, relayed): paths all content/**, including content/about/** and the explainers, which would move from the journalist's P11 h to the editor (the journalist's grant would then lose content/articles/**? NO: it keeps writing articles; to settle); home PrompTugal__Agent__Editor (cl-6.infra preparing the IaC PR); release through release.sh like the journalist. Flags from me: (1) content/** is a write grant on the website: a widening that needs Dinis's own words (session, event_uuid) in cl-6.decisions' record, then cl-6.security's review; (2) overlap: cl-6.journalist already writes content/articles/** and P11 h (content/about/**) is held, so two roles would write the same paths until the journalist's grant is narrowed (a separate change); (3) the website is not attached to anyone by the policy, so the release path needs the attach decision; (4) 'senior to the correspondent' is review authority only: no write access to desks/correspondent/**; (5) cl-6.dev's three content writes of 26 Nov were logged as gaps, which an editor owner would end",
+    "status": "DRAFT, not active: nothing here is in force; it becomes a role in one step after the record and security's review"
+   },
    "cl-6.social": {
     "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange. Its drafts live in drafts/** of its own home, apart from its run state in site/factory/**",
     "writes": [
