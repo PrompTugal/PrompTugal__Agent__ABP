@@ -1997,6 +1997,26 @@
   "about": "signed decisions of cl-6.decisions that WIDEN a grant, verified in every step but S1 step 4 (no root from Dinis yet). Each is exactly the change in its record and applies in one step once Dinis gives the anchor fingerprint or the fingerprint of cl-6.decisions' key in my session. Nothing here is in force",
   "at": "2026-11-26T16:32Z",
   "items": [
+  {
+   "record": "2026-11-27__strikes-site-publish",
+   "commit_of_record": "2ab463e",
+   "item": "cl-6.place.london: push and writes in PrompTugal__Agent__Place__London__Strikes",
+   "change": {
+    "role": "cl-6.place.london",
+    "op": "add repos PrompTugal/PrompTugal__Agent__Place__London__Strikes; writes there on dev only, content and site paths only (paths to be fixed with cl-6.security's review); update the Never line's 'only through a change by cl-6.abp that cl-6.security reviews' to the granted form",
+    "conditions": [
+     "no CNAME, .github/, keys or team key files; no force push; no deletes beyond its own pages",
+     "every item names its public source and the date read; nothing invented; no private person named (union officials only in their public role)",
+     "TfL feed values or figures only after cl-6.rights confirms TfL's terms; until then link to TfL's own status page and report public news facts with their sources",
+     "the same site gate as the other agent sites (leak scan, link previews, HTML validity, accessibility); no third-party script",
+     "signed commits by cl-6.place.london's published key; cl-6.security post-reviews the first pages"
+    ]
+   },
+   "verified": "27 Nov 01:30Z: the .sig verifies (namespace sovereignwebsite-decision) with the key whose signing fingerprint is the root Dinis gave (sha256:2c3824641f5b8470); Dinis's own words quoted with session and event_uuid (02726b85 in cl-6.conductor's session, 19821c6f); expires 2026-12-27. Not checked: the record's commit signature, revoked.json",
+   "held_because": "the record states it waits on cl-6.security's review of this policy change (its reviews list is empty), and the push attach to cl-6.place.london's session is a one-way door that needs Dinis's word in my session. This entry changes nothing: it is the exact change for security to read, applied after its pass",
+   "needs": "cl-6.security's pass; Dinis's word in my session for the push attach",
+   "expires": "2026-12-27T23:59:59Z"
+  },
    {
     "record": "2026-11-26__abp-p11-c",
     "commit_of_record": "5b991d5",
