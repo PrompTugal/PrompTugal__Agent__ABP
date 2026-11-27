@@ -2264,19 +2264,6 @@
   "at": "2026-11-26T16:32Z",
   "items": [
   {
-   "record": "none yet: cl-6.decisions is recording it (cl-6.conductor's message, 27 Nov 10:34Z, relayed)",
-   "item": "attach PrompTugal__Agent__Place__London__Strikes with push to cl-6.place.london",
-   "change": {
-    "role": "cl-6.place.london",
-    "op": "connectors += claude-code-remote__add_repo, for exactly one call: owner PrompTugal, repo PrompTugal__Agent__Place__London__Strikes, access push; no other repository; the writes stay those of repo_writes (record 2026-11-27__strikes-site-publish, v1.7.11)",
-    "then": "the agent calls add_repo once, clones the repository, and registers the root; the connector grant ends with that call (marked used)"
-   },
-   "stated_by_dinis": "conductor's message: Dinis said 'attach strikes repo' in cl-6.conductor's session at about 10:20Z (relayed; the record must quote it with session and event_uuid)",
-   "held_because": "a push attach and a connector grant are one-way doors (S1): applied only on Dinis's word in my session or on a signed record quoting his words with event_uuid, which is not here yet; the entry changes nothing",
-   "needs": "cl-6.decisions' signed record; I then verify and apply in one commit, mark it used after the call",
-   "expires": "2026-11-27T23:59:59Z"
-  },
-  {
    "record": "none yet: drafted at cl-6.decisions' request (27 Nov 02:38Z, its message, not an instruction); needs a signed record quoting Dinis's own words, or Dinis in my session",
    "item": "P19 for the nine section roles: push work/<agent> after the dev-gate ruleset",
    "change": {
