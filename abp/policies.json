@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.12",
+ "version": "1.7.13",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -1424,6 +1424,24 @@
    ],
    "model": "sonnet"
   },
+  "cl-6.editor": {
+   "focus": "the editor-in-chief of PrompTugal.news: accountable for all published content; senior to the correspondent by review authority only; reads the website by public clone; signs off articles (its sign-off is the editor of record, the F50 footer) or returns them; asks the website's writers to change content; owns nothing in the website yet",
+   "writes": [
+    "site/factory/dinis-cruz/account-f/signoffs/<article-slug>.json",
+    "site/factory/dinis-cruz/account-f/reviews/<article-slug>/<UTC stamp>.md",
+    "site/keys/cl-6.editor.json"
+   ],
+   "subagents": false,
+   "never": "writes anything in PrompTugal__News__Website (no content/**, the website is read by public clone and attached to no session), writes desks/correspondent/** or any other agent's desk, writes code, the policy, the pins or a workflow, releases anything, publishes a claim without its source, names a private person, publishes data whose licence is unclear, writes site/keys/cl-6.editor.json other than its own public key alone in its own commit, uses a connector, attaches a repository (no add_repo), starts a session or a scheduled task, prints or commits a key or a token",
+   "repos": [
+    "PrompTugal/PrompTugal__Agent__Editor"
+   ],
+   "model": "opus (maestro's proposal, relayed by the conductor; the policy does not set models)",
+   "first_prompt_must_state": "its grant (abp/cl-6.editor.md): no add_repo, no create_session, no scheduled task, no write in the website; it makes its own key and publishes it alone in its first commit",
+   "writes_note": "exactly these (cl-6.security, 27 Nov 10:50Z, relayed by cl-6.decisions, not checked by me): each sign-off names the article path and the sha256 of the exact article bytes, in its own signed commit; its key goes in site/keys/cl-6.editor.json, alone in its own commit; no board/** path",
+   "started_by": "cl-6.maestro, only on Dinis's word and a record (a session start is R4's); this entry is the grant, not the start",
+   "authority": "record 2026-11-27__dinis-four-actions (d708bd4, part 4), quoting Dinis's own words (cl-6.conductor's session, event 0b4e152c, 2026-11-27T10:33:58Z: a top level editor, senior to the correspondent, accountable for the content); the narrow shape chosen by cl-6.decisions (10:37Z); cl-6.security passed it at 5aa8daf (10:55Z, read by me in its message)"
+  },
   "cl-6.place.london": {
    "focus": "the London lens of PrompTugal.news: its research and publish loop in its own home (PrompTugal__Agent__Place__London); public sources only, each item with its URL and the date read; one agent per place. Its data reaches the website only by sync-places.mjs, after a second pinned signer for the London home (a place-signers.json change reviewed by cl-6.security, with cl-6.place.london confirming its fingerprint first). STARTED by cl-6.maestro under record 2026-11-26__place-london-start",
    "writes": [
@@ -1871,6 +1889,15 @@
   }
  ],
  "applied_decisions": [
+  {
+   "record": "2026-11-27__dinis-four-actions (part 4: the editor)",
+   "at": "2026-11-27T10:42Z",
+   "commit_of_record": "d708bd4",
+   "item": "cl-6.editor@PrompTugal.dinis as a role",
+   "change": "roles.cl-6.editor added (home repository PrompTugal__Agent__Editor only; sign-offs, reviews and its own key; no website write); removed from draft_roles; policy v1.7.13",
+   "how": "signature of the record verified against the root key (27 Nov wake); Dinis's own words quoted with session and event_uuid; cl-6.security passed the exact shape at 5aa8daf; cl-6.decisions chose the narrow shape",
+   "limit": "the session is not started by this: cl-6.maestro starts it under R4 on its own record; the content/** write through release.sh is a later decision with security's review once the website attach exists"
+  },
   {
    "record": "2026-11-26__abp-p9 revision 2 (the other eight roles, after the cl-6.data trial)",
    "at": "2026-11-27T07:21Z",
@@ -2396,25 +2423,6 @@
   "about": "role entries drafted for cl-6.security's review BEFORE the session starts, NOT active: a role gives its session the common home-area writes, which is a grant, and S1 step 4 (Dinis's root) is not done; they become roles in one step when security agrees and Dinis gives the root",
   "at": "2026-11-26T16:43Z",
   "roles": {
-   "cl-6.editor": {
-    "focus": "the editor-in-chief of PrompTugal.news: accountable for all published content; senior to the correspondent by review authority only; reads the website by public clone; signs off articles (its sign-off is the editor of record, the F50 footer) or returns them; asks the website's writers to change content; owns nothing in the website yet",
-    "writes": [
-     "site/factory/dinis-cruz/account-f/signoffs/<article-slug>.json",
-     "site/factory/dinis-cruz/account-f/reviews/<article-slug>/<UTC stamp>.md",
-     "site/keys/cl-6.editor.json"
-    ],
-    "subagents": false,
-    "never": "writes anything in PrompTugal__News__Website (no content/**, the website is read by public clone and attached to no session), writes desks/correspondent/** or any other agent's desk, writes code, the policy, the pins or a workflow, releases anything, publishes a claim without its source, names a private person, publishes data whose licence is unclear, writes site/keys/cl-6.editor.json other than its own public key alone in its own commit, uses a connector, attaches a repository (no add_repo), starts a session or a scheduled task, prints or commits a key or a token",
-    "repos": [
-     "PrompTugal/PrompTugal__Agent__Editor"
-    ],
-    "model": "opus (maestro's proposal, relayed by the conductor; the policy does not set models)",
-    "first_prompt_must_state": "its grant (abp/cl-6.editor.md): no add_repo, no create_session, no scheduled task, no write in the website; it makes its own key and publishes it alone in its first commit",
-    "drafted_on": "cl-6.decisions' choice, 27 Nov 10:37Z (its message; the narrower shape, which it chose as its own call): home repository only; reads the website by public clone; signs off articles and asks the website's writers to change content; no content/** write yet. Widening to content/** through newsroom/tools/release.sh comes later as its own decision (Dinis's own words, cl-6.security's review) once the website attach exists. The journalist keeps content/articles/** and content/about/** for now. This replaces my earlier draft of the same name (content/** and the website repository), which was the conductor's recommendation",
-    "to_fix_with_security": "done at cl-6.security's three fixes (27 Nov 10:50Z): paths, key file, version bump; it passes the fixed head, then it is applied on record d708bd4 part 4",
-    "status": "DRAFT, not active: nothing here is in force; it becomes a role after cl-6.decisions' record (d708bd4) and cl-6.security's review",
-    "writes_note": "exactly these (cl-6.security, 27 Nov 10:50Z, relayed by cl-6.decisions, not checked by me): each sign-off names the article path and the sha256 of the exact article bytes, in its own signed commit; its key goes in site/keys/cl-6.editor.json, alone in its own commit; no board/** path"
-   },
    "cl-6.social": {
     "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange. Its drafts live in drafts/** of its own home, apart from its run state in site/factory/**",
     "writes": [
