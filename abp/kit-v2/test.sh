@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # kit v2 tests, in a throw-away install and a throw-away HOME, with throw-away signing keys (it names no real key). usage: bash abp/kit-v2/test.sh
 set -uo pipefail; here=$(cd "$(dirname "$0")" && pwd); pol=$here/../policies.json
+unset ABP_PIN_KEY_SHA256   # the tests use a throw-away key: a pin variable set in the caller's environment (it takes priority over the constant) would make every signed-pins test fail closed
 T=$(mktemp -d); H=$(mktemp -d); trap 'rm -rf "$T" "$H"' EXIT; mkdir -p $T/.claude/hooks $T/abp $T/src $H/home/.abp/keys/cl-6.dev $H/home/.abp/log $T/k
 ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/a >/dev/null; ssh-keygen -q -t ecdsa -b 256 -N '' -f $T/k/b >/dev/null
 fpa=$(ssh-keygen -e -m PKCS8 -f $T/k/a.pub | openssl pkey -pubin -outform DER | sha256sum | cut -d' ' -f1)
