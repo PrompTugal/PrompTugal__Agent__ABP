@@ -1,0 +1,404 @@
+{
+ "$schema": "../../run-report.schema.json",
+ "agent": "cl-6.abp@PrompTugal.dinis",
+ "run": "2026-11-26T22-26-05Z",
+ "started": "2026-11-26T22:26:05.130Z",
+ "ended": "2026-11-27T10:38:47.081Z",
+ "line": "wake 10:37Z: records re-verified, applied the strikes grant, P9 for eight roles, kit v2.3 passed; refused the one-way doors and held widenings; waiting on Dinis for the pin, P11 c, P5, P15 to P20",
+ "policy": {
+  "version": "1.7.11",
+  "sha256": "369b4af6acb460e7"
+ },
+ "text_included": false,
+ "sessions": 1,
+ "requests": [
+  {
+   "t": "2026-11-26T22:26:05.362Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:26:11.905Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:27:01.517Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:27:38.444Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:28:26.186Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:29:06.794Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:29:47.257Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T01:31:09.469Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:37:58.799Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:38:23.844Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:39:07.678Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:40:23.770Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:42:44.495Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:43:11.031Z",
+   "chars": 470,
+   "sha256": "e1c9ad82ed09ae09"
+  },
+  {
+   "t": "2026-11-27T02:44:21.650Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:44:44.811Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:45:58.149Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T02:47:25.595Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:18:50.625Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:20:00.086Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:20:42.347Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:22:00.206Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:22:14.239Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:23:28.952Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:24:17.971Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:25:18.651Z",
+   "chars": 470,
+   "sha256": "e1c9ad82ed09ae09"
+  },
+  {
+   "t": "2026-11-27T07:25:48.060Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:27:29.165Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:30:39.059Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T07:40:51.147Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T08:58:10.271Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:34:25.903Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:34:58.129Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:35:25.991Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:35:59.016Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:36:22.491Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:37:20.530Z",
+   "chars": 469,
+   "sha256": "caa5e6ead84d7eed"
+  },
+  {
+   "t": "2026-11-27T10:38:16.901Z",
+   "chars": 549,
+   "sha256": "b76246fc651fe02b"
+  }
+ ],
+ "session_events": [
+  {
+   "t": "2026-11-26T22:26:05.130Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T01:26:11.683Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T02:37:58.555Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T07:18:50.338Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T07:40:50.791Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T08:58:09.986Z",
+   "source": "resume"
+  },
+  {
+   "t": "2026-11-27T10:34:25.651Z",
+   "source": "resume"
+  }
+ ],
+ "compactions": {
+  "count": 0,
+  "re_anchored": 0
+ },
+ "tool_calls": {
+  "total": 126,
+  "by_kind": {
+   "read": 38,
+   "shell": 50,
+   "connector": 38
+  }
+ },
+ "policies_executed": {},
+ "policies_instrumented": [
+  "R2",
+  "R3",
+  "R4",
+  "R5",
+  "R6",
+  "R7",
+  "R8",
+  "R9"
+ ],
+ "mandate": {
+  "actions": 126,
+  "commits": [
+   {
+    "sha": "0ed5caa",
+    "subject": "cl-6.abp@PrompTugal.dinis: cl-6.editor redrafted narrow (home repo only, no website write)",
+    "files": 47
+   },
+   {
+    "sha": "26f2a44",
+    "subject": "cl-6.abp@PrompTugal.dinis: cl-6.editor drafted (inactive)",
+    "files": 47
+   },
+   {
+    "sha": "9bc156f",
+    "subject": "cl-6.abp@PrompTugal.dinis: strikes push attach drafted as pending (waits for decisions' record)",
+    "files": 47
+   },
+   {
+    "sha": "1210f2e",
+    "subject": "cl-6.abp@PrompTugal.dinis: log P18 stage 2 from cl-6.rights",
+    "files": 1
+   },
+   {
+    "sha": "e5d448c",
+    "subject": "cl-6.abp@PrompTugal.dinis: policy v1.7.11, root index.html and .nojekyll for the Strikes site",
+    "files": 48
+   },
+   {
+    "sha": "da916e7",
+    "subject": "cl-6.abp@PrompTugal.dinis: log both passes of kit v2.3",
+    "files": 1
+   },
+   {
+    "sha": "451a2df",
+    "subject": "cl-6.abp@PrompTugal.dinis: kit v2.3 test.sh ignores a caller's ABP_PIN_KEY_SHA256 (122 of 122 with it set or unset)",
+    "files": 1
+   },
+   {
+    "sha": "369dda7",
+    "subject": "cl-6.abp@PrompTugal.dinis: kit v2.3 allows key/<own role> under R5 for P9 roles (122 tests)",
+    "files": 4
+   },
+   {
+    "sha": "f0a7ce7",
+    "subject": "cl-6.abp@PrompTugal.dinis: P9 key branches for the other eight section roles, policy v1.7.10",
+    "files": 48
+   },
+   {
+    "sha": "4e607ed",
+    "subject": "cl-6.abp@PrompTugal.dinis: P20 data.promptugal.news for the section roles, for review",
+    "files": 47
+   },
+   {
+    "sha": "0de4e2a",
+    "subject": "cl-6.abp@PrompTugal.dinis: log cl-6.data's out-of-grant staging (no grant change)",
+    "files": 1
+   },
+   {
+    "sha": "3bf97c9",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft is text A only (security withdrew B)",
+    "files": 47
+   },
+   {
+    "sha": "b8c97bc",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft carries both force positions for Dinis (A no force, B explicit lease)",
+    "files": 47
+   },
+   {
+    "sha": "a84f023",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft notes infra's force-with-lease ask, not adopted",
+    "files": 47
+   },
+   {
+    "sha": "fcc73ec",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft records the settled design (App fast-forwards dev)",
+    "files": 47
+   },
+   {
+    "sha": "4a72487",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft takes security's conditions",
+    "files": 47
+   },
+   {
+    "sha": "a38f128",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft drops the API status read (git ls-remote instead)",
+    "files": 47
+   },
+   {
+    "sha": "ca59384",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 draft takes the data flow, flags the API status read",
+    "files": 47
+   },
+   {
+    "sha": "20b861d",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 for the nine dev-gate roles drafted as pending (not in force)",
+    "files": 47
+   },
+   {
+    "sha": "76c6bbc",
+    "subject": "cl-6.abp@PrompTugal.dinis: P19 work/<name> push for the dev-gate flow, for Dinis",
+    "files": 47
+   },
+   {
+    "sha": "fd66ca6",
+    "subject": "cl-6.abp@PrompTugal.dinis: strikes-site-publish entry records the checks as done",
+    "files": 47
+   },
+   {
+    "sha": "50a254d",
+    "subject": "cl-6.abp@PrompTugal.dinis: correct the times in the strikes-site-publish entry",
+    "files": 48
+   },
+   {
+    "sha": "9954e22",
+    "subject": "cl-6.abp@PrompTugal.dinis: policy v1.7.9, record checks for strikes-site-publish",
+    "files": 48
+   },
+   {
+    "sha": "1f41434",
+    "subject": "cl-6.abp@PrompTugal.dinis: apply strikes-site-publish for cl-6.place.london (security passed)",
+    "files": 49
+   },
+   {
+    "sha": "37dc800",
+    "subject": "cl-6.abp@PrompTugal.dinis: strikes-site-publish change written for security's review (pending, not in force)",
+    "files": 47
+   }
+  ]
+ },
+ "reach": {
+  "attempts": 0,
+  "blocked": 0,
+  "observed": 0,
+  "denied": []
+ },
+ "breaches": [],
+ "counts": {
+  "requests": 38,
+  "tool_calls": 126,
+  "in_mandate": 126,
+  "out_of_mandate": 0,
+  "attempts": 0,
+  "breaches": 0
+ }
+}
