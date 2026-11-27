@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.11",
+ "version": "1.7.12",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -2399,22 +2399,21 @@
    "cl-6.editor": {
     "focus": "the editor-in-chief of PrompTugal.news: accountable for all published content; senior to the correspondent by review authority only; reads the website by public clone; signs off articles (its sign-off is the editor of record, the F50 footer) or returns them; asks the website's writers to change content; owns nothing in the website yet",
     "writes": [
-     "reviews/**",
-     "signoffs/**",
-     "board/runs/cl-6.editor/**",
-     "board/team/cl-6.editor/**",
-     "board/keys.json"
+     "site/factory/dinis-cruz/account-f/signoffs/<article-slug>.json",
+     "site/factory/dinis-cruz/account-f/reviews/<article-slug>/<UTC stamp>.md",
+     "site/keys/cl-6.editor.json"
     ],
     "subagents": false,
-    "never": "writes anything in PrompTugal__News__Website (no content/**, the website is read by public clone and attached to no session), writes desks/correspondent/** or any other agent's desk, writes code, the policy, the pins or a workflow, releases anything, publishes a claim without its source, names a private person, publishes data whose licence is unclear, writes board/keys.json other than its own public key alone in its own commit, uses a connector, attaches a repository (no add_repo), starts a session or a scheduled task, prints or commits a key or a token",
+    "never": "writes anything in PrompTugal__News__Website (no content/**, the website is read by public clone and attached to no session), writes desks/correspondent/** or any other agent's desk, writes code, the policy, the pins or a workflow, releases anything, publishes a claim without its source, names a private person, publishes data whose licence is unclear, writes site/keys/cl-6.editor.json other than its own public key alone in its own commit, uses a connector, attaches a repository (no add_repo), starts a session or a scheduled task, prints or commits a key or a token",
     "repos": [
      "PrompTugal/PrompTugal__Agent__Editor"
     ],
     "model": "opus (maestro's proposal, relayed by the conductor; the policy does not set models)",
     "first_prompt_must_state": "its grant (abp/cl-6.editor.md): no add_repo, no create_session, no scheduled task, no write in the website; it makes its own key and publishes it alone in its first commit",
     "drafted_on": "cl-6.decisions' choice, 27 Nov 10:37Z (its message; the narrower shape, which it chose as its own call): home repository only; reads the website by public clone; signs off articles and asks the website's writers to change content; no content/** write yet. Widening to content/** through newsroom/tools/release.sh comes later as its own decision (Dinis's own words, cl-6.security's review) once the website attach exists. The journalist keeps content/articles/** and content/about/** for now. This replaces my earlier draft of the same name (content/** and the website repository), which was the conductor's recommendation",
-    "to_fix_with_security": "the two home paths reviews/** and signoffs/** are my choice; cl-6.security and the role decide the exact names before it starts",
-    "status": "DRAFT, not active: nothing here is in force; it becomes a role after cl-6.decisions' record (d708bd4) and cl-6.security's review"
+    "to_fix_with_security": "done at cl-6.security's three fixes (27 Nov 10:50Z): paths, key file, version bump; it passes the fixed head, then it is applied on record d708bd4 part 4",
+    "status": "DRAFT, not active: nothing here is in force; it becomes a role after cl-6.decisions' record (d708bd4) and cl-6.security's review",
+    "writes_note": "exactly these (cl-6.security, 27 Nov 10:50Z, relayed by cl-6.decisions, not checked by me): each sign-off names the article path and the sha256 of the exact article bytes, in its own signed commit; its key goes in site/keys/cl-6.editor.json, alone in its own commit; no board/** path"
    },
    "cl-6.social": {
     "focus": "DRAFT, session not started: a drafting agent for social posts and video scripts: it drafts the script, storyboard and captions; a person posts (record 2026-11-26__social-start, commit d14b5df). Nothing is published, rendered or sent by it; content: no private person named, no session id, key fingerprint, account name, transcript text or session screenshot beyond the re-drawn exchange. Its drafts live in drafts/** of its own home, apart from its run state in site/factory/**",
