@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.signals@PrompTugal.dinis"
-policy: abp/policies.json v1.7.9 (sha256:66fa1c3562abc17b)
+policy: abp/policies.json v1.7.10 (sha256:280b31cd6d8598a6)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.signals@PrompTugal.dinis
@@ -14,6 +14,7 @@ generated: by node abp/tools.mjs build; never edited by hand
 - **Writes (outside):** `/tmp/**`, `~/.abp/keys/*/metadata.json`, `~/.claude/projects/*/memory/**` (scratch, the hook's log, memory).
 - **Sends to:** none.
 - **Pushes to:** `dev` on `origin` only; a dotted worker of this role pushes `work/<name>` and its work is reviewed.
+- **Key branch (2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions); Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: "yes to P9"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel):** push `key/cl-6.signals` only, in `PrompTugal/PrompTugal__News__Signals`, holding only: team/keys.json (only its own entry, adding or rotating); the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin. Conditions: branch named exactly key/cl-6.signals, no force push; the pull request goes to dev, never main; the agent opens exactly one pull request, from key/cl-6.signals to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: "yes to cl-6.data opening one key PR"); it never merges, and opens no other pull request; a later push to the branch voids security's approval; one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops; merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it; nothing else in the grant changes; the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me). Expires 2026-12-10T23:59:59Z.
 - **Never:** writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear.
 
 ## Network (default deny; phase capture)

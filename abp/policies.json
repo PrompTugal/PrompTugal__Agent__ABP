@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.9",
+ "version": "1.7.10",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -666,6 +666,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Travel",
+    "branch": "key/cl-6.travel",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.travel, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.travel to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -720,6 +741,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Library",
+    "branch": "key/cl-6.library",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.library, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.library to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -738,6 +780,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Signals",
+    "branch": "key/cl-6.signals",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.signals, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.signals to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -756,6 +819,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Cyber",
+    "branch": "key/cl-6.cyber",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.cyber, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.cyber to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "reuses a source whose terms do not allow commercial reuse; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -774,6 +858,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Events",
+    "branch": "key/cl-6.events",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.events, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.events to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "reads websummit.com, lu.ma, luma.com, meetup.com or eventbrite (the read-deny hosts of the PrompTugal policy); writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -792,6 +897,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Live",
+    "branch": "key/cl-6.live",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.live, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.live to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "records a camera, uses a camera that is not official, or hosts a stream (embeds only); writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -810,6 +936,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Videos",
+    "branch": "key/cl-6.videos",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.videos, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.videos to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -828,6 +975,27 @@
     "REALITY.md",
     "BRIEF.md"
    ],
+   "key_branch": {
+    "record": "2026-11-26__abp-p9 revision 2 (commit 1cefc01, SovereignWebsite/Site__Agent__Decisions)",
+    "authority": "Dinis Cruz, typed in cl-6.abp's own session, 26 Nov 2026: \"yes to P9\"; the record lists the roles in order after the cl-6.data trial: signals, cyber, bulletins, events, library, live, videos, travel",
+    "repository": "PrompTugal/PrompTugal__News__Bulletins",
+    "branch": "key/cl-6.bulletins",
+    "files": [
+     "team/keys.json (only its own entry, adding or rotating)",
+     "the files that PrompTugal__IaC #25 policy/key-bootstrap.json lists as pinnable for this repository, each byte-identical to its signed pin"
+    ],
+    "conditions": [
+     "branch named exactly key/cl-6.bulletins, no force push; the pull request goes to dev, never main",
+     "the agent opens exactly one pull request, from key/cl-6.bulletins to dev in PrompTugal__News__Data, with the GitHub connector tool github__create_pull_request for that one call (Dinis, in cl-6.abp's own session, 26 Nov 2026: \"yes to cl-6.data opening one key PR\"); it never merges, and opens no other pull request; a later push to the branch voids security's approval",
+     "one byte different from a pin and the pull request is refused; any real workflow or script change goes through cl-6.dev or cl-6.devops",
+     "merged only by the App or a person after cl-6.security@PrompTugal.dinis' signed approval naming the exact head; a later push voids it",
+     "nothing else in the grant changes",
+     "the trial is done: cl-6.data's key/cl-6.data merged as 8c861c6 (News__Data #1) and cl-6.security post-reviewed it (PrompTugal__Agent__Security findings.md, 27 Nov 00:54Z and later, read by me)"
+    ],
+    "expires": "2026-12-10T23:59:59Z",
+    "enforcement": "the R5 branch exemption is not in the hook (kit v1 here, kit v2.2b passed without it): until a reviewed kit change, the push is by this grant, logged and reviewed; a kit change is a new head needing both security passes",
+    "pull_request": "the agent may NOT open the pull request: Dinis's \"yes to cl-6.data opening one key PR\" was for cl-6.data only; opening a PR needs the GitHub connector (R3/R7, one-way), so it waits for Dinis's word in my session for this role, or someone else opening it"
+   },
    "subagents": false,
    "never": "spends more than 5 USD a day, or uses an audio key that did not arrive through the secure form; writes outside its grant, uses a sub-agent, starts a session or a scheduled task, uses a connector, prints or commits a key or a token, names a private person, or publishes data whose licence is unclear",
    "repos": [
@@ -1701,6 +1869,15 @@
   }
  ],
  "applied_decisions": [
+  {
+   "record": "2026-11-26__abp-p9 revision 2 (the other eight roles, after the cl-6.data trial)",
+   "at": "2026-11-27T07:21Z",
+   "commit_of_record": "1cefc01",
+   "item": "P9 key branches for signals, cyber, bulletins, events, library, live, videos, travel",
+   "change": "roles.<role>.key_branch added to each (key/<role> in its own News repository; team/keys.json own entry plus the pinned files only; no PR opened by the agent)",
+   "how": "Dinis's own words 'yes to P9' quoted in the record (event_uuid 7c144bf8), the record verified (26 Nov, signature good against the root key); the condition 'a security agent reads the trial branch before any other section repeats it' is met: News__Data #1 merged as 8c861c6 and cl-6.security post-reviewed it (its findings.md, read by me in its home: 27 Nov 00:54Z, 01:08Z and later); cl-6.decisions asked for it at 07:20Z (its message)",
+   "limit": "the PR is NOT granted (needs Dinis for each role); the hook cannot yet allow a key/* branch (R5): kit change; security's lessons (diff hash, anchor) are for Dinis and IaC"
+  },
   {
    "record": "2026-11-27__strikes-site-publish",
    "at": "2026-11-27T01:28Z",
