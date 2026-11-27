@@ -62,7 +62,7 @@
   "cl-6.infra",
   "cl-6.editor"
  ],
- "updated": "2026-11-27T10:42Z",
+ "updated": "2026-11-27T21:37Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -367,6 +367,10 @@
   {
    "at": "2026-11-27T10:42Z",
    "event": "policy v1.7.13: cl-6.editor is a role (home repo only; sign-offs, reviews, own key), on record d708bd4 part 4, security passed 5aa8daf; its session is maestro's to start"
+  },
+  {
+   "at": "2026-11-27T21:37Z",
+   "event": "wake 21:37Z: records re-verified, nothing new applied; strikes session start recorded (no ABP change); waiting on Dinis for the one-way doors and widenings listed in decisions.md"
   }
  ],
  "waiting_on": [
