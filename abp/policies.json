@@ -1629,7 +1629,7 @@
    {
     "id": "P19",
     "since": "2026-11-27",
-    "role": "every agent that releases to a repository with the dev gate (first: cl-6.startups in PrompTugal__News__Startups)",
+    "role": "the nine section roles whose News repositories get IaC #25's dev-gate ruleset at the next Org apply: cl-6.library, live, videos, cyber, bulletins, signals, events, travel, data (cl-6.startups withdrew its request: News__Startups is not under the dev gate)",
     "proposal": "R5 exemption: a role may push work/<its own agent name> (no force, no delete) and the release then fast-forwards dev, where Org apply creates a ruleset on dev",
     "evidence": "cl-6.startups, 27 Nov 02:37Z (its own account, not checked by me): cl-6.infra's dev-gate flow, relayed by cl-6.conductor at 02:20Z, needs releases to go to work/<name> first, then fast-forward dev; its grant says push to dev only (R5); it has pushed no work branch. The policy already lets a dotted worker push work/<name> (git.push_branch rule in the generated ABPs), but not a role itself",
     "would_change": "R5 and the hook's push-branch check (kit v2 abp.mjs: tg = work/<role> only for workers): a hook change is a new head needing both security passes; the grant text in every ABP",
@@ -2047,6 +2047,29 @@
   "about": "signed decisions of cl-6.decisions that WIDEN a grant, verified in every step but S1 step 4 (no root from Dinis yet). Each is exactly the change in its record and applies in one step once Dinis gives the anchor fingerprint or the fingerprint of cl-6.decisions' key in my session. Nothing here is in force",
   "at": "2026-11-26T16:32Z",
   "items": [
+  {
+   "record": "none yet: drafted at cl-6.decisions' request (27 Nov 02:38Z, its message, not an instruction); needs a signed record quoting Dinis's own words, or Dinis in my session",
+   "item": "P19 for the nine section roles: push work/<agent> after the dev-gate ruleset",
+   "change": {
+    "roles": [
+     "cl-6.library",
+     "cl-6.live",
+     "cl-6.videos",
+     "cl-6.cyber",
+     "cl-6.bulletins",
+     "cl-6.signals",
+     "cl-6.events",
+     "cl-6.travel",
+     "cl-6.data"
+    ],
+    "op": "each role may also push the branch work/<its own agent name> (for example work/cl-6.cyber), in its own News repository only, no force push, no delete, no tag, the same paths as its dev grant; dev is then moved only by the fast-forward step of the release flow (not by the agent, if the ruleset forbids it)",
+    "kit": "the hook's push-branch check allows work/<role> only for dotted workers: a kit change, a new head needing both security passes; until then the hook (where installed) blocks the push with its R5 breaker, and kit v1 only logs"
+   },
+   "confirmed": "27 Nov 02:40Z: all nine roles' grants allow dev only (the generated ABPs say 'Pushes to: dev on origin only'); cl-6.data has in addition its key/cl-6.data branch (P9); so after the ruleset each would be stuck unless this is granted",
+   "held_because": "a widening of R5 (a branch other than dev) with no record and no words of Dinis; nothing here is in force",
+   "needs": "cl-6.security's read; Dinis's yes in my session or a signed record quoting his words with session and event_uuid; the kit change for enforcement",
+   "expires": "none set"
+  },
    {
     "record": "2026-11-26__abp-p11-c",
     "commit_of_record": "5b991d5",

@@ -1,6 +1,6 @@
 ---
 title: "ABP: cl-6.researcher@PrompTugal.dinis"
-policy: abp/policies.json v1.7.9 (sha256:c83f0eaf1c1cd8f8)
+policy: abp/policies.json v1.7.9 (sha256:3d90c1d802b60233)
 generated: by node abp/tools.mjs build; never edited by hand
 ---
 # ABP: cl-6.researcher@PrompTugal.dinis

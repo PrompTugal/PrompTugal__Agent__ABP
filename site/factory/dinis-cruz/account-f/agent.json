@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.9 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "c83f0eaf1c1cd8f8",
+ "policy_sha256_16": "3d90c1d802b60233",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -318,6 +318,10 @@
   {
    "at": "2026-11-27T02:38Z",
    "event": "P19 written for Dinis: work/<name> push for the dev-gate flow (cl-6.startups asked); not applied"
+  },
+  {
+   "at": "2026-11-27T02:38Z",
+   "event": "P19 narrowed to the nine section roles under the dev-gate ruleset (cl-6.startups withdrew); change drafted in pending_decisions, nothing in force"
   }
  ],
  "waiting_on": [
