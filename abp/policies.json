@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.14",
+ "version": "1.7.15",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -547,6 +547,32 @@
     "expires": "2026-11-30T23:59:59Z",
     "used": true,
     "used_note": "26 Nov 2026 18:49Z, reported by cl-6.dev (not verified by me; the website is not attached to me): one signed commit 43e8b32c4 (v0.1.2335), data/by-place/places.json, nine lines, the london entry only; cl-6.security reviewed the diff before the push and post-reviewed it at 18:39Z (per cl-6.dev). The grant is spent: no further write under this record; my hourly review checks the commit when the website is readable"
+   },
+   "repo_writes": {
+    "record": "2026-11-26__abp-p11-c revision 3 (commit 1d297b6, SovereignWebsite/Site__Agent__Decisions); cl-6.security@dinis agreed with conditions (opinion block-2026-11-26-01, 5c9d835)",
+    "authority": "Dinis Cruz, typed in cl-6.dev's own session (session_016CrbJKEPqF3pNfbncgHqvy), event_uuid 8ca6fb3c-c6c1-43b6-ba6f-d99581b0043d, 2026-11-28T11:23:16Z: \"yes to cl-6.dev writing the website's place data ... only by running the signed place sync (newsroom/tools/sync-places.mjs), as in record 2026-11-26__abp-p11-c\" (stored without its two asterisks; the line names the record, whose change lists the exact globs: applied as the record lists them, the narrower reading)",
+    "repository": "PrompTugal/PrompTugal__News__Website",
+    "branch": "dev",
+    "allow": [
+     "data/by-place/*.json",
+     "data/by-place/now/*.json"
+    ],
+    "refuse": [
+     "data/by-place/** (any deeper path)",
+     "data/schemas/**",
+     "newsroom/tools/place-signers.json (protected, owner cl-6.security)",
+     "newsroom/tools/data-signers.json (protected, owner cl-6.security)",
+     "any path written other than by sync-places.mjs"
+    ],
+    "deletes": "none",
+    "conditions": [
+     "dev writes these paths only by running node newsroom/tools/sync-places.mjs; the commit holds only the files it wrote and place-sources.json, and says so",
+     "the hourly review (and a gate check when dev can add it) re-verifies every data/by-place file against place-sources.json; any mismatch is a breach and stops the sync",
+     "withdrawn when the sync moves to CI (cl-6.infra)",
+     "covers the place sync only: not sync-data-now, not the Faro count's two lines, not any other path"
+    ],
+    "not_granted": "sync-data-now and the data-signers.json pin (separate lines for Dinis); in force from 2026-11-28T11:23:16Z; the earlier runs (v0.1.2423, v0.1.2426) stay logged as a gap caused by cl-6.decisions' 07:40Z message",
+    "expires": "2026-11-30T23:59:59Z"
    },
    "subagents": true,
    "never": "changes content or disables a check to make the gate pass, reviews what it wrote without security, or edits the hooks, the policy or the version files",
@@ -1895,6 +1921,15 @@
  ],
  "applied_decisions": [
   {
+   "record": "2026-11-26__abp-p11-c revision 3",
+   "at": "2026-11-28T11:27Z",
+   "commit_of_record": "1d297b6",
+   "item": "P11 c: cl-6.dev writes the website's place data by the signed place sync only",
+   "change": "roles.cl-6.dev.repo_writes added (data/by-place/*.json and data/by-place/now/*.json in PrompTugal__News__Website, dev only, only by sync-places.mjs, with the record's conditions); removed from pending_decisions; policy v1.7.15",
+   "how": "signature verified against the root key; Dinis's own words with session and event_uuid (8ca6fb3c), quoted in the record; cl-6.security@dinis agreed with conditions; not checked by me: the record's git commit signature, cl-6.security's opinion text (revoked.json read empty at the 10:37Z wake)",
+   "limit": "the place sync only; expires 2026-11-30; not sync-data-now"
+  },
+  {
    "record": "2026-11-27__dinis-four-actions (part 4: the editor)",
    "at": "2026-11-27T10:42Z",
    "commit_of_record": "d708bd4",
@@ -2291,27 +2326,6 @@
    "needs": "cl-6.security's read; Dinis's yes in my session or a signed record quoting his words with session and event_uuid; the kit change for enforcement",
    "expires": "none set"
   },
-   {
-    "record": "2026-11-26__abp-p11-c",
-    "commit_of_record": "5b991d5",
-    "item": "P11 c",
-    "change": {
-     "role": "cl-6.dev",
-     "op": "add to writes (website only)",
-     "values": [
-      "data/by-place/*.json",
-      "data/by-place/now/*.json"
-     ]
-    },
-    "conditions": [
-     "not data/by-place/** and not data/schemas/**",
-     "the pin stays protected (applied in v1.4.1)",
-     "dev writes these only by running newsroom/tools/sync-places.mjs; the commit holds only what it wrote and place-sources.json, and says so (the hook cannot see this: my hourly review re-verifies every data/by-place file against place-sources.json; a mismatch is a breach and stops the sync)",
-     "withdrawn when the sync moves to CI (cl-6.infra)"
-    ],
-    "reviewed_by": "cl-6.security@dinis (agree with conditions)",
-    "expires": "2026-11-30T23:59:59Z"
-   },
    {
     "record": "2026-11-26__abp-p11-h",
     "commit_of_record": "5b991d5",
