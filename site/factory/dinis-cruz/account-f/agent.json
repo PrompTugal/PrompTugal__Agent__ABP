@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "policy v1.7.9 (observe; breakers R3 and R4 on) covers all 44 cl-6 roles: the conductor and every session in 2026-11-26-sessions.json. Not yet in the website (needs the repository attached); waiting on the conductor for the questions in decisions.md",
  "policy": "abp/policies.json",
- "policy_sha256_16": "d6fcc6b293106bc8",
+ "policy_sha256_16": "7cd9ebc27ffbb976",
  "covered": [
   "cl-6.abp",
   "cl-6.conductor",
@@ -62,7 +62,7 @@
   "cl-6.infra",
   "cl-6.editor"
  ],
- "updated": "2026-11-27T21:37Z",
+ "updated": "2026-11-28T09:41Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -371,6 +371,10 @@
   {
    "at": "2026-11-27T21:37Z",
    "event": "wake 21:37Z: records re-verified, nothing new applied; strikes session start recorded (no ABP change); waiting on Dinis for the one-way doors and widenings listed in decisions.md"
+  },
+  {
+   "at": "2026-11-28T09:41Z",
+   "event": "policy v1.7.14: data-signers.json protected in advance (tightening); sync-data-now is not covered by P11 c"
   }
  ],
  "waiting_on": [

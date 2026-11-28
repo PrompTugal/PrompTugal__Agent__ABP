@@ -1,7 +1,7 @@
 {
  "licence": "Code Apache-2.0, text CC BY 4.0; adapted from the ABP starter kit (https://sovereignwebsite.ai/abp/kit/) and the PrompTugal policy v1.20.1",
  "about": "The Agent Behaviour Policies of Dinis Cruz's cl-6 PrompTugal agents (Claude account 6, account F), as data: deny by default, one grant per agent. Read by .claude/hooks/abp.mjs. Only cl-6.abp edits this file; a relaxation only at Dinis Cruz's word. It sits beside the PrompTugal policy (PrompTugal__News__Website board/abp/policies.json v1.20.1, observe mode), which names no cl-6 agent; the GitHub and AWS side is cl-6.infra's (PrompTugal__IaC policy/abp.json).",
- "version": "1.7.13",
+ "version": "1.7.14",
  "operator": "Dinis Cruz",
  "kept_by": "cl-6.abp",
  "identity": {
@@ -348,6 +348,11 @@
     "glob": "**/.claude/settings*.json",
     "owner": null,
     "why": "settings can switch the hooks off (v1.6.0: no owner exemption inside a session: an install or an update is a signed commit made outside a live session, then reviewed by cl-6.security)"
+   },
+   {
+    "glob": "newsroom/tools/data-signers.json",
+    "owner": "cl-6.security",
+    "why": "a gate file of the website, protected in advance (28 Nov 2026, cl-6.security's recommended design, relayed by cl-6.conductor): it would pin cl-6.data's key for a second signed sync (sync-data-now) of data/by-place/now/ from cl-6.data's adsb-faro output. A tightening I make on my own remit: it protects a path before it exists. Creating the file, and so pinning a key, is trust in a key: Dinis's own words in my session (or, once adopted, his signed answer), then cl-6.security's review; cl-6.data confirms its fingerprint first"
    },
    {
     "glob": "newsroom/tools/place-signers.json",
