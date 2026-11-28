@@ -1864,6 +1864,22 @@
     "would_change": "network.allow of each named role (new host: Dinis's, with cl-6.security's and cl-6.rights' read; it is our own feed, so no third-party terms)",
     "risk": "low for our own feed (public data, GET only); raw.githubusercontent.com widens reads to any repository path of the allowed owners, which the design allows only by owner path",
     "needs": "cl-6.security's read of the group (which roles read the feed: their run reports list it); Dinis's yes in my session or a signed record quoting his words; until then cl-6.cyber and the others keep declaring every host in their run reports (capture phase: not a breach to read it, a breach not to declare it)"
+   },
+   {
+    "id": "P21",
+    "since": "2026-11-28",
+    "role": "cl-6.data",
+    "proposal": "network: GET (and HEAD) to www.youtube.com only for the paths /feeds/videos.xml?channel_id=<id> and /oembed?url=<video url>&format=json, no other path, no API key, no search, no login, no redirect to another host; for a new source card and collector under sources/** and collect/** (already in its writes); the collector keeps title, link, date and a thumbnail link only, no video, no description text copied, no comments",
+    "evidence": "cl-6.conductor, 28 Nov 16:22Z (relayed, not checked by me): Dinis's direction on regional AI and tech videos, whose words cl-6.decisions holds from 11:33Z",
+    "would_change": "cl-6.data's network.allow (a new host: network widening, Dinis's alone; the network phase is capture, so every host is recorded, nothing blocked yet)",
+    "conditions": [
+     "by path, as for the github owner paths: any other path on that host is a finding",
+     "channel ids come from a list in the source card, each with the channel's own page read first: nothing is discovered by search",
+     "each source card records YouTube's terms and the channel's licence as cl-6.rights confirms them, before the first read; 'no value' and 'terms page not found' stay not agreed (as in P18)",
+     "thumbnails are links only: the site must not embed or hotlink a third-party image host without cl-6.security's read",
+     "the run report lists every request"
+    ],
+    "needs": "cl-6.security's read, cl-6.rights' ruling on YouTube's terms and the channels, then Dinis's own words (by-reference yes to this text at a commit, session and event_uuid, via cl-6.decisions) or him in my session; nothing applied"
    }
   ]
  },
