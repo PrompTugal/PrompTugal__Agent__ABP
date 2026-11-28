@@ -62,7 +62,7 @@
   "cl-6.infra",
   "cl-6.editor"
  ],
- "updated": "2026-11-28T09:41Z",
+ "updated": "2026-11-28T10:37Z",
  "timeline": [
   {
    "at": "2026-11-26T01:34Z",
@@ -375,6 +375,10 @@
   {
    "at": "2026-11-28T09:41Z",
    "event": "policy v1.7.14: data-signers.json protected in advance (tightening); sync-data-now is not covered by P11 c"
+  },
+  {
+   "at": "2026-11-28T10:37Z",
+   "event": "wake 10:37Z 28 Nov: records re-verified, nothing new applied; waiting on Dinis for the one-way doors and widenings in decisions.md"
   }
  ],
  "waiting_on": [
