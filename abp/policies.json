@@ -1891,6 +1891,18 @@
     "not_covered": "cl-6.places writing in the 36 place homes (finding A5: its session attached 35 repositories with push at a start-brief word): that is a separate decision; and the historian's 'clones outside its path': not granted",
     "risk": "low if the content rule holds; the hook cannot yet scope a glob to one repository, so 'own home only' is checked in my hourly review",
     "needs": "cl-6.security's read of this text; Dinis's words by reference to the grant_text at a commit (via cl-6.decisions) or in my session; nothing applied"
+   },
+   {
+    "id": "P23",
+    "since": "2026-11-28",
+    "role": "cl-6.places",
+    "proposal": "finding A5, option (a): ratify the 36 place-home attaches with push that cl-6.places made on 26 Nov, naming each home and its paths, with an expiry, as a bridge until one agent per place (option b, Dinis's direction of 26 Nov)",
+    "grant_text": "cl-6.places may push to dev, and only dev, in the 36 repositories PrompTugal/PrompTugal__Agent__Place__<Name>, one per place, where <Name> is one of: Portugal, Aveiro, Beja, Braga, Braganca, Castelo-Branco, Coimbra, Evora, Guarda, Leiria, Lisboa, Portalegre, Porto, Santarem, Setubal, Viana-do-Castelo, Vila-Real, Viseu (the 18 non-Algarve homes), and Algarve, Albufeira, Alcoutim, Aljezur, Castro-Marim, Faro, Lagoa, Lagos, Loule, Monchique, Olhao, Portimao, Quarteira, Sao-Bras-de-Alportel, Silves, Tavira, Vila-Real-de-Santo-Antonio, Vila-do-Bispo (the 18 Algarve homes); London is not included. In each home it may write only data/by-place/*.json, history/**, site/factory/dinis-cruz/account-f/**, and site/keys/cl-6.places.json; in the 18 Algarve homes also data/by-place/now/*.json; in PrompTugal__Agent__Place__Algarve alone also runs/cl-6.places/**. Nothing else, no other repository, no website, no force push, no deletes beyond its own files. history/** holds only what is already public in git and the boards: no transcript text, no key or token, no private person's name or contact, no variable value. Commits are signed with cl-6.places' own key and carry the Agent and Claude-Session trailers. This ratifies the 36 attaches already made on 26 Nov by add_repo; it gives no add_repo and no further attach. A bridge until one agent per place (like cl-6.place.london) replaces it; each place agent that starts removes its home from this line. Expires 2026-12-28.",
+    "evidence": "cl-6.places, 28 Nov 20:27Z (its own account, built from its signed commits in each home; list and paths at PrompTugal__Agent__Place__Algarve runs/cl-6.places/attached-homes-and-paths.md, which I read; I did not check the homes' git logs): 36 homes attached with add_repo (push) on 26 Nov from about 02:20Z at its start brief's word; history/** and data/by-place/now/*.json are outside its grant as written, declared as gaps in its run reports; in 35 homes its grant does not name the repository at all; cl-6.security's access review A5 (medium)",
+    "covers_p22": "supersedes P22's places part (history/** and now/*.json in Place__Algarve only) if accepted; P22 then keeps historian, rights and synthetic",
+    "door": "new repositories attached with push access, ratified after the fact: one-way door in S1: needs Dinis's words in my session (or, once adopted, his signed answer), not a relayed or by-reference line alone",
+    "risk": "36 homes written by one session is the breadth that matters: the hourly review checks each commit against the place it names; the hook cannot yet scope a glob to one repository",
+    "needs": "cl-6.security's read; Dinis's yes in my session; nothing applied"
    }
   ]
  },
