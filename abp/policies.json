@@ -1880,6 +1880,17 @@
      "the run report lists every request"
     ],
     "needs": "cl-6.security's read, cl-6.rights' ruling on YouTube's terms and the channels, then Dinis's own words (by-reference yes to this text at a commit, session and event_uuid, via cl-6.decisions) or him in my session; nothing applied"
+   },
+   {
+    "id": "P22",
+    "since": "2026-11-28",
+    "role": "cl-6.historian, cl-6.rights, cl-6.synthetic, cl-6.places",
+    "proposal": "history/** in each role's own home repository (the P5 and P11 a record, held), for these four roles first, on one by-reference line; cl-6.places also data/by-place/now/*.json in its own home",
+    "grant_text": "Four roles may write history/** in their own home repository, and nothing else is added for them by this line: cl-6.historian in PrompTugal/PrompTugal__Agent__Historian; cl-6.rights in PrompTugal/PrompTugal__Agent__Rights; cl-6.synthetic in PrompTugal/PrompTugal__Agent__Synthetic; cl-6.places in PrompTugal/PrompTugal__Agent__Place__Algarve, where it may also write data/by-place/now/*.json. Never in the website; never in another agent's repository; no deeper rule for clones: a role does not write into clones of other repositories. history/** holds only what is already public in git and the boards: no transcript text, no key or token, no private person's name or contact, no variable value. Each role says in its run report what it wrote there. Expires 2026-12-28.",
+    "evidence": "cl-6.conductor, 28 Nov 20:25Z (relayed): four agents asked, each from its own run (cl-6.rights' request is older, and its run report declares 97 files already moved); the held record 2026-11-26__abp-p5-p11a (cl-6.security@dinis agreed with conditions, b99f0aa) has the paths and conditions",
+    "not_covered": "cl-6.places writing in the 36 place homes (finding A5: its session attached 35 repositories with push at a start-brief word): that is a separate decision; and the historian's 'clones outside its path': not granted",
+    "risk": "low if the content rule holds; the hook cannot yet scope a glob to one repository, so 'own home only' is checked in my hourly review",
+    "needs": "cl-6.security's read of this text; Dinis's words by reference to the grant_text at a commit (via cl-6.decisions) or in my session; nothing applied"
    }
   ]
  },
